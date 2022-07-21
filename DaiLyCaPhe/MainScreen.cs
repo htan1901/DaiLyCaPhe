@@ -17,17 +17,5 @@ namespace DaiLyCaPhe
             InitializeComponent();
         }
 
-        private void addItemButton_Click(object sender, EventArgs e)
-        {
-            ImportBillItem newItem = new ImportBillItem();
-            newItem.Dock = DockStyle.Top;
-            newItem.deleteEvent += new EventHandler(deleteBillItemEvent);
-            importBillItemPanel.Controls.Add(newItem);
-        }
-
-        private void deleteBillItemEvent(object sender, EventArgs e)
-        {
-            importBillItemPanel.Controls.Remove((Control)sender);
-        }
     }
 }

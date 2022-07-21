@@ -54,3 +54,4 @@ C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debu
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.exe.licenses
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\CustomControls.dll
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\CustomControls.pdb
+C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.ImportBillForm.resources
