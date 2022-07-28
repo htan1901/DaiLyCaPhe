@@ -30,20 +30,14 @@
         {
             this.tabPanelMain = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPageImportBill = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.formImportBill = new DaiLyCaPhe.ImportBillForm();
             this.tabNavigationPageExportBill = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabNavigationPageCoffee = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabNavigationPageEmployee = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.formImportBill = new ImportBillForm();
             ((System.ComponentModel.ISupportInitialize)(this.tabPanelMain)).BeginInit();
             this.tabPanelMain.SuspendLayout();
+            this.tabNavigationPageImportBill.SuspendLayout();
             this.SuspendLayout();
-            //
-            // formImportBill
-            //
-            this.formImportBill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formImportBill.TopLevel = false;
-            this.formImportBill.AutoScroll = true;
-            this.formImportBill.Show();
             // 
             // tabPanelMain
             // 
@@ -66,13 +60,24 @@
             this.tabPanelMain.TabIndex = 0;
             this.tabPanelMain.Text = "Quản lý hóa đơn nhập";
             // 
+            // formImportBill
+            // 
+            this.formImportBill.AutoScroll = true;
+            this.formImportBill.ClientSize = new System.Drawing.Size(1298, 720);
+            this.formImportBill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formImportBill.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.formImportBill.Name = "formImportBill";
+            this.formImportBill.Text = "ImportBillForm";
+            this.formImportBill.TopLevel = false;
+            this.tabNavigationPageImportBill.Controls.Add(this.formImportBill);
+            this.formImportBill.Show();
+            // 
             // tabNavigationPageImportBill
             // 
             this.tabNavigationPageImportBill.Caption = "Quản lý hóa đơn nhập";
             this.tabNavigationPageImportBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabNavigationPageImportBill.Name = "tabNavigationPageImportBill";
             this.tabNavigationPageImportBill.Size = new System.Drawing.Size(1298, 720);
-            this.tabNavigationPageImportBill.Controls.Add(formImportBill);
             // 
             // tabNavigationPageExportBill
             // 
@@ -107,6 +112,7 @@
             this.Text = "Đại lý Cà phê";
             ((System.ComponentModel.ISupportInitialize)(this.tabPanelMain)).EndInit();
             this.tabPanelMain.ResumeLayout(false);
+            this.tabNavigationPageImportBill.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
