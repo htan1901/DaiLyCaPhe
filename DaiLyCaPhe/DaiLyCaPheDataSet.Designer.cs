@@ -9274,11 +9274,18 @@ SELECT MaLoaiHat, TenLoaiHat, XuatXu FROM LoaiHatCaPhe WHERE (MaLoaiHat = @MaLoa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MaLoaiHat, TenLoaiHat, XuatXu FROM dbo.LoaiHatCaPhe";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT TOP (1) MaLoaiHat\r\nFROM     LoaiHatCaPhe\r\nWHERE  (TenLoaiHat = @beanTypeNa" +
+                "me) AND (XuatXu = @beanOrigin)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanTypeName", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "TenLoaiHat", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanOrigin", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "XuatXu", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9300,6 +9307,29 @@ SELECT MaLoaiHat, TenLoaiHat, XuatXu FROM LoaiHatCaPhe WHERE (MaLoaiHat = @MaLoa
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual DaiLyCaPheDataSet.LoaiHatCaPheDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            DaiLyCaPheDataSet.LoaiHatCaPheDataTable dataTable = new DaiLyCaPheDataSet.LoaiHatCaPheDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual DaiLyCaPheDataSet.LoaiHatCaPheDataTable GetBeanIDByNameAndOrigin(string beanTypeName, string beanOrigin) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((beanTypeName == null)) {
+                throw new global::System.ArgumentNullException("beanTypeName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(beanTypeName));
+            }
+            if ((beanOrigin == null)) {
+                throw new global::System.ArgumentNullException("beanOrigin");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(beanOrigin));
+            }
             DaiLyCaPheDataSet.LoaiHatCaPheDataTable dataTable = new DaiLyCaPheDataSet.LoaiHatCaPheDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

@@ -33,8 +33,6 @@
             this.panelBillItem = new System.Windows.Forms.Panel();
             this.panelAddBillGroup = new DevExpress.XtraEditors.PanelControl();
             this.dateEditImportDate = new DevExpress.XtraEditors.DateEdit();
-            this.textBoxCategoryNumber = new DevExpress.XtraEditors.TextEdit();
-            this.labelCategoryNumber = new DevExpress.XtraEditors.LabelControl();
             this.buttonCancelBill = new DevExpress.XtraEditors.SimpleButton();
             this.buttonSaveBill = new DevExpress.XtraEditors.SimpleButton();
             this.buttonClearAllItem = new DevExpress.XtraEditors.SimpleButton();
@@ -57,14 +55,18 @@
             this.labelImportBillDetailsTitle = new System.Windows.Forms.Label();
             this.panelSideDataSection = new System.Windows.Forms.Panel();
             this.dataGridViewImportBill = new System.Windows.Forms.DataGridView();
+            this.MaPhieuNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NhaSanXuat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phieuNhapHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelImportBillTitle = new System.Windows.Forms.Label();
             this.panelFilterFunction = new System.Windows.Forms.Panel();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
             this.panelBillDetailsFilter = new System.Windows.Forms.Panel();
-            this.textBoxBeanOrigin = new System.Windows.Forms.TextBox();
+            this.textBoxBeanOriginFilter = new System.Windows.Forms.TextBox();
             this.labelBeanOrigin = new System.Windows.Forms.Label();
-            this.textBoxBeanName = new System.Windows.Forms.TextBox();
+            this.textBoxBeanNameFilter = new System.Windows.Forms.TextBox();
             this.labelBeanName = new System.Windows.Forms.Label();
             this.panelBillFilter = new System.Windows.Forms.Panel();
             this.labelToDateFilter = new System.Windows.Forms.Label();
@@ -79,17 +81,16 @@
             this.chiTietPhieuNhapTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.ChiTietPhieuNhapTableAdapter();
             this.loaiHatCaPheTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoaiHatCaPheTableAdapter();
             this.CTPN_LoaiHatTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CTPN_LoaiHatTableAdapter();
-            this.MaPhieuNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NhaSanXuat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgayNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.loHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter();
+            this.textBoxBillID = new DevExpress.XtraEditors.TextEdit();
+            this.labelBillID = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddImportBill)).BeginInit();
             this.groupAddImportBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelAddBillGroup)).BeginInit();
             this.panelAddBillGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxCategoryNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductCompanyName.Properties)).BeginInit();
             this.panelDataSection.SuspendLayout();
             this.panelImportBillDetails.SuspendLayout();
@@ -109,6 +110,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditToDateFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loaiHatCaPheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chiTietPhieuNhapBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxBillID.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupAddImportBill
@@ -135,9 +138,9 @@
             // 
             // panelAddBillGroup
             // 
+            this.panelAddBillGroup.Controls.Add(this.textBoxBillID);
+            this.panelAddBillGroup.Controls.Add(this.labelBillID);
             this.panelAddBillGroup.Controls.Add(this.dateEditImportDate);
-            this.panelAddBillGroup.Controls.Add(this.textBoxCategoryNumber);
-            this.panelAddBillGroup.Controls.Add(this.labelCategoryNumber);
             this.panelAddBillGroup.Controls.Add(this.buttonCancelBill);
             this.panelAddBillGroup.Controls.Add(this.buttonSaveBill);
             this.panelAddBillGroup.Controls.Add(this.buttonClearAllItem);
@@ -155,7 +158,7 @@
             // dateEditImportDate
             // 
             this.dateEditImportDate.EditValue = null;
-            this.dateEditImportDate.Location = new System.Drawing.Point(15, 94);
+            this.dateEditImportDate.Location = new System.Drawing.Point(15, 158);
             this.dateEditImportDate.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dateEditImportDate.Name = "dateEditImportDate";
             this.dateEditImportDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -171,31 +174,6 @@
             this.dateEditImportDate.Properties.MaskSettings.Set("mask", "dd/MM/yyyy");
             this.dateEditImportDate.Size = new System.Drawing.Size(299, 28);
             this.dateEditImportDate.TabIndex = 6;
-            // 
-            // textBoxCategoryNumber
-            // 
-            this.textBoxCategoryNumber.Location = new System.Drawing.Point(15, 150);
-            this.textBoxCategoryNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.textBoxCategoryNumber.Name = "textBoxCategoryNumber";
-            this.textBoxCategoryNumber.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCategoryNumber.Properties.Appearance.Options.UseFont = true;
-            this.textBoxCategoryNumber.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            this.textBoxCategoryNumber.Properties.MaskSettings.Set("mask", "d");
-            this.textBoxCategoryNumber.Properties.UseMaskAsDisplayFormat = true;
-            this.textBoxCategoryNumber.Size = new System.Drawing.Size(299, 28);
-            this.textBoxCategoryNumber.TabIndex = 9;
-            // 
-            // labelCategoryNumber
-            // 
-            this.labelCategoryNumber.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCategoryNumber.Appearance.Options.UseFont = true;
-            this.labelCategoryNumber.Location = new System.Drawing.Point(15, 128);
-            this.labelCategoryNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.labelCategoryNumber.Name = "labelCategoryNumber";
-            this.labelCategoryNumber.Size = new System.Drawing.Size(31, 18);
-            this.labelCategoryNumber.TabIndex = 8;
-            this.labelCategoryNumber.Text = "Số lô";
-            this.labelCategoryNumber.Click += new System.EventHandler(this.labelClickToFocus);
             // 
             // buttonCancelBill
             // 
@@ -218,7 +196,7 @@
             this.buttonSaveBill.Size = new System.Drawing.Size(115, 30);
             this.buttonSaveBill.TabIndex = 6;
             this.buttonSaveBill.Text = "Lưu hóa đơn";
-            this.buttonSaveBill.Click += new System.EventHandler(this.saveBill);
+            this.buttonSaveBill.Click += new System.EventHandler(this.buttonSaveBill_Click);
             // 
             // buttonClearAllItem
             // 
@@ -248,7 +226,7 @@
             // 
             this.labelImportDate.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelImportDate.Appearance.Options.UseFont = true;
-            this.labelImportDate.Location = new System.Drawing.Point(15, 69);
+            this.labelImportDate.Location = new System.Drawing.Point(15, 133);
             this.labelImportDate.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.labelImportDate.Name = "labelImportDate";
             this.labelImportDate.Size = new System.Drawing.Size(71, 18);
@@ -258,7 +236,7 @@
             // 
             // textBoxProductCompanyName
             // 
-            this.textBoxProductCompanyName.Location = new System.Drawing.Point(15, 36);
+            this.textBoxProductCompanyName.Location = new System.Drawing.Point(15, 96);
             this.textBoxProductCompanyName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxProductCompanyName.Name = "textBoxProductCompanyName";
             this.textBoxProductCompanyName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -270,7 +248,7 @@
             // 
             this.labelCompanyName.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCompanyName.Appearance.Options.UseFont = true;
-            this.labelCompanyName.Location = new System.Drawing.Point(15, 10);
+            this.labelCompanyName.Location = new System.Drawing.Point(15, 70);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.labelCompanyName.Name = "labelCompanyName";
             this.labelCompanyName.Size = new System.Drawing.Size(117, 18);
@@ -448,6 +426,43 @@
             this.dataGridViewImportBill.TabIndex = 0;
             this.dataGridViewImportBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewImportBill_CellContentClick);
             // 
+            // MaPhieuNhap
+            // 
+            this.MaPhieuNhap.DataPropertyName = "MaPhieuNhap";
+            this.MaPhieuNhap.HeaderText = "MaPhieuNhap";
+            this.MaPhieuNhap.MinimumWidth = 6;
+            this.MaPhieuNhap.Name = "MaPhieuNhap";
+            this.MaPhieuNhap.ReadOnly = true;
+            this.MaPhieuNhap.Visible = false;
+            this.MaPhieuNhap.Width = 125;
+            // 
+            // NhaSanXuat
+            // 
+            this.NhaSanXuat.DataPropertyName = "NhaSanXuat";
+            this.NhaSanXuat.HeaderText = "Nhà sản xuất";
+            this.NhaSanXuat.MinimumWidth = 6;
+            this.NhaSanXuat.Name = "NhaSanXuat";
+            this.NhaSanXuat.ReadOnly = true;
+            this.NhaSanXuat.Width = 250;
+            // 
+            // NgayNhap
+            // 
+            this.NgayNhap.DataPropertyName = "NgayNhap";
+            this.NgayNhap.HeaderText = "Ngày nhập";
+            this.NgayNhap.MinimumWidth = 6;
+            this.NgayNhap.Name = "NgayNhap";
+            this.NgayNhap.ReadOnly = true;
+            this.NgayNhap.Width = 125;
+            // 
+            // TongTien
+            // 
+            this.TongTien.DataPropertyName = "TongTien";
+            this.TongTien.HeaderText = "Tổng tiền";
+            this.TongTien.MinimumWidth = 6;
+            this.TongTien.Name = "TongTien";
+            this.TongTien.ReadOnly = true;
+            this.TongTien.Width = 125;
+            // 
             // phieuNhapHangBindingSource
             // 
             this.phieuNhapHangBindingSource.DataMember = "PhieuNhapHang";
@@ -488,9 +503,9 @@
             // 
             // panelBillDetailsFilter
             // 
-            this.panelBillDetailsFilter.Controls.Add(this.textBoxBeanOrigin);
+            this.panelBillDetailsFilter.Controls.Add(this.textBoxBeanOriginFilter);
             this.panelBillDetailsFilter.Controls.Add(this.labelBeanOrigin);
-            this.panelBillDetailsFilter.Controls.Add(this.textBoxBeanName);
+            this.panelBillDetailsFilter.Controls.Add(this.textBoxBeanNameFilter);
             this.panelBillDetailsFilter.Controls.Add(this.labelBeanName);
             this.panelBillDetailsFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBillDetailsFilter.Location = new System.Drawing.Point(554, 24);
@@ -498,13 +513,13 @@
             this.panelBillDetailsFilter.Size = new System.Drawing.Size(760, 131);
             this.panelBillDetailsFilter.TabIndex = 7;
             // 
-            // textBoxBeanOrigin
+            // textBoxBeanOriginFilter
             // 
-            this.textBoxBeanOrigin.Location = new System.Drawing.Point(172, 78);
-            this.textBoxBeanOrigin.Name = "textBoxBeanOrigin";
-            this.textBoxBeanOrigin.Size = new System.Drawing.Size(219, 28);
-            this.textBoxBeanOrigin.TabIndex = 5;
-            this.textBoxBeanOrigin.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
+            this.textBoxBeanOriginFilter.Location = new System.Drawing.Point(172, 78);
+            this.textBoxBeanOriginFilter.Name = "textBoxBeanOriginFilter";
+            this.textBoxBeanOriginFilter.Size = new System.Drawing.Size(219, 28);
+            this.textBoxBeanOriginFilter.TabIndex = 5;
+            this.textBoxBeanOriginFilter.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
             // 
             // labelBeanOrigin
             // 
@@ -516,13 +531,13 @@
             this.labelBeanOrigin.Text = "Xuất xứ: ";
             this.labelBeanOrigin.Click += new System.EventHandler(this.labelClickToFocus);
             // 
-            // textBoxBeanName
+            // textBoxBeanNameFilter
             // 
-            this.textBoxBeanName.Location = new System.Drawing.Point(172, 24);
-            this.textBoxBeanName.Name = "textBoxBeanName";
-            this.textBoxBeanName.Size = new System.Drawing.Size(219, 28);
-            this.textBoxBeanName.TabIndex = 3;
-            this.textBoxBeanName.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
+            this.textBoxBeanNameFilter.Location = new System.Drawing.Point(172, 24);
+            this.textBoxBeanNameFilter.Name = "textBoxBeanNameFilter";
+            this.textBoxBeanNameFilter.Size = new System.Drawing.Size(219, 28);
+            this.textBoxBeanNameFilter.TabIndex = 3;
+            this.textBoxBeanNameFilter.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
             // 
             // labelBeanName
             // 
@@ -656,42 +671,36 @@
             // 
             this.CTPN_LoaiHatTableAdapter.ClearBeforeFill = true;
             // 
-            // MaPhieuNhap
+            // loHangBindingSource
             // 
-            this.MaPhieuNhap.DataPropertyName = "MaPhieuNhap";
-            this.MaPhieuNhap.HeaderText = "MaPhieuNhap";
-            this.MaPhieuNhap.MinimumWidth = 6;
-            this.MaPhieuNhap.Name = "MaPhieuNhap";
-            this.MaPhieuNhap.ReadOnly = true;
-            this.MaPhieuNhap.Visible = false;
-            this.MaPhieuNhap.Width = 125;
+            this.loHangBindingSource.DataMember = "LoHang";
+            this.loHangBindingSource.DataSource = this.daiLyCaPheDataSet;
             // 
-            // NhaSanXuat
+            // loHangTableAdapter
             // 
-            this.NhaSanXuat.DataPropertyName = "NhaSanXuat";
-            this.NhaSanXuat.HeaderText = "Nhà sản xuất";
-            this.NhaSanXuat.MinimumWidth = 6;
-            this.NhaSanXuat.Name = "NhaSanXuat";
-            this.NhaSanXuat.ReadOnly = true;
-            this.NhaSanXuat.Width = 250;
+            this.loHangTableAdapter.ClearBeforeFill = true;
             // 
-            // NgayNhap
+            // textBoxBillID
             // 
-            this.NgayNhap.DataPropertyName = "NgayNhap";
-            this.NgayNhap.HeaderText = "Ngày nhập";
-            this.NgayNhap.MinimumWidth = 6;
-            this.NgayNhap.Name = "NgayNhap";
-            this.NgayNhap.ReadOnly = true;
-            this.NgayNhap.Width = 125;
+            this.textBoxBillID.Enabled = false;
+            this.textBoxBillID.Location = new System.Drawing.Point(15, 33);
+            this.textBoxBillID.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.textBoxBillID.Name = "textBoxBillID";
+            this.textBoxBillID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBillID.Properties.Appearance.Options.UseFont = true;
+            this.textBoxBillID.Size = new System.Drawing.Size(299, 28);
+            this.textBoxBillID.TabIndex = 9;
             // 
-            // TongTien
+            // labelBillID
             // 
-            this.TongTien.DataPropertyName = "TongTien";
-            this.TongTien.HeaderText = "Tổng tiền";
-            this.TongTien.MinimumWidth = 6;
-            this.TongTien.Name = "TongTien";
-            this.TongTien.ReadOnly = true;
-            this.TongTien.Width = 125;
+            this.labelBillID.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBillID.Appearance.Options.UseFont = true;
+            this.labelBillID.Location = new System.Drawing.Point(15, 7);
+            this.labelBillID.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.labelBillID.Name = "labelBillID";
+            this.labelBillID.Size = new System.Drawing.Size(79, 18);
+            this.labelBillID.TabIndex = 8;
+            this.labelBillID.Text = "Mã hóa đơn";
             // 
             // ImportBillForm
             // 
@@ -714,7 +723,6 @@
             this.panelAddBillGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxCategoryNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductCompanyName.Properties)).EndInit();
             this.panelDataSection.ResumeLayout(false);
             this.panelImportBillDetails.ResumeLayout(false);
@@ -736,6 +744,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditToDateFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loaiHatCaPheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chiTietPhieuNhapBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxBillID.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -754,8 +764,6 @@
         private DevExpress.XtraEditors.SimpleButton buttonAddItem;
         private DevExpress.XtraEditors.SimpleButton buttonCancelBill;
         private DevExpress.XtraEditors.SimpleButton buttonSaveBill;
-        private DevExpress.XtraEditors.TextEdit textBoxCategoryNumber;
-        private DevExpress.XtraEditors.LabelControl labelCategoryNumber;
         private System.Windows.Forms.Panel panelSideDataSection;
         private System.Windows.Forms.Panel panelImportBillDetails;
         private DevExpress.XtraEditors.DateEdit dateEditImportDate;
@@ -789,13 +797,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn DonGia;
         private System.Windows.Forms.Panel panelBillDetailsFilter;
-        private System.Windows.Forms.TextBox textBoxBeanOrigin;
+        private System.Windows.Forms.TextBox textBoxBeanOriginFilter;
         private System.Windows.Forms.Label labelBeanOrigin;
-        private System.Windows.Forms.TextBox textBoxBeanName;
+        private System.Windows.Forms.TextBox textBoxBeanNameFilter;
         private System.Windows.Forms.Label labelBeanName;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaPhieuNhap;
         private System.Windows.Forms.DataGridViewTextBoxColumn NhaSanXuat;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayNhap;
         private System.Windows.Forms.DataGridViewTextBoxColumn TongTien;
+        private System.Windows.Forms.BindingSource loHangBindingSource;
+        private DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter loHangTableAdapter;
+        private DevExpress.XtraEditors.TextEdit textBoxBillID;
+        private DevExpress.XtraEditors.LabelControl labelBillID;
     }
 }
