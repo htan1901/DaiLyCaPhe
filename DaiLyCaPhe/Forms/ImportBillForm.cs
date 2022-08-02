@@ -18,7 +18,9 @@ namespace DaiLyCaPhe
     {
         private const string DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
         private const string MIN_DATE_VALUE = "01/01/2000";
-        private List<ImportBillItem> deletedItems = new List<ImportBillItem> ();
+        private List<ImportBillItem> deletedItems = new List<ImportBillItem>();
+        private DatabaseConnection database = new DatabaseConnection();
+
         public ImportBillForm()
         {
             InitializeComponent();
@@ -91,8 +93,8 @@ namespace DaiLyCaPhe
                 Dock = DockStyle.Top
             };
             newItem.deleteEvent += new EventHandler(DeleteBillItemEvent);
-            newItem.AddBeanNameItem(DatabaseConnection.GetAllBeanName());
-            newItem.AddBeanOriginItem(DatabaseConnection.GetAllOrigin());
+            newItem.AddBeanNameItem(database.GetAllBeanName());
+            newItem.AddBeanOriginItem(database.GetAllOrigin());
             panelBillItem.Controls.Add(newItem);
         }
 
@@ -114,7 +116,7 @@ namespace DaiLyCaPhe
         }
         private void ButtonSaveBill_Click(object sender, EventArgs e)
         {
-            string billID = DatabaseConnection.GetBillByID(textBoxBillID.Text);
+            string billID = database.GetBillByID(textBoxBillID.Text);
             if (billID == "")
                 SaveBill();
             else
@@ -137,8 +139,8 @@ namespace DaiLyCaPhe
                 return;
             }
 
-            DatabaseConnection.DeleteRecordFromChiTietPhieuNhap(billID);
-            DatabaseConnection.DeleteRecordFromPhieuNhapHang(billID);
+            database.DeleteRecordFromChiTietPhieuNhap(billID);
+            database.DeleteRecordFromPhieuNhapHang(billID);
 
             ImportBillForm_Load(sender, e);
         }
@@ -243,14 +245,14 @@ namespace DaiLyCaPhe
                 return;
             int index = e.RowIndex;
             string billID = dataGridViewImportBill.Rows[index].Cells[0].Value.ToString();
-            string categoryId = DatabaseConnection.GetCategoryIDByBillID(billID);
+            string categoryId = database.GetCategoryIDByBillID(billID);
 
             textBoxBillID.Text = billID;
             textBoxCategoryID.Text = categoryId;
             this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, GetBeanName(), GetOrigin() ,billID);
             textBoxProductCompanyName.Text = dataGridViewImportBill.Rows[index].Cells[1].Value.ToString();
             dateEditImportDate.Text = dataGridViewImportBill.Rows[index].Cells[2].Value.ToString().Substring(0,10);
-            DataTable dataTable = DatabaseConnection.GetBillDetails(billID);
+            DataTable dataTable = database.GetBillDetails(billID);
             if (dataTable == null)
                 return;
             foreach (DataRow row in dataTable.Rows)
@@ -308,10 +310,10 @@ namespace DaiLyCaPhe
                 decimal amount = importBill.Amount;
                 long price = importBill.Price;
 
-                string beanTypeId = DatabaseConnection.GetBeanTypeIdByNameAndOrigin(beanName, origin);
+                string beanTypeId = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
 
-                int loHangRowsAffected = DatabaseConnection.UpdateTableLoHang(categoryID, beanTypeId, productionDate, expireDate);
-                int chiTietPhieuNhapRowsAffected = DatabaseConnection.UpdateTableChiTietPhieuNhap(billID, categoryID, beanTypeId, amount, price);
+                int loHangRowsAffected = database.UpdateTableLoHang(categoryID, beanTypeId, productionDate, expireDate);
+                int chiTietPhieuNhapRowsAffected = database.UpdateTableChiTietPhieuNhap(billID, categoryID, beanTypeId, amount, price);
 
                 if (loHangRowsAffected == 0 && chiTietPhieuNhapRowsAffected == 0)
                 {
@@ -325,9 +327,9 @@ namespace DaiLyCaPhe
                 string beanName = item.BeanName;
                 string origin = item.Origin;
 
-                string beanTypeID = DatabaseConnection.GetBeanTypeIdByNameAndOrigin(beanName, origin);
+                string beanTypeID = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
 
-                DatabaseConnection.DeleteRecordFromChiTietPhieuNhap(billID, categoryID, beanTypeID);
+                database.DeleteRecordFromChiTietPhieuNhap(billID, categoryID, beanTypeID);
             }
         }
 
@@ -391,7 +393,7 @@ namespace DaiLyCaPhe
                 if (price == 0 || amount == 0 || name == "" || name == null || origin == "" || origin == null)
                     continue;
                 
-                string beanID = DatabaseConnection.GetBeanTypeIdByNameAndOrigin(name, origin);
+                string beanID = database.GetBeanTypeIdByNameAndOrigin(name, origin);
                 if (beanID != "")
                     beanTypeID = beanID;
                 else

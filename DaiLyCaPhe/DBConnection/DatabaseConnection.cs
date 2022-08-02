@@ -10,9 +10,9 @@ namespace DaiLyCaPhe.DBConnection
 {
     public class DatabaseConnection
     {
-        private static string _connectionString = "Data Source=localhost;Initial Catalog=DaiLyCaPhe; User ID =sa; Password=1234";
+        private string _connectionString = "Data Source=localhost;Initial Catalog=DaiLyCaPhe; User ID =sa; Password=1234";
 
-        public static string GetBeanTypeIdByNameAndOrigin(string beanName, string beanOrigin)
+        public string GetBeanTypeIdByNameAndOrigin(string beanName, string beanOrigin)
         {
             string data = "";
             string query = "SELECT MaLoaiHat FROM LoaiHatCaPhe WHERE TenLoaiHat LIKE @beanName AND XuatXu LIKE @beanOrigin";
@@ -28,7 +28,7 @@ namespace DaiLyCaPhe.DBConnection
             return data;
         }
 
-        public static DataTable GetBillDetails(string billID)
+        public DataTable GetBillDetails(string billID)
         {
             string query = "SELECT DISTINCT LH.TenLoaiHat, LH.XuatXu, L.NgaySanXuat, SoLuong, C.DonGia " +
                             "FROM ChiTietPhieuNhap C, LoaiHatCaPhe LH, LoHang L " +
@@ -54,7 +54,7 @@ namespace DaiLyCaPhe.DBConnection
             }
         }
 
-        public static string GetBillByID(string billID)
+        public string GetBillByID(string billID)
         { 
             string id;
             string query = "SELECT MaPhieuNhap FROM PhieuNhapHang WHERE MaPhieuNhap = @billID";
@@ -69,7 +69,7 @@ namespace DaiLyCaPhe.DBConnection
             return id;
         }
 
-        public static string GetCategoryIDByBillID(string billID)
+        public string GetCategoryIDByBillID(string billID)
         {
             string id;
             string query = "select SoLoHang " +
@@ -86,7 +86,7 @@ namespace DaiLyCaPhe.DBConnection
             return id;
         }
 
-        public static int UpdateTableLoHang(string SoLoHang, string MaLoaiHat, DateTime NgaySanXuat, DateTime HanSuDung)
+        public int UpdateTableLoHang(string SoLoHang, string MaLoaiHat, DateTime NgaySanXuat, DateTime HanSuDung)
         {
             int rowAffected = 0;
             string updateCommand = "update LoHang " +
@@ -107,7 +107,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public static int UpdateTableChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat, decimal SoLuong, decimal DonGia)
+        public int UpdateTableChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat, decimal SoLuong, decimal DonGia)
         {
             int rowAffected = 0;
             string updateCommand = "update ChiTietPhieuNhap " +
@@ -130,7 +130,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public static int UpdateTablePhieuNhapHang(string MaPhieuNhap, string NhaSanXuat, DateTime NgayNhap)
+        public int UpdateTablePhieuNhapHang(string MaPhieuNhap, string NhaSanXuat, DateTime NgayNhap)
         {
             int rowAffected = 0;
             string updateCommand = "update PhieuNhapHang " +
@@ -152,7 +152,7 @@ namespace DaiLyCaPhe.DBConnection
 
         }
 
-        public static int DeleteRecordFromChiTietPhieuNhap(string MaPhieuNhap)
+        public int DeleteRecordFromChiTietPhieuNhap(string MaPhieuNhap)
         {
             int rowAffected = 0;
             string deleteCommand = "delete from ChiTietPhieuNhap " +
@@ -167,7 +167,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public static int DeleteRecordFromChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat)
+        public int DeleteRecordFromChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat)
         {
             int rowAffected = 0;
             string deleteCommand = "delete from ChiTietPhieuNhap " +
@@ -184,7 +184,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public static int DeleteRecordFromLoHang(string SoLoHang, string MaLoaiHat)
+        public int DeleteRecordFromLoHang(string SoLoHang, string MaLoaiHat)
         {
             int rowAffected = 0;
             string deleteCommand = "delete from LoHang " +
@@ -199,7 +199,7 @@ namespace DaiLyCaPhe.DBConnection
             }
             return rowAffected;
         }
-        public static int DeleteRecordFromPhieuNhapHang(string MaPhieuNhap)
+        public int DeleteRecordFromPhieuNhapHang(string MaPhieuNhap)
         {
             int rowAffected = 0;
             string deleteCommand = "delete from PhieuNhapHang " +
@@ -214,7 +214,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public static List<string> GetAllOrigin()
+        public List<string> GetAllOrigin()
         {
             List<string> origins = new List<string>();
             string query = "select distinct XuatXu from LoaiHatCaPhe";
@@ -233,7 +233,7 @@ namespace DaiLyCaPhe.DBConnection
             }
             return origins;
         }
-        public static List<string> GetAllBeanName()
+        public List<string> GetAllBeanName()
         {
             List<string> names = new List<string>();
             string query = "select distinct TenLoaiHat from LoaiHatCaPhe";
