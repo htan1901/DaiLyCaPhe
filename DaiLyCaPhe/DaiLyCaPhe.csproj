@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DaiLyCaPheDataSet.cs">
+      <DependentUpon>DaiLyCaPheDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DaiLyCaPheDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

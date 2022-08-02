@@ -18,6 +18,7 @@ namespace DaiLyCaPhe
     {
         private const string DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
         private const string MIN_DATE_VALUE = "01/01/2000";
+        private List<ImportBillItem> deletedItems = new List<ImportBillItem> ();
         public ImportBillForm()
         {
             InitializeComponent();
@@ -37,7 +38,28 @@ namespace DaiLyCaPhe
             return dataGridViewImportBill.SelectedCells[0].Value.ToString();
         }
 
-        private string generateID(string prefix, int length)
+        private void ChangeState(bool state)
+        {
+            dateEditImportDate.Enabled = state;
+            textBoxProductCompanyName.Enabled = state;
+            buttonSave.Enabled = state;
+            buttonCancel.Enabled = state;
+            buttonAddItem.Enabled = state;
+            buttonDeleteBill.Enabled = !state;
+            buttonModifyBill.Enabled = !state;
+            buttonAddBill.Enabled = !state;
+        }       
+        
+        private void ClearCurrentData()
+        {
+            textBoxBillID.Text = null;
+            textBoxCategoryID.Text = null;
+            textBoxProductCompanyName.Text = null;
+            dateEditImportDate.Text = null;
+            panelBillItem.Controls.Clear();
+        }
+
+        private string GenerateID(string prefix, int length)
         {
             string nums = "0123456789";
             int numsLen = nums.Length;
@@ -48,7 +70,7 @@ namespace DaiLyCaPhe
             return id;
         }
 
-        private string generateBeanTypeID(string beanType, string origin)
+        private string GenerateBeanTypeID(string beanType)
         {
             Random random = new Random();
             string prefix = beanType.Substring(0, 3);
@@ -62,25 +84,80 @@ namespace DaiLyCaPhe
             return prefix.ToUpper();
         }
 
-        private void addItemButton_Click(object sender, EventArgs e)
+        private void AddItemButton_Click(object sender, EventArgs e)
         {
-            ImportBillItem newItem = new ImportBillItem();
-            newItem.Dock = DockStyle.Top;
-            newItem.deleteEvent += new EventHandler(deleteBillItemEvent);
+            ImportBillItem newItem = new ImportBillItem
+            {
+                Dock = DockStyle.Top
+            };
+            newItem.deleteEvent += new EventHandler(DeleteBillItemEvent);
+            newItem.AddBeanNameItem(DatabaseConnection.GetAllBeanName());
+            newItem.AddBeanOriginItem(DatabaseConnection.GetAllOrigin());
             panelBillItem.Controls.Add(newItem);
         }
 
-        private void deleteBillItemEvent(object sender, EventArgs e)
+        private void DeleteBillItemEvent(object sender, EventArgs e)
         {
             panelBillItem.Controls.Remove((Control)sender);
         }
 
-        private void clearAllItemButton_Click(object sender, EventArgs e)
+        private void DeleteItemFromDBEvent(object sender, EventArgs e)
         {
-            textBoxBillID.Text = null;
-            textBoxProductCompanyName.Text = null;
-            dateEditImportDate.Text = "";
-            panelBillItem.Controls.Clear();
+            deletedItems.Add((ImportBillItem)sender);
+            panelBillItem.Controls.Remove((Control)sender);
+        }
+
+        private void ClearAllItemButton_Click(object sender, EventArgs e)
+        {
+            ClearCurrentData();
+            ChangeState(false);
+        }
+        private void ButtonSaveBill_Click(object sender, EventArgs e)
+        {
+            string billID = DatabaseConnection.GetBillByID(textBoxBillID.Text);
+            if (billID == "")
+                SaveBill();
+            else
+                UpdateBill();
+            ImportBillForm_Load(sender, e);
+            ChangeState(false);
+            ClearCurrentData();
+        }
+
+        private void ButtonDeleteBill_Click(object sender, EventArgs e)
+        {
+            string billID = textBoxBillID.Text;
+            string categoryID = textBoxCategoryID.Text;
+
+            DialogResult dialogResult = MessageBox.Show(string.Format("Hóa đơn {0} sẽ bị xóa", billID), "Thông báo", MessageBoxButtons.OKCancel);
+
+            if (dialogResult == DialogResult.Cancel)
+            {
+                MessageBox.Show("Cancel");
+                return;
+            }
+
+            DatabaseConnection.DeleteRecordFromChiTietPhieuNhap(billID);
+            DatabaseConnection.DeleteRecordFromPhieuNhapHang(billID);
+
+            ImportBillForm_Load(sender, e);
+        }
+
+        private void ButtonModifyBill_Click(object sender, EventArgs e)
+        {
+            ChangeState(true);
+            foreach(Control item in panelBillItem.Controls)
+            {
+                item.Enabled = true;
+            }
+            textBoxProductCompanyName.Focus();
+        }
+
+        private void ButtonAddBill_Click(object sender, EventArgs e)
+        {
+            ClearCurrentData();
+            ChangeState(true);
+            textBoxProductCompanyName.Focus();
         }
 
         private void ImportBillForm_Load(object sender, EventArgs e)
@@ -91,7 +168,7 @@ namespace DaiLyCaPhe
 
         }
 
-        private void labelClickToFocus(object sender, EventArgs e)
+        private void LabelClickToFocus(object sender, EventArgs e)
         {
             if (sender.Equals(labelCompanyNameFilter))
             {
@@ -121,7 +198,7 @@ namespace DaiLyCaPhe
 
         }
 
-        private void textBoxCompanyNameFilter_TextChanged(object sender, EventArgs e)
+        private void TextBoxCompanyNameFilter_TextChanged(object sender, EventArgs e)
         {
 
             try
@@ -134,7 +211,7 @@ namespace DaiLyCaPhe
             }
         }
 
-        private void fillEvent(object sender, EventArgs e)
+        private void FillEvent(object sender, EventArgs e)
         {
             DateTime fromDate;
             if(dateEditFromDateFilter.Text == null || dateEditFromDateFilter.Text == "")
@@ -158,14 +235,18 @@ namespace DaiLyCaPhe
         }
 
 
-        private void dataGridViewImportBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewImportBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            ChangeState(false);
             panelBillItem.Controls.Clear();
             if (!(e.RowIndex >= 0))
                 return;
             int index = e.RowIndex;
             string billID = dataGridViewImportBill.Rows[index].Cells[0].Value.ToString();
+            string categoryId = DatabaseConnection.GetCategoryIDByBillID(billID);
+
             textBoxBillID.Text = billID;
+            textBoxCategoryID.Text = categoryId;
             this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, GetBeanName(), GetOrigin() ,billID);
             textBoxProductCompanyName.Text = dataGridViewImportBill.Rows[index].Cells[1].Value.ToString();
             dateEditImportDate.Text = dataGridViewImportBill.Rows[index].Cells[2].Value.ToString().Substring(0,10);
@@ -180,14 +261,19 @@ namespace DaiLyCaPhe
                 decimal amount = decimal.Parse(row["SoLuong"].ToString());
                 string beanName = row["TenLoaiHat"].ToString();
 
-                ImportBillItem item = new ImportBillItem();
-
-                item.BeanName = beanName;
-                item.Origin = origin;
-                item.ProductionDate = productionDate;
-                item.Amount = amount;
-                item.Price = price.ToString();
-                item.Dock = DockStyle.Top;
+                ImportBillItem item = new ImportBillItem
+                {
+                    BeanName = beanName,
+                    Origin = origin,
+                    ProductionDate = productionDate,
+                    Amount = amount,
+                    Price = price,
+                    Dock = DockStyle.Top,
+                    ComboBoxBeanNameEnabled = false,
+                    ComboBoxBeanOriginEnabled = false,
+                    Enabled = false,
+                };
+                item.deleteEvent += new EventHandler(DeleteItemFromDBEvent);
                 panelBillItem.Controls.Add(item);
             }
 
@@ -202,12 +288,50 @@ namespace DaiLyCaPhe
 
         }
 
-        private void updateBill()
+        private void UpdateBill()
         {
-            loHangTableAdapter.Update();   
+            string billID = textBoxBillID.Text;
+            string categoryID = textBoxCategoryID.Text;
+            string productCompanyName = textBoxProductCompanyName.Text;
+            string importDate = dateEditImportDate.Text;
+
+            foreach(Control item in panelBillItem.Controls)
+            {
+                ImportBillItem importBill = item as ImportBillItem;
+                string beanName = importBill.BeanName;
+                string origin = importBill.Origin;
+                string date = importBill.ProductionDate;
+
+                DateTime productionDate = DateTime.ParseExact(date, DEFAULT_DATE_FORMAT, null);
+                DateTime expireDate = productionDate.AddMonths(3);
+    
+                decimal amount = importBill.Amount;
+                long price = importBill.Price;
+
+                string beanTypeId = DatabaseConnection.GetBeanTypeIdByNameAndOrigin(beanName, origin);
+
+                int loHangRowsAffected = DatabaseConnection.UpdateTableLoHang(categoryID, beanTypeId, productionDate, expireDate);
+                int chiTietPhieuNhapRowsAffected = DatabaseConnection.UpdateTableChiTietPhieuNhap(billID, categoryID, beanTypeId, amount, price);
+
+                if (loHangRowsAffected == 0 && chiTietPhieuNhapRowsAffected == 0)
+                {
+                    loHangTableAdapter.Insert(categoryID, beanTypeId, int.Parse(amount.ToString()), productionDate, expireDate);
+                    chiTietPhieuNhapTableAdapter.Insert(billID, categoryID, beanTypeId, int.Parse(amount.ToString()), price);
+                }
+            }
+
+            foreach(ImportBillItem item in deletedItems)
+            {
+                string beanName = item.BeanName;
+                string origin = item.Origin;
+
+                string beanTypeID = DatabaseConnection.GetBeanTypeIdByNameAndOrigin(beanName, origin);
+
+                DatabaseConnection.DeleteRecordFromChiTietPhieuNhap(billID, categoryID, beanTypeID);
+            }
         }
 
-        private void saveBill()
+        private void SaveBill()
         {
             string importDateText = dateEditImportDate.Text;
             DateTime importDate;
@@ -216,8 +340,8 @@ namespace DaiLyCaPhe
             else
                 importDate = DateTime.ParseExact(importDateText, DEFAULT_DATE_FORMAT, null);
 
-            string billID = generateID("PNH", 6);
-            string categoryID = generateID("SL", 6);
+            string billID = GenerateID("PNH", 6);
+            string categoryID = GenerateID("SL", 6);
             long total = 0;
             string productCompanyName = textBoxProductCompanyName.Text;
 
@@ -237,7 +361,7 @@ namespace DaiLyCaPhe
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    billID = generateID("PNH", 6);
+                    billID = GenerateID("PNH", 6);
                 }
 
             } while (true);
@@ -250,7 +374,7 @@ namespace DaiLyCaPhe
                 string productionDateText = billItem.ProductionDate;
                 DateTime productionDate;
                 DateTime expireDate;
-                int price = 0;
+                long price = 0;
 
                 if (productionDateText == null || productionDateText == "")
                     productionDate = DateTime.Now;
@@ -258,14 +382,7 @@ namespace DaiLyCaPhe
                     productionDate = DateTime.ParseExact(productionDateText, DEFAULT_DATE_FORMAT, null);
                 expireDate = productionDate.AddMonths(3);
 
-                try
-                {
-                    price = int.Parse(billItem.Price);
-                }
-                catch (Exception ex)
-                {
-                    price = 0;
-                }
+                price = billItem.Price;
                 int amount = int.Parse(billItem.Amount.ToString());
 
                 string name = billItem.BeanName;
@@ -279,7 +396,7 @@ namespace DaiLyCaPhe
                     beanTypeID = beanID;
                 else
                 {
-                    beanTypeID = generateBeanTypeID(name, origin);
+                    beanTypeID = GenerateBeanTypeID(name);
                     try
                     {
                         loaiHatCaPheTableAdapter.Insert(beanTypeID, name, origin);
@@ -301,23 +418,12 @@ namespace DaiLyCaPhe
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
-                        categoryID = generateID("SL", 6);
+                        categoryID = GenerateID("SL", 6);
                     }
 
                 } while (true);
             }
         }
 
-        private void buttonSaveBill_Click(object sender, EventArgs e)
-        {
-            string billID = DatabaseConnection.GetBillByID(textBoxBillID.Text);
-            if (billID == "")
-                saveBill();
-            else
-                updateBill();
-
-
-            ImportBillForm_Load(sender, e);
-        }
     }
 }
