@@ -12,7 +12,7 @@ using CustomControls;
 using DaiLyCaPhe.DBConnection;
 using System.Data.SqlClient;
 
-namespace DaiLyCaPhe
+namespace DaiLyCaPhe.Forms
 {
     public partial class ImportBillForm : DevExpress.XtraEditors.XtraForm
     {
@@ -20,26 +20,19 @@ namespace DaiLyCaPhe
         private const string MIN_DATE_VALUE = "01/01/2000";
         private List<ImportBillItem> deletedItems = new List<ImportBillItem>();
         private DatabaseConnection database = new DatabaseConnection();
+        private bool editable = true;
 
         public ImportBillForm()
         {
             InitializeComponent();
         }
-        private string GetBeanName()
-        {
-            return textBoxBeanNameFilter.Text;
-        }
 
-        private string GetOrigin()
+        #region Utility Methods
+        private void DeleteBillItemEvent(object sender, EventArgs e)
         {
-            return textBoxBeanOriginFilter.Text;
+            panelBillItem.Controls.Remove((Control)sender);
         }
-
-        private string GetBillCode()
-        {
-            return dataGridViewImportBill.SelectedCells[0].Value.ToString();
-        }
-
+        
         private void ChangeState(bool state)
         {
             dateEditImportDate.Enabled = state;
@@ -51,7 +44,7 @@ namespace DaiLyCaPhe
             buttonModifyBill.Enabled = !state;
             buttonAddBill.Enabled = !state;
         }       
-        
+
         private void ClearCurrentData()
         {
             textBoxBillID.Text = null;
@@ -60,7 +53,7 @@ namespace DaiLyCaPhe
             dateEditImportDate.Text = null;
             panelBillItem.Controls.Clear();
         }
-
+        
         private string GenerateID(string prefix, int length)
         {
             string nums = "0123456789";
@@ -85,8 +78,17 @@ namespace DaiLyCaPhe
                 prefix += num.ToString();
             return prefix.ToUpper();
         }
+       
+        private void DeleteItemFromDBEvent(object sender, EventArgs e)
+        {
+            deletedItems.Add((ImportBillItem)sender);
+            panelBillItem.Controls.Remove((Control)sender);
+        }
+        
+        #endregion
 
-        private void AddItemButton_Click(object sender, EventArgs e)
+        #region Buttons Event
+        private void ButtonAddItem_Click(object sender, EventArgs e)
         {
             ImportBillItem newItem = new ImportBillItem
             {
@@ -98,31 +100,21 @@ namespace DaiLyCaPhe
             panelBillItem.Controls.Add(newItem);
         }
 
-        private void DeleteBillItemEvent(object sender, EventArgs e)
-        {
-            panelBillItem.Controls.Remove((Control)sender);
-        }
-
-        private void DeleteItemFromDBEvent(object sender, EventArgs e)
-        {
-            deletedItems.Add((ImportBillItem)sender);
-            panelBillItem.Controls.Remove((Control)sender);
-        }
-
-        private void ClearAllItemButton_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             ClearCurrentData();
-            ChangeState(false);
+            ChangeState(!editable);
         }
+        
         private void ButtonSaveBill_Click(object sender, EventArgs e)
         {
-            string billID = database.GetBillByID(textBoxBillID.Text);
+            string billID = database.SearchForImportBillID(textBoxBillID.Text);
             if (billID == "")
                 SaveBill();
             else
                 UpdateBill();
             ImportBillForm_Load(sender, e);
-            ChangeState(false);
+            ChangeState(!editable);
             ClearCurrentData();
         }
 
@@ -147,7 +139,7 @@ namespace DaiLyCaPhe
 
         private void ButtonModifyBill_Click(object sender, EventArgs e)
         {
-            ChangeState(true);
+            ChangeState(editable);
             foreach(Control item in panelBillItem.Controls)
             {
                 item.Enabled = true;
@@ -158,10 +150,50 @@ namespace DaiLyCaPhe
         private void ButtonAddBill_Click(object sender, EventArgs e)
         {
             ClearCurrentData();
-            ChangeState(true);
+            ChangeState(editable);
             textBoxProductCompanyName.Focus();
         }
 
+        #endregion
+
+        #region Fill Events
+
+        private void NameAndDateFillEvent(object sender, EventArgs e)
+        {
+            DateTime fromDate;
+            if(dateEditFromDateFilter.Text == null || dateEditFromDateFilter.Text == "")
+                fromDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
+            else
+                fromDate = DateTime.ParseExact(dateEditFromDateFilter.Text, DEFAULT_DATE_FORMAT, null);
+            DateTime toDate;
+            if (dateEditToDateFilter.Text == null || dateEditToDateFilter.Text == "")
+                toDate = DateTime.MaxValue;
+            else
+                toDate = DateTime.ParseExact(dateEditToDateFilter.Text, DEFAULT_DATE_FORMAT, null);
+
+            try
+            {
+                this.phieuNhapHangTableAdapter.FillByNameAndDate(this.daiLyCaPheDataSet.PhieuNhapHang, textBoxCompanyNameFilter.Text, fromDate, toDate);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void NameAndOriginFillEvent(object sender, EventArgs e)
+        {
+            string name = textBoxBeanNameFilter.Text;
+            string origin = textBoxBeanOriginFilter.Text;
+            string billID = dataGridViewImportBill.SelectedCells[0].Value.ToString();
+
+            this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, name, origin, billID);
+
+        }
+
+        #endregion
+
+        #region Other Events
         private void ImportBillForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'daiLyCaPheDataSet.LoHang' table. You can move, or remove it, as needed.
@@ -200,46 +232,9 @@ namespace DaiLyCaPhe
 
         }
 
-        private void TextBoxCompanyNameFilter_TextChanged(object sender, EventArgs e)
-        {
-
-            try
-            {
-                this.phieuNhapHangTableAdapter.FillByProductCompanyName(this.daiLyCaPheDataSet.PhieuNhapHang, textBoxCompanyNameFilter.Text);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void FillEvent(object sender, EventArgs e)
-        {
-            DateTime fromDate;
-            if(dateEditFromDateFilter.Text == null || dateEditFromDateFilter.Text == "")
-                fromDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
-            else
-                fromDate = DateTime.ParseExact(dateEditFromDateFilter.Text, DEFAULT_DATE_FORMAT, null);
-            DateTime toDate;
-            if (dateEditToDateFilter.Text == null || dateEditToDateFilter.Text == "")
-                toDate = DateTime.MaxValue;
-            else
-                toDate = DateTime.ParseExact(dateEditToDateFilter.Text, DEFAULT_DATE_FORMAT, null);
-
-            try
-            {
-                this.phieuNhapHangTableAdapter.FillByNameAndDate(this.daiLyCaPheDataSet.PhieuNhapHang, textBoxCompanyNameFilter.Text, fromDate, toDate);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-        }
-
-
         private void DataGridViewImportBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            ChangeState(false);
+            ChangeState(!editable);
             panelBillItem.Controls.Clear();
             if (!(e.RowIndex >= 0))
                 return;
@@ -249,10 +244,15 @@ namespace DaiLyCaPhe
 
             textBoxBillID.Text = billID;
             textBoxCategoryID.Text = categoryId;
-            this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, GetBeanName(), GetOrigin() ,billID);
+            string beanNameFillCriteria = textBoxBeanNameFilter.Text;
+            string originFillCriteria = textBoxBeanOriginFilter.Text;
+
+            this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, beanNameFillCriteria, originFillCriteria ,billID);
+
             textBoxProductCompanyName.Text = dataGridViewImportBill.Rows[index].Cells[1].Value.ToString();
             dateEditImportDate.Text = dataGridViewImportBill.Rows[index].Cells[2].Value.ToString().Substring(0,10);
-            DataTable dataTable = database.GetBillDetails(billID);
+
+            DataTable dataTable = database.GetImportBillDetails(billID);
             if (dataTable == null)
                 return;
             foreach (DataRow row in dataTable.Rows)
@@ -280,15 +280,9 @@ namespace DaiLyCaPhe
             }
 
         }
+        
+        #endregion
 
-
-        private void NameAndOriginFilter(object sender, EventArgs e)
-        {
-            string name = textBoxBeanNameFilter.Text;
-            string origin = textBoxBeanOriginFilter.Text;
-            this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, name, origin, GetBillCode());
-
-        }
 
         private void UpdateBill()
         {

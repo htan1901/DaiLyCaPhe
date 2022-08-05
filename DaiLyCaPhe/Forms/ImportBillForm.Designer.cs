@@ -1,4 +1,4 @@
-﻿namespace DaiLyCaPhe
+﻿namespace DaiLyCaPhe.Forms
 {
     partial class ImportBillForm
     {
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupAddImportBill = new DevExpress.XtraEditors.GroupControl();
             this.panelBillItem = new System.Windows.Forms.Panel();
             this.panelAddBillGroup = new DevExpress.XtraEditors.PanelControl();
@@ -47,7 +49,7 @@
             this.textBoxProductCompanyName = new DevExpress.XtraEditors.TextEdit();
             this.labelCompanyName = new DevExpress.XtraEditors.LabelControl();
             this.panelDataSection = new System.Windows.Forms.Panel();
-            this.panelImportBillDetails = new System.Windows.Forms.Panel();
+            this.panelDataImportBillDetails = new System.Windows.Forms.Panel();
             this.dataGridViewImportBIllDetail = new System.Windows.Forms.DataGridView();
             this.maPhieuNhapDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaLoaiHat = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +61,12 @@
             this.cTPNLoaiHatBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
             this.labelImportBillDetailsTitle = new System.Windows.Forms.Label();
-            this.panelSideDataSection = new System.Windows.Forms.Panel();
+            this.panelDataImportBill = new System.Windows.Forms.Panel();
             this.dataGridViewImportBill = new System.Windows.Forms.DataGridView();
+            this.MaPhieuNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NhaSanXuat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phieuNhapHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelImportBillTitle = new System.Windows.Forms.Label();
             this.panelFilterFunction = new System.Windows.Forms.Panel();
@@ -85,10 +91,6 @@
             this.CTPN_LoaiHatTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CTPN_LoaiHatTableAdapter();
             this.loHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter();
-            this.MaPhieuNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NhaSanXuat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgayNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddImportBill)).BeginInit();
             this.groupAddImportBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelAddBillGroup)).BeginInit();
@@ -99,11 +101,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductCompanyName.Properties)).BeginInit();
             this.panelDataSection.SuspendLayout();
-            this.panelImportBillDetails.SuspendLayout();
+            this.panelDataImportBillDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportBIllDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTPNLoaiHatBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).BeginInit();
-            this.panelSideDataSection.SuspendLayout();
+            this.panelDataImportBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportBill)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuNhapHangBindingSource)).BeginInit();
             this.panelFilterFunction.SuspendLayout();
@@ -121,6 +123,8 @@
             // 
             // groupAddImportBill
             // 
+            this.groupAddImportBill.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupAddImportBill.AppearanceCaption.Options.UseFont = true;
             this.groupAddImportBill.Controls.Add(this.panelBillItem);
             this.groupAddImportBill.Controls.Add(this.panelAddBillGroup);
             this.groupAddImportBill.Dock = System.Windows.Forms.DockStyle.Top;
@@ -131,13 +135,13 @@
             this.groupAddImportBill.TabIndex = 0;
             this.groupAddImportBill.Text = "Thêm hóa đơn nhập hàng";
             // 
-            // panelBillItem
+            // panelBillDetails
             // 
             this.panelBillItem.AutoScroll = true;
             this.panelBillItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBillItem.Location = new System.Drawing.Point(329, 28);
             this.panelBillItem.Margin = new System.Windows.Forms.Padding(4);
-            this.panelBillItem.Name = "panelBillItem";
+            this.panelBillItem.Name = "panelBillDetails";
             this.panelBillItem.Size = new System.Drawing.Size(986, 382);
             this.panelBillItem.TabIndex = 1;
             // 
@@ -296,7 +300,7 @@
             this.buttonCancel.Size = new System.Drawing.Size(115, 30);
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Hủy";
-            this.buttonCancel.Click += new System.EventHandler(this.ClearAllItemButton_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // buttonAddItem
             // 
@@ -309,7 +313,7 @@
             this.buttonAddItem.Size = new System.Drawing.Size(115, 30);
             this.buttonAddItem.TabIndex = 4;
             this.buttonAddItem.Text = "Thêm sản phẩm";
-            this.buttonAddItem.Click += new System.EventHandler(this.AddItemButton_Click);
+            this.buttonAddItem.Click += new System.EventHandler(this.ButtonAddItem_Click);
             // 
             // labelImportDate
             // 
@@ -349,8 +353,8 @@
             // panelDataSection
             // 
             this.panelDataSection.AutoScroll = true;
-            this.panelDataSection.Controls.Add(this.panelImportBillDetails);
-            this.panelDataSection.Controls.Add(this.panelSideDataSection);
+            this.panelDataSection.Controls.Add(this.panelDataImportBillDetails);
+            this.panelDataSection.Controls.Add(this.panelDataImportBill);
             this.panelDataSection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDataSection.Location = new System.Drawing.Point(0, 544);
             this.panelDataSection.Margin = new System.Windows.Forms.Padding(4);
@@ -358,23 +362,26 @@
             this.panelDataSection.Size = new System.Drawing.Size(1317, 321);
             this.panelDataSection.TabIndex = 1;
             // 
-            // panelImportBillDetails
+            // panelDataImportBillDetails
             // 
-            this.panelImportBillDetails.AutoScroll = true;
-            this.panelImportBillDetails.Controls.Add(this.dataGridViewImportBIllDetail);
-            this.panelImportBillDetails.Controls.Add(this.labelImportBillDetailsTitle);
-            this.panelImportBillDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelImportBillDetails.Location = new System.Drawing.Point(554, 0);
-            this.panelImportBillDetails.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.panelImportBillDetails.Name = "panelImportBillDetails";
-            this.panelImportBillDetails.Size = new System.Drawing.Size(763, 321);
-            this.panelImportBillDetails.TabIndex = 1;
+            this.panelDataImportBillDetails.AutoScroll = true;
+            this.panelDataImportBillDetails.Controls.Add(this.dataGridViewImportBIllDetail);
+            this.panelDataImportBillDetails.Controls.Add(this.labelImportBillDetailsTitle);
+            this.panelDataImportBillDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDataImportBillDetails.Location = new System.Drawing.Point(554, 0);
+            this.panelDataImportBillDetails.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.panelDataImportBillDetails.Name = "panelDataImportBillDetails";
+            this.panelDataImportBillDetails.Size = new System.Drawing.Size(763, 321);
+            this.panelDataImportBillDetails.TabIndex = 1;
             // 
             // dataGridViewImportBIllDetail
             // 
             this.dataGridViewImportBIllDetail.AllowUserToAddRows = false;
             this.dataGridViewImportBIllDetail.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewImportBIllDetail.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewImportBIllDetail.AutoGenerateColumns = false;
+            this.dataGridViewImportBIllDetail.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewImportBIllDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImportBIllDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.maPhieuNhapDataGridViewTextBoxColumn,
@@ -478,26 +485,29 @@
             this.labelImportBillDetailsTitle.Name = "labelImportBillDetailsTitle";
             this.labelImportBillDetailsTitle.Size = new System.Drawing.Size(763, 32);
             this.labelImportBillDetailsTitle.TabIndex = 2;
-            this.labelImportBillDetailsTitle.Text = "CHI TIẾT HÓA ĐƠN NHẬP";
+            this.labelImportBillDetailsTitle.Text = "CHI TIẾT HÓA ĐƠN NHẬP HÀNG";
             this.labelImportBillDetailsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panelSideDataSection
+            // panelDataImportBill
             // 
-            this.panelSideDataSection.AutoScroll = true;
-            this.panelSideDataSection.Controls.Add(this.dataGridViewImportBill);
-            this.panelSideDataSection.Controls.Add(this.labelImportBillTitle);
-            this.panelSideDataSection.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSideDataSection.Location = new System.Drawing.Point(0, 0);
-            this.panelSideDataSection.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.panelSideDataSection.Name = "panelSideDataSection";
-            this.panelSideDataSection.Size = new System.Drawing.Size(554, 321);
-            this.panelSideDataSection.TabIndex = 0;
+            this.panelDataImportBill.AutoScroll = true;
+            this.panelDataImportBill.Controls.Add(this.dataGridViewImportBill);
+            this.panelDataImportBill.Controls.Add(this.labelImportBillTitle);
+            this.panelDataImportBill.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelDataImportBill.Location = new System.Drawing.Point(0, 0);
+            this.panelDataImportBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.panelDataImportBill.Name = "panelDataImportBill";
+            this.panelDataImportBill.Size = new System.Drawing.Size(554, 321);
+            this.panelDataImportBill.TabIndex = 0;
             // 
             // dataGridViewImportBill
             // 
             this.dataGridViewImportBill.AllowUserToAddRows = false;
             this.dataGridViewImportBill.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewImportBill.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewImportBill.AutoGenerateColumns = false;
+            this.dataGridViewImportBill.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewImportBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImportBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaPhieuNhap,
@@ -515,7 +525,45 @@
             this.dataGridViewImportBill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewImportBill.Size = new System.Drawing.Size(554, 289);
             this.dataGridViewImportBill.TabIndex = 0;
+            this.dataGridViewImportBill.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewImportBill_CellContentClick);
             this.dataGridViewImportBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewImportBill_CellContentClick);
+            // 
+            // MaPhieuNhap
+            // 
+            this.MaPhieuNhap.DataPropertyName = "MaPhieuNhap";
+            this.MaPhieuNhap.HeaderText = "MaPhieuNhap";
+            this.MaPhieuNhap.MinimumWidth = 6;
+            this.MaPhieuNhap.Name = "MaPhieuNhap";
+            this.MaPhieuNhap.ReadOnly = true;
+            this.MaPhieuNhap.Visible = false;
+            this.MaPhieuNhap.Width = 125;
+            // 
+            // NhaSanXuat
+            // 
+            this.NhaSanXuat.DataPropertyName = "NhaSanXuat";
+            this.NhaSanXuat.HeaderText = "Nhà sản xuất";
+            this.NhaSanXuat.MinimumWidth = 6;
+            this.NhaSanXuat.Name = "NhaSanXuat";
+            this.NhaSanXuat.ReadOnly = true;
+            this.NhaSanXuat.Width = 250;
+            // 
+            // NgayNhap
+            // 
+            this.NgayNhap.DataPropertyName = "NgayNhap";
+            this.NgayNhap.HeaderText = "Ngày nhập";
+            this.NgayNhap.MinimumWidth = 6;
+            this.NgayNhap.Name = "NgayNhap";
+            this.NgayNhap.ReadOnly = true;
+            this.NgayNhap.Width = 125;
+            // 
+            // TongTien
+            // 
+            this.TongTien.DataPropertyName = "TongTien";
+            this.TongTien.HeaderText = "Tổng tiền";
+            this.TongTien.MinimumWidth = 6;
+            this.TongTien.Name = "TongTien";
+            this.TongTien.ReadOnly = true;
+            this.TongTien.Width = 125;
             // 
             // phieuNhapHangBindingSource
             // 
@@ -530,7 +578,7 @@
             this.labelImportBillTitle.Name = "labelImportBillTitle";
             this.labelImportBillTitle.Size = new System.Drawing.Size(554, 32);
             this.labelImportBillTitle.TabIndex = 1;
-            this.labelImportBillTitle.Text = "DANH SÁCH HÓA ĐƠN NHẬP";
+            this.labelImportBillTitle.Text = "DANH SÁCH HÓA ĐƠN NHẬP HÀNG";
             this.labelImportBillTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelFilterFunction
@@ -570,16 +618,16 @@
             // 
             // textBoxBeanOriginFilter
             // 
-            this.textBoxBeanOriginFilter.Location = new System.Drawing.Point(209, 61);
+            this.textBoxBeanOriginFilter.Location = new System.Drawing.Point(495, 36);
             this.textBoxBeanOriginFilter.Name = "textBoxBeanOriginFilter";
             this.textBoxBeanOriginFilter.Size = new System.Drawing.Size(219, 28);
             this.textBoxBeanOriginFilter.TabIndex = 5;
-            this.textBoxBeanOriginFilter.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
+            this.textBoxBeanOriginFilter.TextChanged += new System.EventHandler(this.NameAndOriginFillEvent);
             // 
             // labelBeanOrigin
             // 
             this.labelBeanOrigin.AutoSize = true;
-            this.labelBeanOrigin.Location = new System.Drawing.Point(54, 64);
+            this.labelBeanOrigin.Location = new System.Drawing.Point(411, 39);
             this.labelBeanOrigin.Name = "labelBeanOrigin";
             this.labelBeanOrigin.Size = new System.Drawing.Size(78, 21);
             this.labelBeanOrigin.TabIndex = 4;
@@ -588,16 +636,16 @@
             // 
             // textBoxBeanNameFilter
             // 
-            this.textBoxBeanNameFilter.Location = new System.Drawing.Point(209, 12);
+            this.textBoxBeanNameFilter.Location = new System.Drawing.Point(166, 36);
             this.textBoxBeanNameFilter.Name = "textBoxBeanNameFilter";
             this.textBoxBeanNameFilter.Size = new System.Drawing.Size(219, 28);
             this.textBoxBeanNameFilter.TabIndex = 3;
-            this.textBoxBeanNameFilter.TextChanged += new System.EventHandler(this.NameAndOriginFilter);
+            this.textBoxBeanNameFilter.TextChanged += new System.EventHandler(this.NameAndOriginFillEvent);
             // 
             // labelBeanName
             // 
             this.labelBeanName.AutoSize = true;
-            this.labelBeanName.Location = new System.Drawing.Point(54, 15);
+            this.labelBeanName.Location = new System.Drawing.Point(37, 39);
             this.labelBeanName.Name = "labelBeanName";
             this.labelBeanName.Size = new System.Drawing.Size(123, 21);
             this.labelBeanName.TabIndex = 2;
@@ -645,7 +693,7 @@
             this.textBoxCompanyNameFilter.Name = "textBoxCompanyNameFilter";
             this.textBoxCompanyNameFilter.Size = new System.Drawing.Size(219, 28);
             this.textBoxCompanyNameFilter.TabIndex = 1;
-            this.textBoxCompanyNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
+            this.textBoxCompanyNameFilter.TextChanged += new System.EventHandler(this.NameAndDateFillEvent);
             // 
             // labelCompanyNameFilter
             // 
@@ -668,7 +716,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditFromDateFilter.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEditFromDateFilter.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.TouchUI;
+            this.dateEditFromDateFilter.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.ClassicNew;
             this.dateEditFromDateFilter.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
             this.dateEditFromDateFilter.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditFromDateFilter.Properties.EditFormat.FormatString = "dd/MM/yyyy";
@@ -677,7 +725,7 @@
             this.dateEditFromDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditFromDateFilter.Size = new System.Drawing.Size(125, 28);
             this.dateEditFromDateFilter.TabIndex = 2;
-            this.dateEditFromDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
+            this.dateEditFromDateFilter.TextChanged += new System.EventHandler(this.NameAndDateFillEvent);
             // 
             // dateEditToDateFilter
             // 
@@ -690,7 +738,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditToDateFilter.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEditToDateFilter.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.TouchUI;
+            this.dateEditToDateFilter.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.ClassicNew;
             this.dateEditToDateFilter.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
             this.dateEditToDateFilter.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditToDateFilter.Properties.EditFormat.FormatString = "dd/MM/yyyy";
@@ -699,7 +747,7 @@
             this.dateEditToDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditToDateFilter.Size = new System.Drawing.Size(125, 28);
             this.dateEditToDateFilter.TabIndex = 3;
-            this.dateEditToDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
+            this.dateEditToDateFilter.TextChanged += new System.EventHandler(this.NameAndDateFillEvent);
             // 
             // loaiHatCaPheBindingSource
             // 
@@ -736,43 +784,6 @@
             // 
             this.loHangTableAdapter.ClearBeforeFill = true;
             // 
-            // MaPhieuNhap
-            // 
-            this.MaPhieuNhap.DataPropertyName = "MaPhieuNhap";
-            this.MaPhieuNhap.HeaderText = "MaPhieuNhap";
-            this.MaPhieuNhap.MinimumWidth = 6;
-            this.MaPhieuNhap.Name = "MaPhieuNhap";
-            this.MaPhieuNhap.ReadOnly = true;
-            this.MaPhieuNhap.Visible = false;
-            this.MaPhieuNhap.Width = 125;
-            // 
-            // NhaSanXuat
-            // 
-            this.NhaSanXuat.DataPropertyName = "NhaSanXuat";
-            this.NhaSanXuat.HeaderText = "Nhà sản xuất";
-            this.NhaSanXuat.MinimumWidth = 6;
-            this.NhaSanXuat.Name = "NhaSanXuat";
-            this.NhaSanXuat.ReadOnly = true;
-            this.NhaSanXuat.Width = 250;
-            // 
-            // NgayNhap
-            // 
-            this.NgayNhap.DataPropertyName = "NgayNhap";
-            this.NgayNhap.HeaderText = "Ngày nhập";
-            this.NgayNhap.MinimumWidth = 6;
-            this.NgayNhap.Name = "NgayNhap";
-            this.NgayNhap.ReadOnly = true;
-            this.NgayNhap.Width = 125;
-            // 
-            // TongTien
-            // 
-            this.TongTien.DataPropertyName = "TongTien";
-            this.TongTien.HeaderText = "Tổng tiền";
-            this.TongTien.MinimumWidth = 6;
-            this.TongTien.Name = "TongTien";
-            this.TongTien.ReadOnly = true;
-            this.TongTien.Width = 125;
-            // 
             // ImportBillForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -798,11 +809,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditImportDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductCompanyName.Properties)).EndInit();
             this.panelDataSection.ResumeLayout(false);
-            this.panelImportBillDetails.ResumeLayout(false);
+            this.panelDataImportBillDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportBIllDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTPNLoaiHatBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).EndInit();
-            this.panelSideDataSection.ResumeLayout(false);
+            this.panelDataImportBill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportBill)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuNhapHangBindingSource)).EndInit();
             this.panelFilterFunction.ResumeLayout(false);
@@ -836,8 +847,8 @@
         private DevExpress.XtraEditors.SimpleButton buttonAddItem;
         private DevExpress.XtraEditors.SimpleButton buttonDeleteBill;
         private DevExpress.XtraEditors.SimpleButton buttonSave;
-        private System.Windows.Forms.Panel panelSideDataSection;
-        private System.Windows.Forms.Panel panelImportBillDetails;
+        private System.Windows.Forms.Panel panelDataImportBill;
+        private System.Windows.Forms.Panel panelDataImportBillDetails;
         private DevExpress.XtraEditors.DateEdit dateEditImportDate;
         private System.Windows.Forms.Panel panelFilterFunction;
         private System.Windows.Forms.GroupBox groupBoxFilter;

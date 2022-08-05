@@ -54,7 +54,6 @@ C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debu
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.exe.licenses
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\CustomControls.dll
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\CustomControls.pdb
-C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.ImportBillForm.resources
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ExportBillForm.resources
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\DevExpress.CodeParser.v22.1.dll
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\DevExpress.DataAccess.v22.1.dll
@@ -77,3 +76,5 @@ C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debu
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\de\DevExpress.Xpo.v22.1.resources.dll
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\es\DevExpress.Xpo.v22.1.resources.dll
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debug\ja\DevExpress.Xpo.v22.1.resources.dll
+C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ImportBillForm.resources
+C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ProcessPaperForm.resources

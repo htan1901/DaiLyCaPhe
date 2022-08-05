@@ -28,7 +28,7 @@ namespace DaiLyCaPhe.DBConnection
             return data;
         }
 
-        public DataTable GetBillDetails(string billID)
+        public DataTable GetImportBillDetails(string billID)
         {
             string query = "SELECT DISTINCT LH.TenLoaiHat, LH.XuatXu, L.NgaySanXuat, SoLuong, C.DonGia " +
                             "FROM ChiTietPhieuNhap C, LoaiHatCaPhe LH, LoHang L " +
@@ -54,10 +54,24 @@ namespace DaiLyCaPhe.DBConnection
             }
         }
 
-        public string GetBillByID(string billID)
+        public string SearchForImportBillID(string billID)
         { 
             string id;
             string query = "SELECT MaPhieuNhap FROM PhieuNhapHang WHERE MaPhieuNhap = @billID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+        }
+        public string SearchForExportBillID(string billID)
+        { 
+            string id;
+            string query = "SELECT MaPhieuXuat FROM PhieuXuatHang WHERE MaPhieuXuat = @billID";
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -251,6 +265,29 @@ namespace DaiLyCaPhe.DBConnection
                 }
             }
             return names;
+        }
+
+        public DataTable GetExportBillDetails(string billID)
+        {
+            string query = "select S.MaSanPham, S.TenSanPham, S.LoaiSanPham, S.TrongLuong, S.HanSuDung, C.SoLuong, C.DonGia " +
+                            "from ChiTietPhieuXuat C, SanPham S " +
+                            "where C.MaSanPham = S.MaSanPham and MaPhieuXuat = @billID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dataTable = new DataTable();
+                    if(reader.HasRows)
+                    {
+                        dataTable.Load(reader);
+                        return dataTable;
+                    }
+                    return null;
+                }
+            }
         }
     }
 }
