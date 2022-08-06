@@ -31,11 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupAddProcessPaper = new DevExpress.XtraEditors.GroupControl();
+            this.comboBoxProcessMakerID = new System.Windows.Forms.ComboBox();
+            this.comboBoxBeanOrigin = new System.Windows.Forms.ComboBox();
+            this.comboBoxBeanName = new System.Windows.Forms.ComboBox();
+            this.textBoxProductName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxCategoryID = new System.Windows.Forms.ComboBox();
             this.checkBoxIsGrind = new DevExpress.XtraEditors.CheckEdit();
             this.labelBeanID = new DevExpress.XtraEditors.LabelControl();
-            this.comboBoxPackagingMethod = new System.Windows.Forms.ComboBox();
+            this.comboBoxPackingMethod = new System.Windows.Forms.ComboBox();
             this.comboBoxProcessMethod = new System.Windows.Forms.ComboBox();
             this.numericProcessAmount = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -44,7 +48,6 @@
             this.buttonSavePaper = new DevExpress.XtraEditors.SimpleButton();
             this.buttonModifyPaper = new DevExpress.XtraEditors.SimpleButton();
             this.buttonCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.textBoxBeanName = new DevExpress.XtraEditors.TextEdit();
             this.textBoxProcessPaperID = new DevExpress.XtraEditors.TextEdit();
             this.dateEditBeanExpireDate = new DevExpress.XtraEditors.DateEdit();
             this.labelProcessMethod = new DevExpress.XtraEditors.LabelControl();
@@ -52,24 +55,22 @@
             this.labelBeanName = new DevExpress.XtraEditors.LabelControl();
             this.labelPaperID = new DevExpress.XtraEditors.LabelControl();
             this.labelPackagingMethod = new DevExpress.XtraEditors.LabelControl();
-            this.textBoxBeanOrigin = new DevExpress.XtraEditors.TextEdit();
             this.labelOrigin = new DevExpress.XtraEditors.LabelControl();
             this.labelAmount = new DevExpress.XtraEditors.LabelControl();
-            this.textBoxProcessMakerName = new DevExpress.XtraEditors.TextEdit();
             this.labelBeanExpireDate = new DevExpress.XtraEditors.LabelControl();
             this.labelEmployeeName = new DevExpress.XtraEditors.LabelControl();
             this.labelProcessDate = new DevExpress.XtraEditors.LabelControl();
             this.panelFilterFunction = new System.Windows.Forms.Panel();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
             this.panelBillDetailsFilter = new System.Windows.Forms.Panel();
-            this.comboBoxProductTypeFilter = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.labelProductTypeFilter = new System.Windows.Forms.Label();
+            this.textBoxBeanNameFilter = new DevExpress.XtraEditors.TextEdit();
+            this.labelBeanNameFilter = new System.Windows.Forms.Label();
             this.textBoxProductNameFilter = new System.Windows.Forms.TextBox();
             this.labelProductNameFilter = new System.Windows.Forms.Label();
             this.panelBillFilter = new System.Windows.Forms.Panel();
             this.labelToDateFilter = new System.Windows.Forms.Label();
             this.labelFromDateFilter = new System.Windows.Forms.Label();
-            this.textBoxExportPlaceFilter = new System.Windows.Forms.TextBox();
+            this.textBoxProductMakerNameFilter = new System.Windows.Forms.TextBox();
             this.labelProductMaker = new System.Windows.Forms.Label();
             this.dateEditFromDateFilter = new DevExpress.XtraEditors.DateEdit();
             this.dateEditToDateFilter = new DevExpress.XtraEditors.DateEdit();
@@ -77,12 +78,19 @@
             this.panelDataImportBill = new System.Windows.Forms.Panel();
             this.dataGridViewProcessPaper = new System.Windows.Forms.DataGridView();
             this.labelExportBillTitle = new System.Windows.Forms.Label();
-            this.textBoxProductName = new DevExpress.XtraEditors.TextEdit();
             this.phieuCheBienADVBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
+            this.loHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cachDongGoiBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.phuongPhapCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.phieuCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.phieuCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienTableAdapter();
             this.phieuCheBienADVTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienADVTableAdapter();
+            this.loHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter();
+            this.phuongPhapCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhuongPhapCheBienTableAdapter();
+            this.cachDongGoiTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CachDongGoiTableAdapter();
+            this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
             this.maPhieuCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soLoHangDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maLoaiHatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,27 +103,25 @@
             this.CachCheBien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoLuongMoiGoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CachDongGoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xayDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ngayCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soLuongCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddProcessPaper)).BeginInit();
             this.groupAddProcessPaper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkBoxIsGrind.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericProcessAmount)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessPaperID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBeanExpireDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBeanExpireDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditProcessDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditProcessDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanOrigin.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessMakerName.Properties)).BeginInit();
             this.panelFilterFunction.SuspendLayout();
             this.groupBoxFilter.SuspendLayout();
             this.panelBillDetailsFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxProductTypeFilter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanNameFilter.Properties)).BeginInit();
             this.panelBillFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditFromDateFilter.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditFromDateFilter.Properties)).BeginInit();
@@ -124,26 +130,31 @@
             this.panelDataSection.SuspendLayout();
             this.panelDataImportBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcessPaper)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienADVBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupAddProcessPaper
             // 
             this.groupAddProcessPaper.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupAddProcessPaper.AppearanceCaption.Options.UseFont = true;
+            this.groupAddProcessPaper.Controls.Add(this.comboBoxProcessMakerID);
+            this.groupAddProcessPaper.Controls.Add(this.comboBoxBeanOrigin);
+            this.groupAddProcessPaper.Controls.Add(this.comboBoxBeanName);
             this.groupAddProcessPaper.Controls.Add(this.textBoxProductName);
             this.groupAddProcessPaper.Controls.Add(this.labelControl1);
             this.groupAddProcessPaper.Controls.Add(this.comboBoxCategoryID);
             this.groupAddProcessPaper.Controls.Add(this.checkBoxIsGrind);
             this.groupAddProcessPaper.Controls.Add(this.labelBeanID);
-            this.groupAddProcessPaper.Controls.Add(this.comboBoxPackagingMethod);
+            this.groupAddProcessPaper.Controls.Add(this.comboBoxPackingMethod);
             this.groupAddProcessPaper.Controls.Add(this.comboBoxProcessMethod);
             this.groupAddProcessPaper.Controls.Add(this.numericProcessAmount);
             this.groupAddProcessPaper.Controls.Add(this.tableLayoutPanel1);
-            this.groupAddProcessPaper.Controls.Add(this.textBoxBeanName);
             this.groupAddProcessPaper.Controls.Add(this.textBoxProcessPaperID);
             this.groupAddProcessPaper.Controls.Add(this.dateEditBeanExpireDate);
             this.groupAddProcessPaper.Controls.Add(this.labelProcessMethod);
@@ -151,10 +162,8 @@
             this.groupAddProcessPaper.Controls.Add(this.labelBeanName);
             this.groupAddProcessPaper.Controls.Add(this.labelPaperID);
             this.groupAddProcessPaper.Controls.Add(this.labelPackagingMethod);
-            this.groupAddProcessPaper.Controls.Add(this.textBoxBeanOrigin);
             this.groupAddProcessPaper.Controls.Add(this.labelOrigin);
             this.groupAddProcessPaper.Controls.Add(this.labelAmount);
-            this.groupAddProcessPaper.Controls.Add(this.textBoxProcessMakerName);
             this.groupAddProcessPaper.Controls.Add(this.labelBeanExpireDate);
             this.groupAddProcessPaper.Controls.Add(this.labelEmployeeName);
             this.groupAddProcessPaper.Controls.Add(this.labelProcessDate);
@@ -165,6 +174,52 @@
             this.groupAddProcessPaper.Size = new System.Drawing.Size(1313, 412);
             this.groupAddProcessPaper.TabIndex = 2;
             this.groupAddProcessPaper.Text = "Thêm phiếu chế biến";
+            // 
+            // comboBoxProcessMakerID
+            // 
+            this.comboBoxProcessMakerID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProcessMakerID.Enabled = false;
+            this.comboBoxProcessMakerID.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxProcessMakerID.FormattingEnabled = true;
+            this.comboBoxProcessMakerID.Location = new System.Drawing.Point(680, 75);
+            this.comboBoxProcessMakerID.Name = "comboBoxProcessMakerID";
+            this.comboBoxProcessMakerID.Size = new System.Drawing.Size(240, 29);
+            this.comboBoxProcessMakerID.TabIndex = 27;
+            // 
+            // comboBoxBeanOrigin
+            // 
+            this.comboBoxBeanOrigin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBeanOrigin.Enabled = false;
+            this.comboBoxBeanOrigin.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxBeanOrigin.FormattingEnabled = true;
+            this.comboBoxBeanOrigin.Location = new System.Drawing.Point(680, 140);
+            this.comboBoxBeanOrigin.Name = "comboBoxBeanOrigin";
+            this.comboBoxBeanOrigin.Size = new System.Drawing.Size(240, 29);
+            this.comboBoxBeanOrigin.TabIndex = 26;
+            this.comboBoxBeanOrigin.SelectedValueChanged += new System.EventHandler(this.comboBoxBeanOrigin_SelectedValueChanged);
+            // 
+            // comboBoxBeanName
+            // 
+            this.comboBoxBeanName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBeanName.Enabled = false;
+            this.comboBoxBeanName.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxBeanName.FormattingEnabled = true;
+            this.comboBoxBeanName.Location = new System.Drawing.Point(360, 138);
+            this.comboBoxBeanName.Name = "comboBoxBeanName";
+            this.comboBoxBeanName.Size = new System.Drawing.Size(240, 29);
+            this.comboBoxBeanName.TabIndex = 25;
+            this.comboBoxBeanName.SelectedValueChanged += new System.EventHandler(this.comboBoxBeanName_SelectedValueChanged);
+            // 
+            // textBoxProductName
+            // 
+            this.textBoxProductName.Enabled = false;
+            this.textBoxProductName.Location = new System.Drawing.Point(41, 210);
+            this.textBoxProductName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.textBoxProductName.Name = "textBoxProductName";
+            this.textBoxProductName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxProductName.Properties.Appearance.Options.UseFont = true;
+            this.textBoxProductName.Size = new System.Drawing.Size(240, 28);
+            this.textBoxProductName.TabIndex = 24;
             // 
             // labelControl1
             // 
@@ -179,6 +234,8 @@
             // 
             // comboBoxCategoryID
             // 
+            this.comboBoxCategoryID.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.loHangBindingSource, "SoLoHang", true));
+            this.comboBoxCategoryID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategoryID.Enabled = false;
             this.comboBoxCategoryID.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxCategoryID.FormattingEnabled = true;
@@ -186,6 +243,7 @@
             this.comboBoxCategoryID.Name = "comboBoxCategoryID";
             this.comboBoxCategoryID.Size = new System.Drawing.Size(240, 29);
             this.comboBoxCategoryID.TabIndex = 21;
+            this.comboBoxCategoryID.SelectedValueChanged += new System.EventHandler(this.comboBoxCategoryID_SelectedValueChanged);
             // 
             // checkBoxIsGrind
             // 
@@ -209,18 +267,22 @@
             this.labelBeanID.TabIndex = 18;
             this.labelBeanID.Text = "Lô hàng";
             // 
-            // comboBoxPackagingMethod
+            // comboBoxPackingMethod
             // 
-            this.comboBoxPackagingMethod.Enabled = false;
-            this.comboBoxPackagingMethod.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxPackagingMethod.FormattingEnabled = true;
-            this.comboBoxPackagingMethod.Location = new System.Drawing.Point(680, 210);
-            this.comboBoxPackagingMethod.Name = "comboBoxPackagingMethod";
-            this.comboBoxPackagingMethod.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxPackagingMethod.TabIndex = 17;
+            this.comboBoxPackingMethod.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.cachDongGoiBindingSource, "MaCachDongGoi", true));
+            this.comboBoxPackingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPackingMethod.Enabled = false;
+            this.comboBoxPackingMethod.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxPackingMethod.FormattingEnabled = true;
+            this.comboBoxPackingMethod.Location = new System.Drawing.Point(680, 210);
+            this.comboBoxPackingMethod.Name = "comboBoxPackingMethod";
+            this.comboBoxPackingMethod.Size = new System.Drawing.Size(240, 29);
+            this.comboBoxPackingMethod.TabIndex = 17;
             // 
             // comboBoxProcessMethod
             // 
+            this.comboBoxProcessMethod.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.phuongPhapCheBienBindingSource, "MaPPCheBien", true));
+            this.comboBoxProcessMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProcessMethod.Enabled = false;
             this.comboBoxProcessMethod.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxProcessMethod.FormattingEnabled = true;
@@ -270,6 +332,7 @@
             this.buttonAddPaper.Size = new System.Drawing.Size(155, 30);
             this.buttonAddPaper.TabIndex = 13;
             this.buttonAddPaper.Text = "Thêm phiếu chế biến";
+            this.buttonAddPaper.Click += new System.EventHandler(this.buttonAddPaper_Click);
             // 
             // buttonDeletePaper
             // 
@@ -283,6 +346,7 @@
             this.buttonDeletePaper.Size = new System.Drawing.Size(155, 30);
             this.buttonDeletePaper.TabIndex = 7;
             this.buttonDeletePaper.Text = "Xóa phiếu chế biến";
+            this.buttonDeletePaper.Click += new System.EventHandler(this.buttonDeletePaper_Click);
             // 
             // buttonSavePaper
             // 
@@ -296,6 +360,7 @@
             this.buttonSavePaper.Size = new System.Drawing.Size(115, 30);
             this.buttonSavePaper.TabIndex = 6;
             this.buttonSavePaper.Text = "Lưu ";
+            this.buttonSavePaper.Click += new System.EventHandler(this.buttonSavePaper_Click);
             // 
             // buttonModifyPaper
             // 
@@ -308,6 +373,7 @@
             this.buttonModifyPaper.Size = new System.Drawing.Size(155, 30);
             this.buttonModifyPaper.TabIndex = 12;
             this.buttonModifyPaper.Text = "Sửa phiếu chế biến";
+            this.buttonModifyPaper.Click += new System.EventHandler(this.buttonModifyPaper_Click);
             // 
             // buttonCancel
             // 
@@ -321,17 +387,7 @@
             this.buttonCancel.Size = new System.Drawing.Size(115, 30);
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Hủy";
-            // 
-            // textBoxBeanName
-            // 
-            this.textBoxBeanName.Enabled = false;
-            this.textBoxBeanName.Location = new System.Drawing.Point(360, 140);
-            this.textBoxBeanName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.textBoxBeanName.Name = "textBoxBeanName";
-            this.textBoxBeanName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBeanName.Properties.Appearance.Options.UseFont = true;
-            this.textBoxBeanName.Size = new System.Drawing.Size(240, 28);
-            this.textBoxBeanName.TabIndex = 9;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBoxProcessPaperID
             // 
@@ -430,17 +486,6 @@
             this.labelPackagingMethod.TabIndex = 0;
             this.labelPackagingMethod.Text = "Cách đóng gói";
             // 
-            // textBoxBeanOrigin
-            // 
-            this.textBoxBeanOrigin.Enabled = false;
-            this.textBoxBeanOrigin.Location = new System.Drawing.Point(680, 140);
-            this.textBoxBeanOrigin.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.textBoxBeanOrigin.Name = "textBoxBeanOrigin";
-            this.textBoxBeanOrigin.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBeanOrigin.Properties.Appearance.Options.UseFont = true;
-            this.textBoxBeanOrigin.Size = new System.Drawing.Size(240, 28);
-            this.textBoxBeanOrigin.TabIndex = 1;
-            // 
             // labelOrigin
             // 
             this.labelOrigin.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -462,17 +507,6 @@
             this.labelAmount.Size = new System.Drawing.Size(115, 18);
             this.labelAmount.TabIndex = 2;
             this.labelAmount.Text = "Số lượng chế biến";
-            // 
-            // textBoxProcessMakerName
-            // 
-            this.textBoxProcessMakerName.Enabled = false;
-            this.textBoxProcessMakerName.Location = new System.Drawing.Point(680, 75);
-            this.textBoxProcessMakerName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.textBoxProcessMakerName.Name = "textBoxProcessMakerName";
-            this.textBoxProcessMakerName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxProcessMakerName.Properties.Appearance.Options.UseFont = true;
-            this.textBoxProcessMakerName.Size = new System.Drawing.Size(240, 28);
-            this.textBoxProcessMakerName.TabIndex = 1;
             // 
             // labelBeanExpireDate
             // 
@@ -532,8 +566,8 @@
             // panelBillDetailsFilter
             // 
             this.panelBillDetailsFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBillDetailsFilter.Controls.Add(this.comboBoxProductTypeFilter);
-            this.panelBillDetailsFilter.Controls.Add(this.labelProductTypeFilter);
+            this.panelBillDetailsFilter.Controls.Add(this.textBoxBeanNameFilter);
+            this.panelBillDetailsFilter.Controls.Add(this.labelBeanNameFilter);
             this.panelBillDetailsFilter.Controls.Add(this.textBoxProductNameFilter);
             this.panelBillDetailsFilter.Controls.Add(this.labelProductNameFilter);
             this.panelBillDetailsFilter.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -542,40 +576,38 @@
             this.panelBillDetailsFilter.Size = new System.Drawing.Size(756, 105);
             this.panelBillDetailsFilter.TabIndex = 7;
             // 
-            // comboBoxProductTypeFilter
+            // textBoxBeanNameFilter
             // 
-            this.comboBoxProductTypeFilter.Location = new System.Drawing.Point(541, 39);
-            this.comboBoxProductTypeFilter.Name = "comboBoxProductTypeFilter";
-            this.comboBoxProductTypeFilter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxProductTypeFilter.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxProductTypeFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxProductTypeFilter.Properties.Items.AddRange(new object[] {
-            "Hạt",
-            "Bột"});
-            this.comboBoxProductTypeFilter.Size = new System.Drawing.Size(166, 28);
-            this.comboBoxProductTypeFilter.TabIndex = 6;
+            this.textBoxBeanNameFilter.Location = new System.Drawing.Point(548, 40);
+            this.textBoxBeanNameFilter.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.textBoxBeanNameFilter.Name = "textBoxBeanNameFilter";
+            this.textBoxBeanNameFilter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBeanNameFilter.Properties.Appearance.Options.UseFont = true;
+            this.textBoxBeanNameFilter.Size = new System.Drawing.Size(166, 28);
+            this.textBoxBeanNameFilter.TabIndex = 10;
+            this.textBoxBeanNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
-            // labelProductTypeFilter
+            // labelBeanNameFilter
             // 
-            this.labelProductTypeFilter.AutoSize = true;
-            this.labelProductTypeFilter.Location = new System.Drawing.Point(412, 42);
-            this.labelProductTypeFilter.Name = "labelProductTypeFilter";
-            this.labelProductTypeFilter.Size = new System.Drawing.Size(123, 21);
-            this.labelProductTypeFilter.TabIndex = 4;
-            this.labelProductTypeFilter.Text = "Loại sản phẩm:";
+            this.labelBeanNameFilter.AutoSize = true;
+            this.labelBeanNameFilter.Location = new System.Drawing.Point(412, 43);
+            this.labelBeanNameFilter.Name = "labelBeanNameFilter";
+            this.labelBeanNameFilter.Size = new System.Drawing.Size(129, 21);
+            this.labelBeanNameFilter.TabIndex = 4;
+            this.labelBeanNameFilter.Text = "Loại hạt cà phê:";
             // 
             // textBoxProductNameFilter
             // 
-            this.textBoxProductNameFilter.Location = new System.Drawing.Point(171, 39);
+            this.textBoxProductNameFilter.Location = new System.Drawing.Point(171, 40);
             this.textBoxProductNameFilter.Name = "textBoxProductNameFilter";
             this.textBoxProductNameFilter.Size = new System.Drawing.Size(166, 28);
             this.textBoxProductNameFilter.TabIndex = 3;
+            this.textBoxProductNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // labelProductNameFilter
             // 
             this.labelProductNameFilter.AutoSize = true;
-            this.labelProductNameFilter.Location = new System.Drawing.Point(44, 42);
+            this.labelProductNameFilter.Location = new System.Drawing.Point(44, 43);
             this.labelProductNameFilter.Name = "labelProductNameFilter";
             this.labelProductNameFilter.Size = new System.Drawing.Size(121, 21);
             this.labelProductNameFilter.TabIndex = 2;
@@ -586,7 +618,7 @@
             this.panelBillFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBillFilter.Controls.Add(this.labelToDateFilter);
             this.panelBillFilter.Controls.Add(this.labelFromDateFilter);
-            this.panelBillFilter.Controls.Add(this.textBoxExportPlaceFilter);
+            this.panelBillFilter.Controls.Add(this.textBoxProductMakerNameFilter);
             this.panelBillFilter.Controls.Add(this.labelProductMaker);
             this.panelBillFilter.Controls.Add(this.dateEditFromDateFilter);
             this.panelBillFilter.Controls.Add(this.dateEditToDateFilter);
@@ -599,7 +631,7 @@
             // labelToDateFilter
             // 
             this.labelToDateFilter.AutoSize = true;
-            this.labelToDateFilter.Location = new System.Drawing.Point(257, 64);
+            this.labelToDateFilter.Location = new System.Drawing.Point(257, 63);
             this.labelToDateFilter.Name = "labelToDateFilter";
             this.labelToDateFilter.Size = new System.Drawing.Size(79, 21);
             this.labelToDateFilter.TabIndex = 5;
@@ -608,18 +640,19 @@
             // labelFromDateFilter
             // 
             this.labelFromDateFilter.AutoSize = true;
-            this.labelFromDateFilter.Location = new System.Drawing.Point(33, 64);
+            this.labelFromDateFilter.Location = new System.Drawing.Point(33, 63);
             this.labelFromDateFilter.Name = "labelFromDateFilter";
             this.labelFromDateFilter.Size = new System.Drawing.Size(76, 21);
             this.labelFromDateFilter.TabIndex = 4;
             this.labelFromDateFilter.Text = "Từ ngày:";
             // 
-            // textBoxExportPlaceFilter
+            // textBoxProductMakerNameFilter
             // 
-            this.textBoxExportPlaceFilter.Location = new System.Drawing.Point(188, 12);
-            this.textBoxExportPlaceFilter.Name = "textBoxExportPlaceFilter";
-            this.textBoxExportPlaceFilter.Size = new System.Drawing.Size(219, 28);
-            this.textBoxExportPlaceFilter.TabIndex = 1;
+            this.textBoxProductMakerNameFilter.Location = new System.Drawing.Point(188, 12);
+            this.textBoxProductMakerNameFilter.Name = "textBoxProductMakerNameFilter";
+            this.textBoxProductMakerNameFilter.Size = new System.Drawing.Size(219, 28);
+            this.textBoxProductMakerNameFilter.TabIndex = 1;
+            this.textBoxProductMakerNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // labelProductMaker
             // 
@@ -633,7 +666,7 @@
             // dateEditFromDateFilter
             // 
             this.dateEditFromDateFilter.EditValue = null;
-            this.dateEditFromDateFilter.Location = new System.Drawing.Point(115, 61);
+            this.dateEditFromDateFilter.Location = new System.Drawing.Point(115, 60);
             this.dateEditFromDateFilter.Name = "dateEditFromDateFilter";
             this.dateEditFromDateFilter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEditFromDateFilter.Properties.Appearance.Options.UseFont = true;
@@ -650,11 +683,12 @@
             this.dateEditFromDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditFromDateFilter.Size = new System.Drawing.Size(125, 28);
             this.dateEditFromDateFilter.TabIndex = 2;
+            this.dateEditFromDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // dateEditToDateFilter
             // 
             this.dateEditToDateFilter.EditValue = null;
-            this.dateEditToDateFilter.Location = new System.Drawing.Point(342, 61);
+            this.dateEditToDateFilter.Location = new System.Drawing.Point(342, 60);
             this.dateEditToDateFilter.Name = "dateEditToDateFilter";
             this.dateEditToDateFilter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEditToDateFilter.Properties.Appearance.Options.UseFont = true;
@@ -671,6 +705,7 @@
             this.dateEditToDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditToDateFilter.Size = new System.Drawing.Size(125, 28);
             this.dateEditToDateFilter.TabIndex = 3;
+            this.dateEditToDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // panelDataSection
             // 
@@ -716,7 +751,7 @@
             this.CachCheBien,
             this.SoLuongMoiGoi,
             this.CachDongGoi,
-            this.HoTen,
+            this.MaNhanVien,
             this.xayDataGridViewCheckBoxColumn,
             this.ngayCheBienDataGridViewTextBoxColumn,
             this.soLuongCheBienDataGridViewTextBoxColumn});
@@ -727,6 +762,7 @@
             this.dataGridViewProcessPaper.Name = "dataGridViewProcessPaper";
             this.dataGridViewProcessPaper.ReadOnly = true;
             this.dataGridViewProcessPaper.RowHeadersWidth = 51;
+            this.dataGridViewProcessPaper.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewProcessPaper.RowTemplate.Height = 24;
             this.dataGridViewProcessPaper.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewProcessPaper.Size = new System.Drawing.Size(1313, 210);
@@ -745,17 +781,6 @@
             this.labelExportBillTitle.Text = "DANH SÁCH PHIẾU CHẾ BIẾN";
             this.labelExportBillTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxProductName
-            // 
-            this.textBoxProductName.Enabled = false;
-            this.textBoxProductName.Location = new System.Drawing.Point(41, 210);
-            this.textBoxProductName.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.textBoxProductName.Name = "textBoxProductName";
-            this.textBoxProductName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxProductName.Properties.Appearance.Options.UseFont = true;
-            this.textBoxProductName.Size = new System.Drawing.Size(240, 28);
-            this.textBoxProductName.TabIndex = 24;
-            // 
             // phieuCheBienADVBindingSource
             // 
             this.phieuCheBienADVBindingSource.DataMember = "PhieuCheBienADV";
@@ -765,6 +790,21 @@
             // 
             this.daiLyCaPheDataSet.DataSetName = "DaiLyCaPheDataSet";
             this.daiLyCaPheDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // loHangBindingSource
+            // 
+            this.loHangBindingSource.DataMember = "LoHang";
+            this.loHangBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // cachDongGoiBindingSource
+            // 
+            this.cachDongGoiBindingSource.DataMember = "CachDongGoi";
+            this.cachDongGoiBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // phuongPhapCheBienBindingSource
+            // 
+            this.phuongPhapCheBienBindingSource.DataMember = "PhuongPhapCheBien";
+            this.phuongPhapCheBienBindingSource.DataSource = this.daiLyCaPheDataSet;
             // 
             // phieuCheBienBindingSource
             // 
@@ -779,10 +819,31 @@
             // 
             this.phieuCheBienADVTableAdapter.ClearBeforeFill = true;
             // 
+            // loHangTableAdapter
+            // 
+            this.loHangTableAdapter.ClearBeforeFill = true;
+            // 
+            // phuongPhapCheBienTableAdapter
+            // 
+            this.phuongPhapCheBienTableAdapter.ClearBeforeFill = true;
+            // 
+            // cachDongGoiTableAdapter
+            // 
+            this.cachDongGoiTableAdapter.ClearBeforeFill = true;
+            // 
+            // sanPhamBindingSource
+            // 
+            this.sanPhamBindingSource.DataMember = "SanPham";
+            this.sanPhamBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // sanPhamTableAdapter
+            // 
+            this.sanPhamTableAdapter.ClearBeforeFill = true;
+            // 
             // maPhieuCheBienDataGridViewTextBoxColumn
             // 
             this.maPhieuCheBienDataGridViewTextBoxColumn.DataPropertyName = "MaPhieuCheBien";
-            this.maPhieuCheBienDataGridViewTextBoxColumn.HeaderText = "MaPhieuCheBien";
+            this.maPhieuCheBienDataGridViewTextBoxColumn.HeaderText = "Mã phiếu chế biến";
             this.maPhieuCheBienDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.maPhieuCheBienDataGridViewTextBoxColumn.Name = "maPhieuCheBienDataGridViewTextBoxColumn";
             this.maPhieuCheBienDataGridViewTextBoxColumn.ReadOnly = true;
@@ -790,7 +851,7 @@
             // soLoHangDataGridViewTextBoxColumn
             // 
             this.soLoHangDataGridViewTextBoxColumn.DataPropertyName = "SoLoHang";
-            this.soLoHangDataGridViewTextBoxColumn.HeaderText = "SoLoHang";
+            this.soLoHangDataGridViewTextBoxColumn.HeaderText = "Số lô hàng";
             this.soLoHangDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.soLoHangDataGridViewTextBoxColumn.Name = "soLoHangDataGridViewTextBoxColumn";
             this.soLoHangDataGridViewTextBoxColumn.ReadOnly = true;
@@ -798,7 +859,7 @@
             // maLoaiHatDataGridViewTextBoxColumn
             // 
             this.maLoaiHatDataGridViewTextBoxColumn.DataPropertyName = "MaLoaiHat";
-            this.maLoaiHatDataGridViewTextBoxColumn.HeaderText = "MaLoaiHat";
+            this.maLoaiHatDataGridViewTextBoxColumn.HeaderText = "Mã loại hạt";
             this.maLoaiHatDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.maLoaiHatDataGridViewTextBoxColumn.Name = "maLoaiHatDataGridViewTextBoxColumn";
             this.maLoaiHatDataGridViewTextBoxColumn.ReadOnly = true;
@@ -806,7 +867,7 @@
             // maSanPhamDataGridViewTextBoxColumn
             // 
             this.maSanPhamDataGridViewTextBoxColumn.DataPropertyName = "MaSanPham";
-            this.maSanPhamDataGridViewTextBoxColumn.HeaderText = "MaSanPham";
+            this.maSanPhamDataGridViewTextBoxColumn.HeaderText = "Mã sản phẩm";
             this.maSanPhamDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.maSanPhamDataGridViewTextBoxColumn.Name = "maSanPhamDataGridViewTextBoxColumn";
             this.maSanPhamDataGridViewTextBoxColumn.ReadOnly = true;
@@ -814,7 +875,7 @@
             // maPPCheBienDataGridViewTextBoxColumn
             // 
             this.maPPCheBienDataGridViewTextBoxColumn.DataPropertyName = "MaPPCheBien";
-            this.maPPCheBienDataGridViewTextBoxColumn.HeaderText = "MaPPCheBien";
+            this.maPPCheBienDataGridViewTextBoxColumn.HeaderText = "Mã P.P chế biến";
             this.maPPCheBienDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.maPPCheBienDataGridViewTextBoxColumn.Name = "maPPCheBienDataGridViewTextBoxColumn";
             this.maPPCheBienDataGridViewTextBoxColumn.ReadOnly = true;
@@ -822,7 +883,7 @@
             // maCachDongGoiDataGridViewTextBoxColumn
             // 
             this.maCachDongGoiDataGridViewTextBoxColumn.DataPropertyName = "MaCachDongGoi";
-            this.maCachDongGoiDataGridViewTextBoxColumn.HeaderText = "MaCachDongGoi";
+            this.maCachDongGoiDataGridViewTextBoxColumn.HeaderText = "Mã cách đóng  gói";
             this.maCachDongGoiDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.maCachDongGoiDataGridViewTextBoxColumn.Name = "maCachDongGoiDataGridViewTextBoxColumn";
             this.maCachDongGoiDataGridViewTextBoxColumn.ReadOnly = true;
@@ -877,13 +938,13 @@
             this.CachDongGoi.ReadOnly = true;
             this.CachDongGoi.Visible = false;
             // 
-            // HoTen
+            // MaNhanVien
             // 
-            this.HoTen.DataPropertyName = "HoTen";
-            this.HoTen.HeaderText = "Nhân viên thực hiện";
-            this.HoTen.MinimumWidth = 6;
-            this.HoTen.Name = "HoTen";
-            this.HoTen.ReadOnly = true;
+            this.MaNhanVien.DataPropertyName = "MaNhanVien";
+            this.MaNhanVien.HeaderText = "Nhân viên thực hiện";
+            this.MaNhanVien.MinimumWidth = 6;
+            this.MaNhanVien.Name = "MaNhanVien";
+            this.MaNhanVien.ReadOnly = true;
             // 
             // xayDataGridViewCheckBoxColumn
             // 
@@ -924,22 +985,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupAddProcessPaper)).EndInit();
             this.groupAddProcessPaper.ResumeLayout(false);
             this.groupAddProcessPaper.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkBoxIsGrind.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericProcessAmount)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessPaperID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBeanExpireDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBeanExpireDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditProcessDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditProcessDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanOrigin.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessMakerName.Properties)).EndInit();
             this.panelFilterFunction.ResumeLayout(false);
             this.groupBoxFilter.ResumeLayout(false);
             this.panelBillDetailsFilter.ResumeLayout(false);
             this.panelBillDetailsFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxProductTypeFilter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxBeanNameFilter.Properties)).EndInit();
             this.panelBillFilter.ResumeLayout(false);
             this.panelBillFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditFromDateFilter.Properties.CalendarTimeProperties)).EndInit();
@@ -949,10 +1008,13 @@
             this.panelDataSection.ResumeLayout(false);
             this.panelDataImportBill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcessPaper)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienADVBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -969,19 +1031,17 @@
         private DevExpress.XtraEditors.SimpleButton buttonSavePaper;
         private DevExpress.XtraEditors.SimpleButton buttonCancel;
         private DevExpress.XtraEditors.LabelControl labelProcessDate;
-        private DevExpress.XtraEditors.TextEdit textBoxProcessMakerName;
         private DevExpress.XtraEditors.LabelControl labelEmployeeName;
         private System.Windows.Forms.Panel panelFilterFunction;
         private System.Windows.Forms.GroupBox groupBoxFilter;
         private System.Windows.Forms.Panel panelBillDetailsFilter;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxProductTypeFilter;
-        private System.Windows.Forms.Label labelProductTypeFilter;
+        private System.Windows.Forms.Label labelBeanNameFilter;
         private System.Windows.Forms.TextBox textBoxProductNameFilter;
         private System.Windows.Forms.Label labelProductNameFilter;
         private System.Windows.Forms.Panel panelBillFilter;
         private System.Windows.Forms.Label labelToDateFilter;
         private System.Windows.Forms.Label labelFromDateFilter;
-        private System.Windows.Forms.TextBox textBoxExportPlaceFilter;
+        private System.Windows.Forms.TextBox textBoxProductMakerNameFilter;
         private System.Windows.Forms.Label labelProductMaker;
         private DevExpress.XtraEditors.DateEdit dateEditFromDateFilter;
         private DevExpress.XtraEditors.DateEdit dateEditToDateFilter;
@@ -996,22 +1056,32 @@
         private System.Windows.Forms.BindingSource phieuCheBienADVBindingSource;
         private DaiLyCaPheDataSetTableAdapters.PhieuCheBienADVTableAdapter phieuCheBienADVTableAdapter;
         private System.Windows.Forms.NumericUpDown numericProcessAmount;
-        private DevExpress.XtraEditors.TextEdit textBoxBeanName;
         private DevExpress.XtraEditors.DateEdit dateEditBeanExpireDate;
         private DevExpress.XtraEditors.LabelControl labelProcessMethod;
         private DevExpress.XtraEditors.LabelControl labelBeanName;
         private DevExpress.XtraEditors.LabelControl labelPackagingMethod;
-        private DevExpress.XtraEditors.TextEdit textBoxBeanOrigin;
         private DevExpress.XtraEditors.LabelControl labelOrigin;
         private DevExpress.XtraEditors.LabelControl labelAmount;
         private DevExpress.XtraEditors.LabelControl labelBeanExpireDate;
         private DevExpress.XtraEditors.CheckEdit checkBoxIsGrind;
         private DevExpress.XtraEditors.LabelControl labelBeanID;
-        private System.Windows.Forms.ComboBox comboBoxPackagingMethod;
+        private System.Windows.Forms.ComboBox comboBoxPackingMethod;
         private System.Windows.Forms.ComboBox comboBoxProcessMethod;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private System.Windows.Forms.ComboBox comboBoxCategoryID;
         private DevExpress.XtraEditors.TextEdit textBoxProductName;
+        private DevExpress.XtraEditors.TextEdit textBoxBeanNameFilter;
+        private System.Windows.Forms.BindingSource loHangBindingSource;
+        private DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter loHangTableAdapter;
+        private System.Windows.Forms.ComboBox comboBoxBeanName;
+        private System.Windows.Forms.ComboBox comboBoxBeanOrigin;
+        private System.Windows.Forms.BindingSource phuongPhapCheBienBindingSource;
+        private DaiLyCaPheDataSetTableAdapters.PhuongPhapCheBienTableAdapter phuongPhapCheBienTableAdapter;
+        private System.Windows.Forms.BindingSource cachDongGoiBindingSource;
+        private DaiLyCaPheDataSetTableAdapters.CachDongGoiTableAdapter cachDongGoiTableAdapter;
+        private System.Windows.Forms.BindingSource sanPhamBindingSource;
+        private DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter sanPhamTableAdapter;
+        private System.Windows.Forms.ComboBox comboBoxProcessMakerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn maPhieuCheBienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn soLoHangDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn maLoaiHatDataGridViewTextBoxColumn;
@@ -1024,7 +1094,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CachCheBien;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuongMoiGoi;
         private System.Windows.Forms.DataGridViewTextBoxColumn CachDongGoi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaNhanVien;
         private System.Windows.Forms.DataGridViewCheckBoxColumn xayDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngayCheBienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn soLuongCheBienDataGridViewTextBoxColumn;

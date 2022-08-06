@@ -35,15 +35,23 @@ namespace DaiLyCaPhe.Forms
         
         private void ChangeState(bool state)
         {
-            dateEditImportDate.Enabled = state;
-            textBoxProductCompanyName.Enabled = state;
-            buttonSave.Enabled = state;
-            buttonCancel.Enabled = state;
-            buttonAddItem.Enabled = state;
+
             buttonDeleteBill.Enabled = !state;
             buttonModifyBill.Enabled = !state;
             buttonAddBill.Enabled = !state;
-        }       
+
+            buttonSave.Enabled = state;
+            buttonCancel.Enabled = state;
+            buttonAddItem.Enabled = state;
+        }   
+        
+        private void ToggleEditing(bool isAllow)
+        {
+            textBoxProductCompanyName.Enabled = isAllow;
+            dateEditImportDate.Enabled = isAllow;
+            foreach(Control item in panelBillItem.Controls)
+                item.Enabled = isAllow;
+        }
 
         private void ClearCurrentData()
         {
@@ -104,6 +112,7 @@ namespace DaiLyCaPhe.Forms
         {
             ClearCurrentData();
             ChangeState(!editable);
+            ToggleEditing(!editable);
         }
         
         private void ButtonSaveBill_Click(object sender, EventArgs e)
@@ -115,6 +124,7 @@ namespace DaiLyCaPhe.Forms
                 UpdateBill();
             ImportBillForm_Load(sender, e);
             ChangeState(!editable);
+            ToggleEditing(!editable);
             ClearCurrentData();
         }
 
@@ -135,15 +145,14 @@ namespace DaiLyCaPhe.Forms
             database.DeleteRecordFromPhieuNhapHang(billID);
 
             ImportBillForm_Load(sender, e);
+            ClearCurrentData();
+            ToggleEditing(!editable);
         }
 
         private void ButtonModifyBill_Click(object sender, EventArgs e)
         {
             ChangeState(editable);
-            foreach(Control item in panelBillItem.Controls)
-            {
-                item.Enabled = true;
-            }
+            ToggleEditing(editable);
             textBoxProductCompanyName.Focus();
         }
 
@@ -151,6 +160,7 @@ namespace DaiLyCaPhe.Forms
         {
             ClearCurrentData();
             ChangeState(editable);
+            ToggleEditing(editable);
             textBoxProductCompanyName.Focus();
         }
 

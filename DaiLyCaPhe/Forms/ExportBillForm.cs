@@ -29,14 +29,13 @@ namespace DaiLyCaPhe.Forms
         #region Utility Methods
         private void ChangeState(bool state)
         {
-            textBoxExportPlace.Enabled = state;
-            dateEditExportDate.Enabled = state;
+            buttonAddBill.Enabled = !state;
+            buttonModifyBill.Enabled = !state;
+            buttonDeleteBill.Enabled = !state;
+
             buttonSaveBill.Enabled = state;
             buttonCancel.Enabled = state;
             buttonAddItem.Enabled = state;
-            buttonDeleteBill.Enabled = !state;
-            buttonModifyBill.Enabled = !state;
-            buttonAddBill.Enabled = !state;
         }       
 
         private void ClearFilterData()
@@ -56,6 +55,14 @@ namespace DaiLyCaPhe.Forms
             panelBillDetails.Controls.Clear();
         }
 
+        private void ToggleEditing(bool isAllow)
+        {
+            textBoxExportPlace.Enabled = isAllow;
+            dateEditExportDate.Enabled = isAllow;
+            foreach(Control item in panelBillDetails.Controls)
+                item.Enabled = isAllow;
+        }
+
         private string GenerateProductID()
         {
             return "";
@@ -67,7 +74,9 @@ namespace DaiLyCaPhe.Forms
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             ClearCurrentData();
+            ClearFilterData();
             ChangeState(!editable);
+            ToggleEditing(!editable);
         }
 
         private void ButtonAddItem_Click(object sender, EventArgs e)
@@ -88,10 +97,7 @@ namespace DaiLyCaPhe.Forms
         private void ButtonModifyBill_Click(object sender, EventArgs e)
         {
             ChangeState(editable);
-            foreach(Control item in panelBillDetails.Controls)
-            {
-                item.Enabled = true;
-            }
+            ToggleEditing(editable);
             textBoxExportPlace.Focus();
         }
 
@@ -99,6 +105,7 @@ namespace DaiLyCaPhe.Forms
         {
             ClearCurrentData();
             ChangeState(editable);
+            ToggleEditing(editable);
             textBoxExportPlace.Focus();
         }
 

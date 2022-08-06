@@ -267,6 +267,69 @@ namespace DaiLyCaPhe.DBConnection
             return names;
         }
 
+        public List<string> GetAllBeanName(string categoryID)
+        {
+            List<string> names = new List<string>();
+            string query = "select distinct C.TenLoaiHat from LoHang L, LoaiHatCaPhe C where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        names.Add(line);
+                    }
+                }
+            }
+            return names;
+        }
+
+        public List<string> GetAllOrigin(string categoryID, string beanName)
+        {
+            List<string> origins = new List<string>();
+            string query = "select distinct C.XuatXu from LoHang L, LoaiHatCaPhe C where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanName";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanName", beanName));
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        origins.Add(line);
+                    }
+                }
+            }
+            return origins;
+        }
+
+        public string GetExpireDate(string categoryID, string beanName, string origin)
+        {
+            string id;
+            string query = "select L.HanSuDung " +
+                            "from LoHang L, LoaiHatCaPhe C " +
+                            "where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanName and C.XuatXu like @origin";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@categoryId", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanName", beanName));
+                command.Parameters.Add(new SqlParameter("@origin", origin));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+
+        }
+
         public DataTable GetExportBillDetails(string billID)
         {
             string query = "select S.MaSanPham, S.TenSanPham, S.LoaiSanPham, S.TrongLuong, S.HanSuDung, C.SoLuong, C.DonGia " +
@@ -288,6 +351,160 @@ namespace DaiLyCaPhe.DBConnection
                     return null;
                 }
             }
+        }
+
+        public string GetExpireDate(string categoryID, string beanID)
+        {
+            string id;
+            string query = "select HanSuDung " +
+                            "from LoHang " +
+                            "where SoLoHang = @categoryID and MaLoaiHat = @beanID ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+        }
+
+        public List<string> GetAllCategoryID()
+        {
+            List<string> list = new List<string>();
+            string query = "select distinct SoLoHang from LoHang";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        list.Add(line);
+                    }
+                }
+            }
+            return list;
+        }
+
+        public List<string> GetAllProcessMethod()
+        {
+            List<string> methods = new List<string>();
+            string query = "select distinct MoTa from PhuongPhapCheBien";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        methods.Add(line);
+                    }
+                }
+            }
+            return methods;
+        }
+        
+        public string GetProcessMethodID(string methodDescription)
+        {
+            string id;
+            string query = "select MaPPCheBien " +
+                            "from PhuongPhapCheBien " +
+                            "where MoTa = @description ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@description", methodDescription));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+        }
+
+        public List<string> GetAllPackingMethod()
+        {
+            List<string> methods = new List<string>();
+            string query = "select distinct MoTa from CachDongGoi";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        methods.Add(line);
+                    }
+                }
+            }
+            return methods;
+        }
+
+        public string GetPackingMethodID(string methodDescription)
+        {
+            string id;
+            string query = "select MaCachDongGoi " +
+                            "from CachDongGoi " +
+                            "where MoTa = @description ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@description", methodDescription));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+        }
+
+        public float GetPackingWeight(string methodID)
+        {
+            float id;
+            string query = "select SoLuongMoiGoi " +
+                            "from CachDongGoi " +
+                            "where MaCachDongGoi = @methodID ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@methodID", methodID));
+                object obj = command.ExecuteScalar();
+                id = obj == null ? 0.0F : float.Parse(obj.ToString());
+            }
+            return id;
+        }
+
+        public List<string> GetAllEmployeeIDs()
+        {
+            List<string> employees = new List<string>();
+            string query = "select MaNhanVien from NhanVien";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        employees.Add(line);
+                    }
+                }
+            }
+            return employees;
+        }
+
+        public void UpdateTablePhieuCheBien(string paperID, string beanID)
+        {
+
         }
     }
 }

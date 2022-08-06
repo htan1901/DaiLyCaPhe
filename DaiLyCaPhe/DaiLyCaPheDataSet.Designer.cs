@@ -5539,13 +5539,13 @@ namespace DaiLyCaPhe {
             
             private global::System.Data.DataColumn columnCachDongGoi;
             
-            private global::System.Data.DataColumn columnHoTen;
-            
             private global::System.Data.DataColumn columnXay;
             
             private global::System.Data.DataColumn columnNgayCheBien;
             
             private global::System.Data.DataColumn columnSoLuongCheBien;
+            
+            private global::System.Data.DataColumn columnMaNhanVien;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -5678,14 +5678,6 @@ namespace DaiLyCaPhe {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn HoTenColumn {
-                get {
-                    return this.columnHoTen;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn XayColumn {
                 get {
                     return this.columnXay;
@@ -5705,6 +5697,14 @@ namespace DaiLyCaPhe {
             public global::System.Data.DataColumn SoLuongCheBienColumn {
                 get {
                     return this.columnSoLuongCheBien;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn MaNhanVienColumn {
+                get {
+                    return this.columnMaNhanVien;
                 }
             }
             
@@ -5758,10 +5758,10 @@ namespace DaiLyCaPhe {
                         string CachCheBien, 
                         double SoLuongMoiGoi, 
                         string CachDongGoi, 
-                        string HoTen, 
                         bool Xay, 
                         System.DateTime NgayCheBien, 
-                        int SoLuongCheBien) {
+                        int SoLuongCheBien, 
+                        string MaNhanVien) {
                 PhieuCheBienADVRow rowPhieuCheBienADVRow = ((PhieuCheBienADVRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MaPhieuCheBien,
@@ -5776,10 +5776,10 @@ namespace DaiLyCaPhe {
                         CachCheBien,
                         SoLuongMoiGoi,
                         CachDongGoi,
-                        HoTen,
                         Xay,
                         NgayCheBien,
-                        SoLuongCheBien};
+                        SoLuongCheBien,
+                        MaNhanVien};
                 rowPhieuCheBienADVRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPhieuCheBienADVRow);
                 return rowPhieuCheBienADVRow;
@@ -5821,10 +5821,10 @@ namespace DaiLyCaPhe {
                 this.columnCachCheBien = base.Columns["CachCheBien"];
                 this.columnSoLuongMoiGoi = base.Columns["SoLuongMoiGoi"];
                 this.columnCachDongGoi = base.Columns["CachDongGoi"];
-                this.columnHoTen = base.Columns["HoTen"];
                 this.columnXay = base.Columns["Xay"];
                 this.columnNgayCheBien = base.Columns["NgayCheBien"];
                 this.columnSoLuongCheBien = base.Columns["SoLuongCheBien"];
+                this.columnMaNhanVien = base.Columns["MaNhanVien"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5854,14 +5854,14 @@ namespace DaiLyCaPhe {
                 base.Columns.Add(this.columnSoLuongMoiGoi);
                 this.columnCachDongGoi = new global::System.Data.DataColumn("CachDongGoi", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCachDongGoi);
-                this.columnHoTen = new global::System.Data.DataColumn("HoTen", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnHoTen);
                 this.columnXay = new global::System.Data.DataColumn("Xay", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnXay);
                 this.columnNgayCheBien = new global::System.Data.DataColumn("NgayCheBien", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNgayCheBien);
                 this.columnSoLuongCheBien = new global::System.Data.DataColumn("SoLuongCheBien", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSoLuongCheBien);
+                this.columnMaNhanVien = new global::System.Data.DataColumn("MaNhanVien", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMaNhanVien);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnMaPhieuCheBien}, true));
                 this.columnMaPhieuCheBien.AllowDBNull = false;
@@ -5887,11 +5887,11 @@ namespace DaiLyCaPhe {
                 this.columnSoLuongMoiGoi.AllowDBNull = false;
                 this.columnCachDongGoi.AllowDBNull = false;
                 this.columnCachDongGoi.MaxLength = 100;
-                this.columnHoTen.AllowDBNull = false;
-                this.columnHoTen.MaxLength = 200;
                 this.columnXay.AllowDBNull = false;
                 this.columnNgayCheBien.AllowDBNull = false;
                 this.columnSoLuongCheBien.AllowDBNull = false;
+                this.columnMaNhanVien.AllowDBNull = false;
+                this.columnMaNhanVien.MaxLength = 9;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7643,17 +7643,6 @@ namespace DaiLyCaPhe {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string HoTen {
-                get {
-                    return ((string)(this[this.tablePhieuCheBienADV.HoTenColumn]));
-                }
-                set {
-                    this[this.tablePhieuCheBienADV.HoTenColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Xay {
                 get {
                     return ((bool)(this[this.tablePhieuCheBienADV.XayColumn]));
@@ -7682,6 +7671,17 @@ namespace DaiLyCaPhe {
                 }
                 set {
                     this[this.tablePhieuCheBienADV.SoLuongCheBienColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string MaNhanVien {
+                get {
+                    return ((string)(this[this.tablePhieuCheBienADV.MaNhanVienColumn]));
+                }
+                set {
+                    this[this.tablePhieuCheBienADV.MaNhanVienColumn] = value;
                 }
             }
             
@@ -10283,11 +10283,27 @@ SELECT SoLoHang, MaLoaiHat, SoLuongTon, NgaySanXuat, HanSuDung FROM LoHang WHERE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT SoLoHang, MaLoaiHat, SoLuongTon, NgaySanXuat, HanSuDung FROM dbo.LoHang";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"UPDATE PhieuCheBien
+SET  MaPPCheBien = @processMethodID, MaCachDongGoi = @packingMethodID, MaNhanVien = @employeeID, MaSanPham = @productID, Xay = @isGrind, NgayCheBien = @processDate, SoLuongCheBien = @amount
+WHERE  (MaPhieuCheBien = @paperID) AND (SoLoHang = @categoryID) AND (MaLoaiHat = @beanID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@processMethodID", global::System.Data.SqlDbType.Char, 3, global::System.Data.ParameterDirection.Input, 0, 0, "MaPPCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@packingMethodID", global::System.Data.SqlDbType.Char, 6, global::System.Data.ParameterDirection.Input, 0, 0, "MaCachDongGoi", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@employeeID", global::System.Data.SqlDbType.Char, 9, global::System.Data.ParameterDirection.Input, 0, 0, "MaNhanVien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@productID", global::System.Data.SqlDbType.Char, 15, global::System.Data.ParameterDirection.Input, 0, 0, "MaSanPham", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@isGrind", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "Xay", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@processDate", global::System.Data.SqlDbType.DateTime, 3, global::System.Data.ParameterDirection.Input, 0, 0, "NgayCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SoLuongCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paperID", global::System.Data.SqlDbType.Char, 9, global::System.Data.ParameterDirection.Input, 0, 0, "MaPhieuCheBien", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@categoryID", global::System.Data.SqlDbType.Char, 8, global::System.Data.ParameterDirection.Input, 0, 0, "SoLoHang", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanID", global::System.Data.SqlDbType.Char, 6, global::System.Data.ParameterDirection.Input, 0, 0, "MaLoaiHat", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10472,6 +10488,74 @@ SELECT SoLoHang, MaLoaiHat, SoLuongTon, NgaySanXuat, HanSuDung FROM LoHang WHERE
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int SoLuongTon, System.DateTime NgaySanXuat, System.DateTime HanSuDung, string Original_SoLoHang, string Original_MaLoaiHat, int Original_SoLuongTon, System.DateTime Original_NgaySanXuat, System.DateTime Original_HanSuDung) {
             return this.Update(Original_SoLoHang, Original_MaLoaiHat, SoLuongTon, NgaySanXuat, HanSuDung, Original_SoLoHang, Original_MaLoaiHat, Original_SoLuongTon, Original_NgaySanXuat, Original_HanSuDung);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateTable(string processMethodID, string packingMethodID, string employeeID, string productID, bool isGrind, System.DateTime processDate, int amount, string paperID, string categoryID, string beanID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((processMethodID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(processMethodID));
+            }
+            if ((packingMethodID == null)) {
+                throw new global::System.ArgumentNullException("packingMethodID");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(packingMethodID));
+            }
+            if ((employeeID == null)) {
+                throw new global::System.ArgumentNullException("employeeID");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(employeeID));
+            }
+            if ((productID == null)) {
+                throw new global::System.ArgumentNullException("productID");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(productID));
+            }
+            command.Parameters[4].Value = ((bool)(isGrind));
+            command.Parameters[5].Value = ((System.DateTime)(processDate));
+            command.Parameters[6].Value = ((int)(amount));
+            if ((paperID == null)) {
+                throw new global::System.ArgumentNullException("paperID");
+            }
+            else {
+                command.Parameters[7].Value = ((string)(paperID));
+            }
+            if ((categoryID == null)) {
+                throw new global::System.ArgumentNullException("categoryID");
+            }
+            else {
+                command.Parameters[8].Value = ((string)(categoryID));
+            }
+            if ((beanID == null)) {
+                throw new global::System.ArgumentNullException("beanID");
+            }
+            else {
+                command.Parameters[9].Value = ((string)(beanID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -13766,10 +13850,10 @@ where C.MaSanPham = S.MaSanPham and S.TenSanPham like '%' + @productName + '%' a
             tableMapping.ColumnMappings.Add("CachCheBien", "CachCheBien");
             tableMapping.ColumnMappings.Add("SoLuongMoiGoi", "SoLuongMoiGoi");
             tableMapping.ColumnMappings.Add("CachDongGoi", "CachDongGoi");
-            tableMapping.ColumnMappings.Add("HoTen", "HoTen");
             tableMapping.ColumnMappings.Add("Xay", "Xay");
             tableMapping.ColumnMappings.Add("NgayCheBien", "NgayCheBien");
             tableMapping.ColumnMappings.Add("SoLuongCheBien", "SoLuongCheBien");
+            tableMapping.ColumnMappings.Add("MaNhanVien", "MaNhanVien");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -13783,10 +13867,10 @@ where C.MaSanPham = S.MaSanPham and S.TenSanPham like '%' + @productName + '%' a
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT P.MaPhieuCheBien, P.SoLoHang, P.MaLoaiHat, P.MaSanPham, P.MaPPCheBien, P.MaCachDongGoi, L.TenLoaiHat, L.XuatXu, S.TenSanPham, Ph.MoTa AS CachCheBien, C.SoLuongMoiGoi, C.MoTa AS CachDongGoi, N.HoTen, P.Xay, 
+            this._commandCollection[0].CommandText = @"SELECT P.MaPhieuCheBien, P.SoLoHang, P.MaLoaiHat, P.MaSanPham, P.MaPPCheBien, P.MaCachDongGoi, L.TenLoaiHat, L.XuatXu, S.TenSanPham, Ph.MoTa AS CachCheBien, C.SoLuongMoiGoi, C.MoTa AS CachDongGoi, N.MaNhanVien, P.Xay, 
                   P.NgayCheBien, P.SoLuongCheBien
 FROM     PhieuCheBien AS P INNER JOIN
                   LoaiHatCaPhe AS L ON P.MaLoaiHat = L.MaLoaiHat INNER JOIN
@@ -13795,6 +13879,23 @@ FROM     PhieuCheBien AS P INNER JOIN
                   NhanVien AS N ON P.MaNhanVien = N.MaNhanVien INNER JOIN
                   SanPham AS S ON P.MaSanPham = S.MaSanPham";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT P.MaPhieuCheBien, P.SoLoHang, P.MaLoaiHat, P.MaSanPham, P.MaPPCheBien, P.MaCachDongGoi, L.TenLoaiHat, L.XuatXu, S.TenSanPham, Ph.MoTa AS CachCheBien, C.SoLuongMoiGoi, C.MoTa AS CachDongGoi, N.HoTen, P.Xay, 
+                  P.NgayCheBien, P.SoLuongCheBien
+FROM     PhieuCheBien AS P INNER JOIN
+                  LoaiHatCaPhe AS L ON P.MaLoaiHat = L.MaLoaiHat INNER JOIN
+                  PhuongPhapCheBien AS Ph ON P.MaPPCheBien = Ph.MaPPCheBien INNER JOIN
+                  CachDongGoi AS C ON P.MaCachDongGoi = C.MaCachDongGoi INNER JOIN
+                  NhanVien AS N ON P.MaNhanVien = N.MaNhanVien INNER JOIN
+                  SanPham AS S ON P.MaSanPham = S.MaSanPham
+WHERE  (N.HoTen LIKE '%' + @productMakerName + '%') AND (P.NgayCheBien >= @fromDate) AND (P.NgayCheBien <= @toDate) AND (S.TenSanPham LIKE '%' + @productName + '%') AND (L.TenLoaiHat LIKE '%' + @beanName + '%')";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@productMakerName", global::System.Data.SqlDbType.NVarChar, 200, global::System.Data.ParameterDirection.Input, 0, 0, "HoTen", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fromDate", global::System.Data.SqlDbType.DateTime, 3, global::System.Data.ParameterDirection.Input, 0, 0, "NgayCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@toDate", global::System.Data.SqlDbType.DateTime, 3, global::System.Data.ParameterDirection.Input, 0, 0, "NgayCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@productName", global::System.Data.SqlDbType.NVarChar, 200, global::System.Data.ParameterDirection.Input, 0, 0, "TenSanPham", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanName", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "TenLoaiHat", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13819,6 +13920,39 @@ FROM     PhieuCheBien AS P INNER JOIN
             DaiLyCaPheDataSet.PhieuCheBienADVDataTable dataTable = new DaiLyCaPheDataSet.PhieuCheBienADVDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByMaker_Date_Product_Bean(DaiLyCaPheDataSet.PhieuCheBienADVDataTable dataTable, string productMakerName, System.DateTime fromDate, System.DateTime toDate, string productName, string beanName) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((productMakerName == null)) {
+                throw new global::System.ArgumentNullException("productMakerName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(productMakerName));
+            }
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(fromDate));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(toDate));
+            if ((productName == null)) {
+                throw new global::System.ArgumentNullException("productName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(productName));
+            }
+            if ((beanName == null)) {
+                throw new global::System.ArgumentNullException("beanName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((string)(beanName));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
     }
     
