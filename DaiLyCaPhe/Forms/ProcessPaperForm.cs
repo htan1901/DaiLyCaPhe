@@ -119,10 +119,11 @@ namespace DaiLyCaPhe.Forms
                 string packingMethodID = database.GetPackingMethodID(comboBoxPackingMethod.Text);
                 bool isGrind = checkBoxIsGrind.Checked;
                 string beanID = database.GetBeanTypeIdByNameAndOrigin(beanName, beanOrigin);
-                string productID = GenerateProductID(beanID.Substring(0,3), processMethodID);
+                string productID = database.GetProductID(paperID, categoryID, beanID);
 
                 string productType = isGrind ? "Bột" : "Hạt";
                 float weight = database.GetPackingWeight(packingMethodID);
+
                 DateTime expireDate;
                 if (expireDateStr == null || expireDateStr == "")
                     expireDate = DateTime.Now;
@@ -135,14 +136,20 @@ namespace DaiLyCaPhe.Forms
                 else
                     processDate = DateTime.ParseExact(processDateStr, DEFAULT_DATE_FORMAT, null);
 
+                int maximumAmount = database.GetLeftOverAmount(categoryID, beanID);
+                if (amount < 1 || amount > maximumAmount)
+                {
+                    MessageBox.Show("Số lượng chế biến không hợp lệ", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
+
+                database.UpdateTableSanPham(productID, productName, productType, weight, expireDate, (int)amount);
+                database.UpdateTablePhieuCheBien(paperID, categoryID, beanID, processMethodID, packingMethodID, makerID, productID, isGrind, processDate, (int)amount);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-
-
-
         }
 
         public void SaveBill()
@@ -179,6 +186,13 @@ namespace DaiLyCaPhe.Forms
                 else
                     processDate = DateTime.ParseExact(processDateStr, DEFAULT_DATE_FORMAT, null);
 
+                int maximumAmount = database.GetLeftOverAmount(categoryID, beanID);
+                if (amount < 1 || amount > maximumAmount)
+                {
+                    MessageBox.Show("Số lượng chế biến không hợp lệ", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
+
                 sanPhamTableAdapter.Insert(productID, productName, productType, weight, expireDate, (int)amount);
                 phieuCheBienTableAdapter.Insert(paperID, categoryID, beanID, processMethodID, packingMethodID, makerID, productID, isGrind, processDate, (int)amount);
             }
@@ -186,15 +200,13 @@ namespace DaiLyCaPhe.Forms
             {
                 MessageBox.Show(e.Message);
             }
-
-
         }
 
         #endregion
 
         #region Button Events
         
-        private void buttonAddPaper_Click(object sender, EventArgs e)
+        private void ButtonAddPaper_Click(object sender, EventArgs e)
         {
             ClearCurrentData();
             ClearFilterData();
@@ -203,16 +215,27 @@ namespace DaiLyCaPhe.Forms
             dateEditProcessDate.Focus();
         }
 
-        private void buttonModifyPaper_Click(object sender, EventArgs e)
+        private void ButtonModifyPaper_Click(object sender, EventArgs e)
         {
             ClearFilterData();
             ToggleEditing(editable);
             ChangeState(editable);
+            comboBoxBeanName.Enabled = false;
+            comboBoxBeanOrigin.Enabled = false;
+            comboBoxCategoryID.Enabled = false;
+            dateEditBeanExpireDate.Enabled = false;
             dateEditProcessDate.Focus();
         }
 
-        private void buttonDeletePaper_Click(object sender, EventArgs e)
+        private void ButtonDeletePaper_Click(object sender, EventArgs e)
         {
+            string paperID = textBoxProcessPaperID.Text;
+            if (paperID == null || paperID == "")
+                return;
+            DialogResult result = MessageBox.Show(string.Format("Bạn muốn xóa phiếu chế biến {0}", paperID), "Thông báo", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+                database.DeleteRecordFromPhieuCheBien(paperID);
+            ProcessBillForm_Load(sender, e);
         }
 
         private void buttonSavePaper_Click(object sender, EventArgs e)
@@ -220,8 +243,8 @@ namespace DaiLyCaPhe.Forms
             string paperID = textBoxProcessPaperID.Text;
             if (paperID == "" || paperID == null)
                 SaveBill();
-            else 
-
+            else
+                UpdateBill();
 
             ClearCurrentData();
             ClearFilterData();
@@ -244,14 +267,6 @@ namespace DaiLyCaPhe.Forms
 
         private void ProcessBillForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.SanPham' table. You can move, or remove it, as needed.
-            this.sanPhamTableAdapter.Fill(this.daiLyCaPheDataSet.SanPham);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.CachDongGoi' table. You can move, or remove it, as needed.
-            this.cachDongGoiTableAdapter.Fill(this.daiLyCaPheDataSet.CachDongGoi);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.PhuongPhapCheBien' table. You can move, or remove it, as needed.
-            this.phuongPhapCheBienTableAdapter.Fill(this.daiLyCaPheDataSet.PhuongPhapCheBien);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.LoHang' table. You can move, or remove it, as needed.
-            this.loHangTableAdapter.Fill(this.daiLyCaPheDataSet.LoHang);
             this.phieuCheBienADVTableAdapter.Fill(this.daiLyCaPheDataSet.PhieuCheBienADV);
 
             List<string> listCategoryID = database.GetAllCategoryID();
@@ -293,9 +308,9 @@ namespace DaiLyCaPhe.Forms
             string packingMethodName = dataGridViewProcessPaper.Rows[index].Cells[11].Value.ToString();
             string productMakerName = dataGridViewProcessPaper.Rows[index].Cells[12].Value.ToString();
             bool isGrind = (bool)dataGridViewProcessPaper.Rows[index].Cells[13].Value;
-            string processDate = dataGridViewProcessPaper.Rows[index].Cells[14].Value.ToString();
+            string processDate = dataGridViewProcessPaper.Rows[index].Cells[14].Value.ToString().Substring(0,10);
             string processAmount = dataGridViewProcessPaper.Rows[index].Cells[15].Value.ToString();
-            string expireDate = database.GetExpireDate(categoryID, beanID);
+            string expireDate = database.GetExpireDate(categoryID, beanID).Substring(0,10);
 
             textBoxProcessPaperID.Text = processParperID;
             comboBoxCategoryID.Text = categoryID;

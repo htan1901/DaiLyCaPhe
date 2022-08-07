@@ -11241,12 +11241,28 @@ SELECT MaPhieuCheBien, SoLoHang, MaLoaiHat, MaPPCheBien, MaCachDongGoi, MaNhanVi
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MaPhieuCheBien, SoLoHang, MaLoaiHat, MaPPCheBien, MaCachDongGoi, MaNhanVie" +
                 "n, MaSanPham, Xay, NgayCheBien, SoLuongCheBien FROM dbo.PhieuCheBien";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"UPDATE PhieuCheBien
+SET MaPPCheBien = @processMethodID, MaCachDongGoi = @packingMethodID, MaNhanVien = @employeeID, MaSanPham = @productID, Xay = @isGrind, NgayCheBien = @processDate, SoLuongCheBien = @amount
+WHERE  (MaPhieuCheBien = @paperID) AND (SoLoHang = @categoryID) AND (MaLoaiHat = @beanID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@processMethodID", global::System.Data.SqlDbType.Char, 3, global::System.Data.ParameterDirection.Input, 0, 0, "MaPPCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@packingMethodID", global::System.Data.SqlDbType.Char, 6, global::System.Data.ParameterDirection.Input, 0, 0, "MaCachDongGoi", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@employeeID", global::System.Data.SqlDbType.Char, 9, global::System.Data.ParameterDirection.Input, 0, 0, "MaNhanVien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@productID", global::System.Data.SqlDbType.Char, 15, global::System.Data.ParameterDirection.Input, 0, 0, "MaSanPham", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@isGrind", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "Xay", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@processDate", global::System.Data.SqlDbType.DateTime, 3, global::System.Data.ParameterDirection.Input, 0, 0, "NgayCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SoLuongCheBien", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paperID", global::System.Data.SqlDbType.Char, 9, global::System.Data.ParameterDirection.Input, 0, 0, "MaPhieuCheBien", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@categoryID", global::System.Data.SqlDbType.Char, 8, global::System.Data.ParameterDirection.Input, 0, 0, "SoLoHang", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanID", global::System.Data.SqlDbType.Char, 6, global::System.Data.ParameterDirection.Input, 0, 0, "MaLoaiHat", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11594,6 +11610,74 @@ SELECT MaPhieuCheBien, SoLoHang, MaLoaiHat, MaPPCheBien, MaCachDongGoi, MaNhanVi
                     System.DateTime Original_NgayCheBien, 
                     int Original_SoLuongCheBien) {
             return this.Update(Original_MaPhieuCheBien, SoLoHang, MaLoaiHat, MaPPCheBien, MaCachDongGoi, MaNhanVien, MaSanPham, Xay, NgayCheBien, SoLuongCheBien, Original_MaPhieuCheBien, Original_SoLoHang, Original_MaLoaiHat, Original_MaPPCheBien, Original_MaCachDongGoi, Original_MaNhanVien, Original_MaSanPham, Original_Xay, Original_NgayCheBien, Original_SoLuongCheBien);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateTable(string processMethodID, string packingMethodID, string employeeID, string productID, bool isGrind, System.DateTime processDate, int amount, string paperID, string categoryID, string beanID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((processMethodID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(processMethodID));
+            }
+            if ((packingMethodID == null)) {
+                throw new global::System.ArgumentNullException("packingMethodID");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(packingMethodID));
+            }
+            if ((employeeID == null)) {
+                throw new global::System.ArgumentNullException("employeeID");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(employeeID));
+            }
+            if ((productID == null)) {
+                throw new global::System.ArgumentNullException("productID");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(productID));
+            }
+            command.Parameters[4].Value = ((bool)(isGrind));
+            command.Parameters[5].Value = ((System.DateTime)(processDate));
+            command.Parameters[6].Value = ((int)(amount));
+            if ((paperID == null)) {
+                throw new global::System.ArgumentNullException("paperID");
+            }
+            else {
+                command.Parameters[7].Value = ((string)(paperID));
+            }
+            if ((categoryID == null)) {
+                throw new global::System.ArgumentNullException("categoryID");
+            }
+            else {
+                command.Parameters[8].Value = ((string)(categoryID));
+            }
+            if ((beanID == null)) {
+                throw new global::System.ArgumentNullException("beanID");
+            }
+            else {
+                command.Parameters[9].Value = ((string)(beanID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

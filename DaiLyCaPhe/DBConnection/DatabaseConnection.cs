@@ -502,9 +502,106 @@ namespace DaiLyCaPhe.DBConnection
             return employees;
         }
 
-        public void UpdateTablePhieuCheBien(string paperID, string beanID)
+        public int UpdateTablePhieuCheBien(string paperID, string categoryID, string beanID, string processMethodID, string packingMethodID, string employeeID, string productID, bool isGrind, DateTime processDate, int amount)
         {
+            int rowAffected = 0;
+            string updateCommand = "update PhieuCheBien set MaPPCheBien = @processMethodID, MaCachDongGoi = @packingMethodID, MaNhanVien = @employeeID, MaSanPham = @productID, Xay = @isGrind, NgayCheBien = @processDate, SoLuongCheBien = @amount where MaPhieuCheBien = @paperID and SoLoHang = @categoryID and MaLoaiHat = @beanID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(updateCommand, connection);
+                command.Parameters.Add(new SqlParameter("@paperID", paperID));
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+                command.Parameters.Add(new SqlParameter("@processMethodID", processMethodID));
+                command.Parameters.Add(new SqlParameter("@packingMethodID", packingMethodID));
+                command.Parameters.Add(new SqlParameter("@employeeID", employeeID));
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+                command.Parameters.Add(new SqlParameter("@isGrind", isGrind));
+                command.Parameters.Add(new SqlParameter("@processDate", processDate));
+                command.Parameters.Add(new SqlParameter("@amount", amount));
 
+                rowAffected = command.ExecuteNonQuery();                
+
+            }
+            
+            return rowAffected;
+        }
+
+        public int DeleteRecordFromPhieuCheBien(string paperID)
+        {
+            int rowAffected = 0;
+            string deleteCommand = "delete from PhieuCheBien " +
+                                    "where MaPhieuCheBien = @paperID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(deleteCommand, connection);
+                command.Parameters.Add(new SqlParameter("@paperID", paperID));
+                rowAffected = command.ExecuteNonQuery();                
+            }
+            return rowAffected;
+        }
+
+        public int UpdateTableSanPham(string productID, string productName, string productType, float weight, DateTime expireDate, int amountLeftOver)
+        {
+            int rowAffected = 0;
+            string updateCommand = "update SanPham set TenSanPham = @productName, LoaiSanPham = @productType, TrongLuong = @weight, HanSuDung = @expireDate, SoLuongTon = @amountLeftOver where MaSanPham = @productID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(updateCommand, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+                command.Parameters.Add(new SqlParameter("@productName", productName));
+                command.Parameters.Add(new SqlParameter("@productType", productType));
+                command.Parameters.Add(new SqlParameter("@weight", weight));
+                command.Parameters.Add(new SqlParameter("@expireDate", expireDate));
+                command.Parameters.Add(new SqlParameter("@amountLeftOver", amountLeftOver));
+
+                rowAffected = command.ExecuteNonQuery();                
+
+            }
+            
+            return rowAffected;
+        }
+
+        public string GetProductID(string paperID, string categoryID, string beanID)
+        {
+            string id;
+            string query = "select MaSanPham " +
+                            "from PhieuCheBien " +
+                            "where MaPhieuCheBien = @paperID and SoLoHang = @categoryID and MaLoaiHat = @beanID ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@paperID", paperID));
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
+            }
+            return id;
+        }
+
+        public int GetLeftOverAmount(string categoryID, string beanID)
+        {
+            int id;
+            string query = "select SoLuongTon " +
+                            "from LoHang " +
+                            "where SoLoHang = @categoryID and MaLoaiHat = @beanID ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+
+                object obj = command.ExecuteScalar();
+                id = obj == null ? 0 : int.Parse(obj.ToString());
+            }
+            return id;
         }
     }
 }

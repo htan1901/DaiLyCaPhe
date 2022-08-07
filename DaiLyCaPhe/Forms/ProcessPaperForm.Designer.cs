@@ -332,7 +332,7 @@
             this.buttonAddPaper.Size = new System.Drawing.Size(155, 30);
             this.buttonAddPaper.TabIndex = 13;
             this.buttonAddPaper.Text = "Thêm phiếu chế biến";
-            this.buttonAddPaper.Click += new System.EventHandler(this.buttonAddPaper_Click);
+            this.buttonAddPaper.Click += new System.EventHandler(this.ButtonAddPaper_Click);
             // 
             // buttonDeletePaper
             // 
@@ -346,7 +346,7 @@
             this.buttonDeletePaper.Size = new System.Drawing.Size(155, 30);
             this.buttonDeletePaper.TabIndex = 7;
             this.buttonDeletePaper.Text = "Xóa phiếu chế biến";
-            this.buttonDeletePaper.Click += new System.EventHandler(this.buttonDeletePaper_Click);
+            this.buttonDeletePaper.Click += new System.EventHandler(this.ButtonDeletePaper_Click);
             // 
             // buttonSavePaper
             // 
@@ -373,7 +373,7 @@
             this.buttonModifyPaper.Size = new System.Drawing.Size(155, 30);
             this.buttonModifyPaper.TabIndex = 12;
             this.buttonModifyPaper.Text = "Sửa phiếu chế biến";
-            this.buttonModifyPaper.Click += new System.EventHandler(this.buttonModifyPaper_Click);
+            this.buttonModifyPaper.Click += new System.EventHandler(this.ButtonModifyPaper_Click);
             // 
             // buttonCancel
             // 
