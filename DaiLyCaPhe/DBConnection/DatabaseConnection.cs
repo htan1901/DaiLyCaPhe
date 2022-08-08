@@ -505,7 +505,7 @@ namespace DaiLyCaPhe.DBConnection
         public int UpdateTablePhieuCheBien(string paperID, string categoryID, string beanID, string processMethodID, string packingMethodID, string employeeID, string productID, bool isGrind, DateTime processDate, int amount)
         {
             int rowAffected = 0;
-            string updateCommand = "update PhieuCheBien set MaPPCheBien = @processMethodID, MaCachDongGoi = @packingMethodID, MaNhanVien = @employeeID, MaSanPham = @productID, Xay = @isGrind, NgayCheBien = @processDate, SoLuongCheBien = @amount where MaPhieuCheBien = @paperID and SoLoHang = @categoryID and MaLoaiHat = @beanID";
+            string updateCommand = "update PhieuCheBien set MaPPCheBien = @processMethodID, MaCachDongGoi = @packingMethodID, MaNhanVien = @employeeID, MaSanPham = @productID, Xay = @isGrind, NgayCheBien = @processDate, SoLuongCheBien = @state where MaPhieuCheBien = @paperID and SoLoHang = @categoryID and MaLoaiHat = @beanID";
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -519,7 +519,7 @@ namespace DaiLyCaPhe.DBConnection
                 command.Parameters.Add(new SqlParameter("@productID", productID));
                 command.Parameters.Add(new SqlParameter("@isGrind", isGrind));
                 command.Parameters.Add(new SqlParameter("@processDate", processDate));
-                command.Parameters.Add(new SqlParameter("@amount", amount));
+                command.Parameters.Add(new SqlParameter("@state", amount));
 
                 rowAffected = command.ExecuteNonQuery();                
 
@@ -739,13 +739,13 @@ namespace DaiLyCaPhe.DBConnection
         {
             int rowAffected = 0;
             string updateCommand = "update ChiTietPhieuXuat " +
-                                    "set SoLuong = @amount, DonGia = @price " +
+                                    "set SoLuong = @state, DonGia = @price " +
                                     "where MaPhieuXuat = @billID and MaSanPham = @productID";
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(updateCommand, connection);
-                command.Parameters.Add(new SqlParameter("@amount", amount));
+                command.Parameters.Add(new SqlParameter("@state", amount));
                 command.Parameters.Add(new SqlParameter("@price", price));
                 command.Parameters.Add(new SqlParameter("@billID", billID));
                 command.Parameters.Add(new SqlParameter("@productID", productID));
@@ -805,6 +805,46 @@ namespace DaiLyCaPhe.DBConnection
                 rowAffected = command.ExecuteNonQuery();                
             }
             return rowAffected;
+        }
+
+        public object ValidateLoginInfo(string username, string password)
+        {
+            object state;
+            string query = "select VaiTro " +
+                            "from ThongTinDangNhap " +
+                            "where TenDangNhap = @username and MatKhau = @password";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@username", username));
+                command.Parameters.Add(new SqlParameter("@password", password));
+
+                object obj = command.ExecuteScalar();
+                state = obj;
+            }
+            return state;
+        }
+
+        public int IsAccountExist(string username)
+        {
+            int state;
+            string query = "select MaThongTin " +
+                            "from ThongTinDangNhap " +
+                            "where TenDangNhap = @username";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@username", username));
+
+                object obj = command.ExecuteScalar();
+                if (obj == null)
+                    state = -1;
+                else
+                    state = int.Parse(obj.ToString());
+            }
+            return state;
         }
     }
 }

@@ -74,6 +74,12 @@
       <DependentUpon>DaiLyCaPheDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DBConnection\DatabaseConnection.cs" />
+    <Compile Include="Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExportBillForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExportBillForm.resx">
       <DependentUpon>ExportBillForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,19 +8,61 @@ using System.Text;
 using System.Windows.Forms;
 using CustomControls;
 using DaiLyCaPhe.Forms;
+using DaiLyCaPhe.DBConnection;
 
 namespace DaiLyCaPhe
 {
     public partial class MainScreen : DevExpress.XtraEditors.XtraForm
     {
+        private DatabaseConnection database = new DatabaseConnection();
+
         public MainScreen()
         {
             InitializeComponent();
         }
 
-        private void formProcessPaper_Load(object sender, EventArgs e)
+        private void LogOut()
         {
+            DisableFeatures();
+            tabNavigationPageLogin.Enabled = true;
+            tabNavigationPageLogin.PageVisible = true;
+            textBoxUsername.Text = null;
+            textBoxPassword.Text = null;
+            tabPanelMain.SelectedPage = tabNavigationPageLogin;
+        }
 
+        private void DisableFeatures()
+        {
+            tabNavigationPageImportBill.Enabled = false;
+            tabNavigationPageExportBill.Enabled = false;
+            tabNavigationPageProcessPaper.Enabled = false;
+            tabNavigationPageImportBill.PageVisible = false;
+            tabNavigationPageExportBill.PageVisible = false;
+            tabNavigationPageProcessPaper.PageVisible = false;
+            tabNavigationPageAdmin.Enabled = false;
+            tabNavigationPageAdmin.PageVisible = false;
+        }
+
+        private void EnableFeatures(int role)
+        {
+            if (role == 1)
+            {
+                tabNavigationPageImportBill.Enabled = true;
+                tabNavigationPageExportBill.Enabled = true;
+                tabNavigationPageAdmin.Enabled = true;
+
+                tabNavigationPageImportBill.PageVisible = true;
+                tabNavigationPageExportBill.PageVisible = true;
+                tabNavigationPageAdmin.PageVisible = true;
+
+            }
+            tabNavigationPageProcessPaper.Enabled = true;
+            tabNavigationPageProcessPaper.PageVisible = true;
+
+            tabNavigationPageLogin.Enabled = false;
+            tabNavigationPageLogin.PageVisible = false;
+
+            tabPanelMain.SelectedPage = tabNavigationPageProcessPaper;
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -48,6 +90,54 @@ namespace DaiLyCaPhe
             };
             tabNavigationPageProcessPaper.Controls.Add(processPaperForm);
             processPaperForm.Show();
+
+            AdminForm adminForm = new AdminForm
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill,
+            };
+            tabNavigationPageAdmin.Controls.Add(adminForm);
+            adminForm.Show();
+            
+            
+            DisableFeatures();
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            string username = textBoxUsername.Text;
+            string password = textBoxPassword.Text;
+
+            int state = -1;
+
+            object role = database.ValidateLoginInfo(username, password);
+            if (role == null)
+                MessageBox.Show("Sai thông tin đăng nhập", "Thông báo", MessageBoxButtons.OK);
+            else
+            {
+                if (bool.Parse(role.ToString()) == false)
+                    state = 0;
+                if (bool.Parse(role.ToString()) == true)
+                    state = 1;
+                EnableFeatures(state);
+            }
+        }
+
+        private void logOut_Click(object sender, EventArgs e)
+        {
+            LogOut();
+        }
+
+        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn muốn thoát chương trình", "Thông báo", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+                e.Cancel = true;
+        }
+
+        private void HidePassword(object sender, EventArgs e)
+        {
+            textBoxPassword.UseSystemPasswordChar = !checkBoxHiddenPassword.Checked;
         }
     }
 }
