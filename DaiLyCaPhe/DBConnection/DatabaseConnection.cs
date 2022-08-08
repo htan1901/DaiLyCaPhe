@@ -100,7 +100,7 @@ namespace DaiLyCaPhe.DBConnection
             return id;
         }
 
-        public int UpdateTableLoHang(string SoLoHang, string MaLoaiHat, DateTime NgaySanXuat, DateTime HanSuDung)
+        public int UpdateRecordLoHang(string SoLoHang, string MaLoaiHat, DateTime NgaySanXuat, DateTime HanSuDung)
         {
             int rowAffected = 0;
             string updateCommand = "update LoHang " +
@@ -121,7 +121,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public int UpdateTableChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat, decimal SoLuong, decimal DonGia)
+        public int UpdateRecordChiTietPhieuNhap(string MaPhieuNhap, string SoLoHang, string MaLoaiHat, decimal SoLuong, decimal DonGia)
         {
             int rowAffected = 0;
             string updateCommand = "update ChiTietPhieuNhap " +
@@ -144,7 +144,7 @@ namespace DaiLyCaPhe.DBConnection
             return rowAffected;
         }
 
-        public int UpdateTablePhieuNhapHang(string MaPhieuNhap, string NhaSanXuat, DateTime NgayNhap)
+        public int UpdateRecordPhieuNhapHang(string MaPhieuNhap, string NhaSanXuat, DateTime NgayNhap)
         {
             int rowAffected = 0;
             string updateCommand = "update PhieuNhapHang " +
@@ -587,7 +587,7 @@ namespace DaiLyCaPhe.DBConnection
 
         public int GetLeftOverAmount(string categoryID, string beanID)
         {
-            int id;
+            int amountLeftOver;
             string query = "select SoLuongTon " +
                             "from LoHang " +
                             "where SoLoHang = @categoryID and MaLoaiHat = @beanID ";
@@ -599,9 +599,212 @@ namespace DaiLyCaPhe.DBConnection
                 command.Parameters.Add(new SqlParameter("@beanID", beanID));
 
                 object obj = command.ExecuteScalar();
-                id = obj == null ? 0 : int.Parse(obj.ToString());
+                amountLeftOver = obj == null ? 0 : int.Parse(obj.ToString());
+            }
+            return amountLeftOver;
+        }
+
+        public string GetProductID(string productName, string productType, string expireDate, float weight)
+        {
+            string id;
+            string query = "select MaSanPham " +
+                            "from SanPham " +
+                            "where TenSanPham = @productName and LoaiSanPham = @productType and HanSuDung = @expireDate and TrongLuong = @weight ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productName", productName));
+                command.Parameters.Add(new SqlParameter("@productType", productType));
+                command.Parameters.Add(new SqlParameter("@expireDate", expireDate));
+                command.Parameters.Add(new SqlParameter("@weight", weight));
+
+                object obj = command.ExecuteScalar();
+                id = obj == null ? "" : obj.ToString();
             }
             return id;
+        }
+
+        public long GetPrice(string productID)
+        {
+            long price;
+            string query = "select DonGia " +
+                            "from DonGia D, PhieuCheBien P " +
+                            "where P.MaLoaiHat = D.MaLoaiHat and P.MaSanPham = @productID and DenNgay is null ";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                object obj = command.ExecuteScalar();
+                price = obj == null ? 0 : long.Parse(obj.ToString());
+            }
+            return price;
+        }
+
+        public List<string> GetAllProductIDs()
+        {
+            List<string> ids = new List<string>();
+            string query = "select MaSanPham from SanPham";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        ids.Add(line);
+                    }
+                }
+            }
+            return ids;
+        }
+
+        public string GetProductName(string productID)
+        {
+            string name;
+            string query = "select TenSanPham " +
+                            "from SanPham " +
+                            "where MaSanPham = @productID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                object obj = command.ExecuteScalar();
+                name = obj == null ? "" : obj.ToString();
+            }
+            return name;
+        }
+        public string GetProductType(string productID)
+        {
+            string type;
+            string query = "select LoaiSanPham " +
+                            "from SanPham " +
+                            "where MaSanPham = @productID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                object obj = command.ExecuteScalar();
+                type = obj == null ? "" : obj.ToString();
+            }
+            return type;
+        }
+
+        public float GetProductWeight(string productID)
+        {
+            float weight;
+            string query = "select TrongLuong " +
+                            "from SanPham " +
+                            "where MaSanPham = @productID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                object obj = command.ExecuteScalar();
+                weight = obj == null ? 0.0f : float.Parse(obj.ToString());
+            }
+            return weight;
+        }
+
+        public int GetProductAmount(string productID)
+        {
+            int amount;
+            string query = "select SoLuongTon " +
+                            "from SanPham " +
+                            "where MaSanPham = @productID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                object obj = command.ExecuteScalar();
+                amount = obj == null ? 0 : int.Parse(obj.ToString());
+            }
+            return amount;
+
+        }
+
+        public int UpdateRecordChiTietPhieuXuat(string billID, string productID, int amount, long price)
+        {
+            int rowAffected = 0;
+            string updateCommand = "update ChiTietPhieuXuat " +
+                                    "set SoLuong = @amount, DonGia = @price " +
+                                    "where MaPhieuXuat = @billID and MaSanPham = @productID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(updateCommand, connection);
+                command.Parameters.Add(new SqlParameter("@amount", amount));
+                command.Parameters.Add(new SqlParameter("@price", price));
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                rowAffected = command.ExecuteNonQuery();                
+
+            }
+            
+            return rowAffected;
+
+        }
+        public int UpdateRecordPhieuXuatHang(string billID, string exportPlace, DateTime exportDate)
+        {
+            int rowAffected = 0;
+            string updateCommand = "update PhieuXuatHang " +
+                                    "set NoiXuat = @exportPlace, NgayXuat = @exportDate " +
+                                    "where MaPhieuXuat = @billID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(updateCommand, connection);
+                command.Parameters.Add(new SqlParameter("@exportPlace", exportPlace));
+                command.Parameters.Add(new SqlParameter("@exportDate", exportDate));
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+
+                rowAffected = command.ExecuteNonQuery();                
+            }
+            return rowAffected;
+        }
+
+        public int DeleteRecordFromChiTietPhieuXuat(string billID, string productID)
+        {
+            int rowAffected = 0;
+            string deleteCommand = "delete from ChiTietPhieuXuat where MaPhieuXuat = @billID and MaSanPham = @productID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(deleteCommand, connection);
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+                command.Parameters.Add(new SqlParameter("@productID", productID));
+
+                rowAffected = command.ExecuteNonQuery();                
+            }
+            return rowAffected;
+        }
+
+        public int DeleteRecordFromPhieuXuatHang(string billID)
+        {
+            int rowAffected = 0;
+            string deleteCommand = "delete from PhieuXuatHang where MaPhieuXuat = @billID";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(deleteCommand, connection);
+                command.Parameters.Add(new SqlParameter("@billID", billID));
+
+                rowAffected = command.ExecuteNonQuery();                
+            }
+            return rowAffected;
         }
     }
 }

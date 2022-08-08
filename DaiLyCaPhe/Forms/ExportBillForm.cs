@@ -18,6 +18,7 @@ namespace DaiLyCaPhe.Forms
 
         private const string DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
         private const string MIN_DATE_VALUE = "01/01/2000";
+        private List<ExportBillItem> deletedItems = new List<ExportBillItem>();
         private bool editable = true;
         private DatabaseConnection database = new DatabaseConnection();
 
@@ -62,10 +63,64 @@ namespace DaiLyCaPhe.Forms
             foreach(Control item in panelBillDetails.Controls)
                 item.Enabled = isAllow;
         }
-
-        private string GenerateProductID()
+        public string GenerateProductID(string beanID, string processMethodID)
         {
-            return "";
+            Random random = new Random();
+            string prefix = beanID + "-" + processMethodID + "-";
+            for(int i = 0; i < 3; i++)
+            {
+                int randNum = random.Next(100);
+                prefix += (randNum < 10) ? ("0" + randNum) : randNum.ToString();
+            }
+            return prefix;
+        }
+
+        public string GenerateBillID()
+        {
+            string prefix = "PXH";
+            Random random = new Random();
+            for(int i = 0; i<3; i++)
+            {
+                int randNum = random.Next(100);
+                prefix += randNum<10 ? ("0" + randNum) : randNum.ToString();
+            }
+            return prefix;
+        }
+
+        private void AddEventToItem(ExportBillItem item)
+        {
+            item.comboBoxIDValueChanged += new EventHandler((sndr, evnt) =>
+            {
+                string productId = item.ProductID;
+                
+                foreach(Control i in panelBillDetails.Controls)
+                {
+                    ExportBillItem billItem = i as ExportBillItem;
+
+                    if (billItem == item)
+                        continue;
+
+                    if(billItem.ProductID == productId)
+                    {
+                        MessageBox.Show("Trùng sản phẩm", "Thông báo", MessageBoxButtons.OK);
+                        panelBillDetails.Controls.Remove(item);
+                        return;
+                    }
+                }
+
+                string name = database.GetProductName(productId);
+                string type = database.GetProductType(productId);
+                float weight = database.GetProductWeight(productId);
+                long price = database.GetPrice(productId);
+                decimal maximum = database.GetProductAmount(productId);
+
+                item.ProductName = name;
+                item.ProductType = type;
+                item.Weight = weight.ToString();
+                item.Price = price;
+                item.Maximum = maximum;
+                item.Minimum = 1;
+            });
         }
 
         #endregion
@@ -81,17 +136,28 @@ namespace DaiLyCaPhe.Forms
 
         private void ButtonAddItem_Click(object sender, EventArgs e)
         {
-            ExportBillItem newItem = new ExportBillItem
+            ExportBillItem item = new ExportBillItem
             {
                 Dock = DockStyle.Top
             };
-            newItem.deleteEvent += new EventHandler(DeleteBillItemEvent);
-            panelBillDetails.Controls.Add(newItem);
+            item.deleteEvent += new EventHandler(DeleteBillItemEvent);
+            List<string> ids = database.GetAllProductIDs();
+            item.AddProductIDsItem(ids);
+            item.deleteEvent += new EventHandler(DeleteBillItemEvent);
+            AddEventToItem(item);
+            panelBillDetails.Controls.Add(item);
         }
 
         private void DeleteBillItemEvent(object sender, EventArgs e)
         {
             panelBillDetails.Controls.Remove((ExportBillItem)sender);
+        }
+
+        private void UpdateBill_DeleteItem(object sender, EventArgs e)
+        {
+            ExportBillItem item = sender as ExportBillItem;
+            deletedItems.Add(item);
+            panelBillDetails.Controls.Remove(item);
         }
 
         private void ButtonModifyBill_Click(object sender, EventArgs e)
@@ -142,6 +208,7 @@ namespace DaiLyCaPhe.Forms
         #endregion
 
         #region Other Events
+
         private void ExportBillForm_Load(object sender, EventArgs e)
         {
             this.phieuXuatHangTableAdapter.Fill(this.daiLyCaPheDataSet.PhieuXuatHang);
@@ -151,6 +218,7 @@ namespace DaiLyCaPhe.Forms
         {
             ChangeState(!editable);
             ClearFilterData();
+            panelBillDetails.Controls.Clear();
             if(e.RowIndex < 0)
                 return;
 
@@ -179,8 +247,6 @@ namespace DaiLyCaPhe.Forms
                 long amount = long.Parse(row["SoLuong"].ToString());
                 long price = long.Parse(row["DonGia"].ToString());
 
-                MessageBox.Show(productID);
-
                 ExportBillItem item = new ExportBillItem
                 {
                     Dock = DockStyle.Top,
@@ -188,12 +254,14 @@ namespace DaiLyCaPhe.Forms
                     ProductID = productID,
                     ProductName = productName,
                     ProductType = productType,
-                    ExpireDate = expireDate,
                     Weight = weight,
                     Amount = amount,
                     Price = price
                 };
-                item.deleteEvent += new EventHandler(DeleteBillItemEvent);
+                List<string> ids = database.GetAllProductIDs();
+                item.AddProductIDsItem(ids);
+                item.deleteEvent += new EventHandler(UpdateBill_DeleteItem);
+                AddEventToItem(item);
                 panelBillDetails.Controls.Add(item);
             }
         }
@@ -202,13 +270,14 @@ namespace DaiLyCaPhe.Forms
 
         private void UpdateBill()
         {
-
-        }
-
-        private void SaveBill()
-        {
             string billID = textBoxBillID.Text;
             string exportPlace = textBoxExportPlace.Text;
+
+            if(exportPlace == null || exportPlace == "")
+            {
+                MessageBox.Show("Nơi xuất không được rỗng", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
 
             DateTime exportDate;
             string exportDateStr = dateEditExportDate.Text;
@@ -217,30 +286,117 @@ namespace DaiLyCaPhe.Forms
             else
                 exportDate = DateTime.ParseExact(exportDateStr, DEFAULT_DATE_FORMAT, null);
 
+            database.UpdateRecordPhieuXuatHang(billID, exportPlace, exportDate);
+            
             foreach(Control item in panelBillDetails.Controls)
             {
                 ExportBillItem billItem = item as ExportBillItem;
 
+                decimal amount = billItem.Amount;
                 string productID = billItem.ProductID;
-                string productName = billItem.ProductName;
-                string productType = billItem.ProductType;
-                string expireDate = billItem.ExpireDate;
-                string weight = billItem.Weight;
-                
-                 
+                long price = billItem.Price;
 
+                if(amount == 0 || productID == "" || productID == null || price == 0)
+                {
+                    MessageBox.Show("Sản phẩm có trường thông tin rỗng. Bỏ qua sản phẩm", "Thông báo", MessageBoxButtons.OK);
+                    continue;
+                }
+
+                int rowAffected = database.UpdateRecordChiTietPhieuXuat(billID, productID, (int)amount, price);
+
+                if(rowAffected == 0)
+                    chiTietPhieuXuatTableAdapter.Insert(billID, productID, (int)amount, price);
+            }
+
+            foreach(ExportBillItem item in deletedItems)
+            {
+                database.DeleteRecordFromChiTietPhieuXuat(billID, item.ProductID);
+            }
+        }
+
+        private void SaveBill()
+        {
+            string billID = GenerateBillID();
+            string exportPlace = textBoxExportPlace.Text;
+
+            if(exportPlace == null || exportPlace == "")
+            {
+                MessageBox.Show("Nơi xuất không được rỗng", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
+
+            DateTime exportDate;
+            string exportDateStr = dateEditExportDate.Text;
+            if (exportDateStr == null || exportDateStr == "")
+                exportDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
+            else
+                exportDate = DateTime.ParseExact(exportDateStr, DEFAULT_DATE_FORMAT, null);
+
+            phieuXuatHangTableAdapter.Insert(billID, exportPlace, exportDate, 0);
+
+            foreach(Control item in panelBillDetails.Controls)
+            {
+                ExportBillItem billItem = item as ExportBillItem;
+
+                decimal amount = billItem.Amount;
+                string productID = billItem.ProductID;
+                long price = billItem.Price;
+
+                if(amount == 0 || productID == "" || productID == null || price == 0)
+                {
+                    MessageBox.Show("Sản phẩm có trường thông tin rỗng. Bỏ qua sản phẩm", "Thông báo", MessageBoxButtons.OK);
+                    continue;
+                }
+
+                chiTietPhieuXuatTableAdapter.Insert(billID, productID, (int)amount, price);
             }
         }
 
         private void ButtonSaveBill_Click(object sender, EventArgs e)
         {
-            string billID = database.SearchForExportBillID(textBoxBillID.Text);
-            if (billID == "")
+            string billID = textBoxBillID.Text;
+            if (billID == "" || billID == null)
                 SaveBill();
             else
                 UpdateBill();
             ExportBillForm_Load(sender, e);
             ChangeState(!editable);
+            ClearCurrentData();
+        }
+
+        private void buttonDeleteBill_Click(object sender, EventArgs e)
+        {
+            string billID = textBoxBillID.Text;
+            DialogResult result = MessageBox.Show(string.Format("Phiếu xuất hàng {0} sẽ bị xóa", textBoxBillID.Text), "Thông báo", MessageBoxButtons.OKCancel);
+
+            if (result == DialogResult.Cancel)
+                return;
+
+            foreach (Control item in panelBillDetails.Controls)
+            {
+                ExportBillItem billItem = item as ExportBillItem;
+                string productID = billItem.ProductID;
+                try
+                {
+                    database.DeleteRecordFromChiTietPhieuXuat(billID, productID);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            } 
+
+            try
+            {
+                database.DeleteRecordFromPhieuXuatHang(billID);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            ChangeState(!editable);
+            ExportBillForm_Load(sender, e);
             ClearCurrentData();
         }
     }

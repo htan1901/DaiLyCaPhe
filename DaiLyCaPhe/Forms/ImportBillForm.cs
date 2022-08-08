@@ -87,7 +87,7 @@ namespace DaiLyCaPhe.Forms
             return prefix.ToUpper();
         }
        
-        private void DeleteItemFromDBEvent(object sender, EventArgs e)
+        private void UpdateBill_DeleteItem(object sender, EventArgs e)
         {
             deletedItems.Add((ImportBillItem)sender);
             panelBillItem.Controls.Remove((Control)sender);
@@ -136,12 +136,17 @@ namespace DaiLyCaPhe.Forms
             DialogResult dialogResult = MessageBox.Show(string.Format("Hóa đơn {0} sẽ bị xóa", billID), "Thông báo", MessageBoxButtons.OKCancel);
 
             if (dialogResult == DialogResult.Cancel)
-            {
-                MessageBox.Show("Cancel");
                 return;
-            }
+            foreach (Control item in panelBillItem.Controls)
+            {
+                ImportBillItem billItem = item as ImportBillItem;
+                string beanName = billItem.BeanName;
+                string origin = billItem.Origin;
 
-            database.DeleteRecordFromChiTietPhieuNhap(billID);
+                string beanID = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
+
+                database.DeleteRecordFromChiTietPhieuNhap(billID, categoryID, beanID);
+            }
             database.DeleteRecordFromPhieuNhapHang(billID);
 
             ImportBillForm_Load(sender, e);
@@ -285,7 +290,7 @@ namespace DaiLyCaPhe.Forms
                     ComboBoxBeanOriginEnabled = false,
                     Enabled = false,
                 };
-                item.deleteEvent += new EventHandler(DeleteItemFromDBEvent);
+                item.deleteEvent += new EventHandler(UpdateBill_DeleteItem);
                 panelBillItem.Controls.Add(item);
             }
 
@@ -316,8 +321,8 @@ namespace DaiLyCaPhe.Forms
 
                 string beanTypeId = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
 
-                int loHangRowsAffected = database.UpdateTableLoHang(categoryID, beanTypeId, productionDate, expireDate);
-                int chiTietPhieuNhapRowsAffected = database.UpdateTableChiTietPhieuNhap(billID, categoryID, beanTypeId, amount, price);
+                int loHangRowsAffected = database.UpdateRecordLoHang(categoryID, beanTypeId, productionDate, expireDate);
+                int chiTietPhieuNhapRowsAffected = database.UpdateRecordChiTietPhieuNhap(billID, categoryID, beanTypeId, amount, price);
 
                 if (loHangRowsAffected == 0 && chiTietPhieuNhapRowsAffected == 0)
                 {

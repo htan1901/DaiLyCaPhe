@@ -194,7 +194,19 @@ namespace DaiLyCaPhe.Forms
                 }
 
                 sanPhamTableAdapter.Insert(productID, productName, productType, weight, expireDate, (int)amount);
-                phieuCheBienTableAdapter.Insert(paperID, categoryID, beanID, processMethodID, packingMethodID, makerID, productID, isGrind, processDate, (int)amount);
+                do
+                {
+                    try
+                    {
+                        phieuCheBienTableAdapter.Insert(paperID, categoryID, beanID, processMethodID, packingMethodID, makerID, productID, isGrind, processDate, (int)amount);
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        paperID = GeneratePaperID();
+                        productID = GenerateProductID(beanID.Substring(0,3), processMethodID);
+                    }
+                } while (true);
             }
             catch (Exception e)
             {
