@@ -174,6 +174,15 @@ namespace DaiLyCaPhe.Forms
 
                 string productType = isGrind ? "Bột" : "Hạt";
                 float weight = database.GetPackingWeight(packingMethodID);
+
+                decimal actualAmountLeft = amount % (decimal)weight;
+                if(actualAmountLeft > 0)
+                {
+                    MessageBox.Show("Sản phẩm chế biến không thể đóng hết vào gói. Hãy thử cách đóng gói khác hoặc thay đổi số lượng", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
+                decimal actualAmount = amount / (decimal)weight;
+
                 DateTime expireDate;
                 if (expireDateStr == null || expireDateStr == "")
                     expireDate = DateTime.Now;
@@ -187,13 +196,15 @@ namespace DaiLyCaPhe.Forms
                     processDate = DateTime.ParseExact(processDateStr, DEFAULT_DATE_FORMAT, null);
 
                 int maximumAmount = database.GetLeftOverAmount(categoryID, beanID);
+
                 if (amount < 1 || amount > maximumAmount)
                 {
                     MessageBox.Show("Số lượng chế biến không hợp lệ", "Thông báo", MessageBoxButtons.OK);
                     return;
                 }
 
-                sanPhamTableAdapter.Insert(productID, productName, productType, weight, expireDate, (int)amount);
+
+                sanPhamTableAdapter.Insert(productID, productName, productType, weight, expireDate, (int)actualAmount);
                 do
                 {
                     try
@@ -280,6 +291,9 @@ namespace DaiLyCaPhe.Forms
         private void ProcessBillForm_Load(object sender, EventArgs e)
         {
             this.phieuCheBienADVTableAdapter.Fill(this.daiLyCaPheDataSet.PhieuCheBienADV);
+
+            comboBoxCategoryID.Items.Clear();
+            comboBoxProcessMakerID.Items.Clear();
 
             List<string> listCategoryID = database.GetAllCategoryID();
             foreach(string item in listCategoryID)
@@ -393,6 +407,7 @@ namespace DaiLyCaPhe.Forms
             string beanName = comboBoxBeanName.Text;
             string origin = comboBoxBeanOrigin.Text;
             dateEditBeanExpireDate.Text = database.GetExpireDate(categoryID, beanName, origin).Substring(0,10);
+            dateEditBeanExpireDate.Enabled = false;
         }
     }
 }

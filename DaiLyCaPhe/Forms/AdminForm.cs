@@ -150,6 +150,13 @@ namespace DaiLyCaPhe.Forms
         private void buttonDeleteAccount_Click(object sender, EventArgs e)
         {
             string username = textBoxUsername.Text.Trim();
+            
+            if(username == "admin")
+            {
+                MessageBox.Show("Không thể xóa tài khoản admin gốc");
+                return;
+            }
+
             DialogResult result = MessageBox.Show(string.Format("Tài khoản {0} sẽ bị xóa", username), "Thông báo", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.No)

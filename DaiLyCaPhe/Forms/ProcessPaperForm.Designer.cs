@@ -37,10 +37,14 @@
             this.textBoxProductName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxCategoryID = new System.Windows.Forms.ComboBox();
+            this.loHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
             this.checkBoxIsGrind = new DevExpress.XtraEditors.CheckEdit();
             this.labelBeanID = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxPackingMethod = new System.Windows.Forms.ComboBox();
+            this.cachDongGoiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxProcessMethod = new System.Windows.Forms.ComboBox();
+            this.phuongPhapCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericProcessAmount = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonAddPaper = new DevExpress.XtraEditors.SimpleButton();
@@ -77,20 +81,6 @@
             this.panelDataSection = new System.Windows.Forms.Panel();
             this.panelDataImportBill = new System.Windows.Forms.Panel();
             this.dataGridViewProcessPaper = new System.Windows.Forms.DataGridView();
-            this.labelExportBillTitle = new System.Windows.Forms.Label();
-            this.phieuCheBienADVBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
-            this.loHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cachDongGoiBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.phuongPhapCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.phieuCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.phieuCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienTableAdapter();
-            this.phieuCheBienADVTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienADVTableAdapter();
-            this.loHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter();
-            this.phuongPhapCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhuongPhapCheBienTableAdapter();
-            this.cachDongGoiTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CachDongGoiTableAdapter();
-            this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
             this.maPhieuCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soLoHangDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maLoaiHatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,10 +97,25 @@
             this.xayDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ngayCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soLuongCheBienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phieuCheBienADVBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelExportBillTitle = new System.Windows.Forms.Label();
+            this.phieuCheBienBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.phieuCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienTableAdapter();
+            this.phieuCheBienADVTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuCheBienADVTableAdapter();
+            this.loHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHangTableAdapter();
+            this.phuongPhapCheBienTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhuongPhapCheBienTableAdapter();
+            this.cachDongGoiTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CachDongGoiTableAdapter();
+            this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
+            this.labelKg = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddProcessPaper)).BeginInit();
             this.groupAddProcessPaper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkBoxIsGrind.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericProcessAmount)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessPaperID.Properties)).BeginInit();
@@ -131,10 +136,6 @@
             this.panelDataImportBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcessPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienADVBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -143,6 +144,7 @@
             // 
             this.groupAddProcessPaper.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupAddProcessPaper.AppearanceCaption.Options.UseFont = true;
+            this.groupAddProcessPaper.Controls.Add(this.labelKg);
             this.groupAddProcessPaper.Controls.Add(this.comboBoxProcessMakerID);
             this.groupAddProcessPaper.Controls.Add(this.comboBoxBeanOrigin);
             this.groupAddProcessPaper.Controls.Add(this.comboBoxBeanName);
@@ -245,6 +247,16 @@
             this.comboBoxCategoryID.TabIndex = 21;
             this.comboBoxCategoryID.SelectedValueChanged += new System.EventHandler(this.comboBoxCategoryID_SelectedValueChanged);
             // 
+            // loHangBindingSource
+            // 
+            this.loHangBindingSource.DataMember = "LoHang";
+            this.loHangBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // daiLyCaPheDataSet
+            // 
+            this.daiLyCaPheDataSet.DataSetName = "DaiLyCaPheDataSet";
+            this.daiLyCaPheDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // checkBoxIsGrind
             // 
             this.checkBoxIsGrind.Enabled = false;
@@ -279,6 +291,11 @@
             this.comboBoxPackingMethod.Size = new System.Drawing.Size(240, 29);
             this.comboBoxPackingMethod.TabIndex = 17;
             // 
+            // cachDongGoiBindingSource
+            // 
+            this.cachDongGoiBindingSource.DataMember = "CachDongGoi";
+            this.cachDongGoiBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
             // comboBoxProcessMethod
             // 
             this.comboBoxProcessMethod.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.phuongPhapCheBienBindingSource, "MaPPCheBien", true));
@@ -291,13 +308,18 @@
             this.comboBoxProcessMethod.Size = new System.Drawing.Size(240, 29);
             this.comboBoxProcessMethod.TabIndex = 16;
             // 
+            // phuongPhapCheBienBindingSource
+            // 
+            this.phuongPhapCheBienBindingSource.DataMember = "PhuongPhapCheBien";
+            this.phuongPhapCheBienBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
             // numericProcessAmount
             // 
             this.numericProcessAmount.Enabled = false;
             this.numericProcessAmount.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericProcessAmount.Location = new System.Drawing.Point(1000, 75);
             this.numericProcessAmount.Name = "numericProcessAmount";
-            this.numericProcessAmount.Size = new System.Drawing.Size(240, 28);
+            this.numericProcessAmount.Size = new System.Drawing.Size(207, 28);
             this.numericProcessAmount.TabIndex = 15;
             // 
             // tableLayoutPanel1
@@ -770,76 +792,6 @@
             this.dataGridViewProcessPaper.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProcessPaper_CellContentClick);
             this.dataGridViewProcessPaper.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProcessPaper_CellContentClick);
             // 
-            // labelExportBillTitle
-            // 
-            this.labelExportBillTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelExportBillTitle.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelExportBillTitle.Location = new System.Drawing.Point(0, 0);
-            this.labelExportBillTitle.Name = "labelExportBillTitle";
-            this.labelExportBillTitle.Size = new System.Drawing.Size(1313, 31);
-            this.labelExportBillTitle.TabIndex = 1;
-            this.labelExportBillTitle.Text = "DANH SÁCH PHIẾU CHẾ BIẾN";
-            this.labelExportBillTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // phieuCheBienADVBindingSource
-            // 
-            this.phieuCheBienADVBindingSource.DataMember = "PhieuCheBienADV";
-            this.phieuCheBienADVBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // daiLyCaPheDataSet
-            // 
-            this.daiLyCaPheDataSet.DataSetName = "DaiLyCaPheDataSet";
-            this.daiLyCaPheDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // loHangBindingSource
-            // 
-            this.loHangBindingSource.DataMember = "LoHang";
-            this.loHangBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // cachDongGoiBindingSource
-            // 
-            this.cachDongGoiBindingSource.DataMember = "CachDongGoi";
-            this.cachDongGoiBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // phuongPhapCheBienBindingSource
-            // 
-            this.phuongPhapCheBienBindingSource.DataMember = "PhuongPhapCheBien";
-            this.phuongPhapCheBienBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // phieuCheBienBindingSource
-            // 
-            this.phieuCheBienBindingSource.DataMember = "PhieuCheBien";
-            this.phieuCheBienBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // phieuCheBienTableAdapter
-            // 
-            this.phieuCheBienTableAdapter.ClearBeforeFill = true;
-            // 
-            // phieuCheBienADVTableAdapter
-            // 
-            this.phieuCheBienADVTableAdapter.ClearBeforeFill = true;
-            // 
-            // loHangTableAdapter
-            // 
-            this.loHangTableAdapter.ClearBeforeFill = true;
-            // 
-            // phuongPhapCheBienTableAdapter
-            // 
-            this.phuongPhapCheBienTableAdapter.ClearBeforeFill = true;
-            // 
-            // cachDongGoiTableAdapter
-            // 
-            this.cachDongGoiTableAdapter.ClearBeforeFill = true;
-            // 
-            // sanPhamBindingSource
-            // 
-            this.sanPhamBindingSource.DataMember = "SanPham";
-            this.sanPhamBindingSource.DataSource = this.daiLyCaPheDataSet;
-            // 
-            // sanPhamTableAdapter
-            // 
-            this.sanPhamTableAdapter.ClearBeforeFill = true;
-            // 
             // maPhieuCheBienDataGridViewTextBoxColumn
             // 
             this.maPhieuCheBienDataGridViewTextBoxColumn.DataPropertyName = "MaPhieuCheBien";
@@ -970,6 +922,66 @@
             this.soLuongCheBienDataGridViewTextBoxColumn.Name = "soLuongCheBienDataGridViewTextBoxColumn";
             this.soLuongCheBienDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // phieuCheBienADVBindingSource
+            // 
+            this.phieuCheBienADVBindingSource.DataMember = "PhieuCheBienADV";
+            this.phieuCheBienADVBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // labelExportBillTitle
+            // 
+            this.labelExportBillTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelExportBillTitle.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelExportBillTitle.Location = new System.Drawing.Point(0, 0);
+            this.labelExportBillTitle.Name = "labelExportBillTitle";
+            this.labelExportBillTitle.Size = new System.Drawing.Size(1313, 31);
+            this.labelExportBillTitle.TabIndex = 1;
+            this.labelExportBillTitle.Text = "DANH SÁCH PHIẾU CHẾ BIẾN";
+            this.labelExportBillTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // phieuCheBienBindingSource
+            // 
+            this.phieuCheBienBindingSource.DataMember = "PhieuCheBien";
+            this.phieuCheBienBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // phieuCheBienTableAdapter
+            // 
+            this.phieuCheBienTableAdapter.ClearBeforeFill = true;
+            // 
+            // phieuCheBienADVTableAdapter
+            // 
+            this.phieuCheBienADVTableAdapter.ClearBeforeFill = true;
+            // 
+            // loHangTableAdapter
+            // 
+            this.loHangTableAdapter.ClearBeforeFill = true;
+            // 
+            // phuongPhapCheBienTableAdapter
+            // 
+            this.phuongPhapCheBienTableAdapter.ClearBeforeFill = true;
+            // 
+            // cachDongGoiTableAdapter
+            // 
+            this.cachDongGoiTableAdapter.ClearBeforeFill = true;
+            // 
+            // sanPhamBindingSource
+            // 
+            this.sanPhamBindingSource.DataMember = "SanPham";
+            this.sanPhamBindingSource.DataSource = this.daiLyCaPheDataSet;
+            // 
+            // sanPhamTableAdapter
+            // 
+            this.sanPhamTableAdapter.ClearBeforeFill = true;
+            // 
+            // labelKg
+            // 
+            this.labelKg.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKg.Appearance.Options.UseFont = true;
+            this.labelKg.Location = new System.Drawing.Point(1213, 78);
+            this.labelKg.Name = "labelKg";
+            this.labelKg.Size = new System.Drawing.Size(17, 21);
+            this.labelKg.TabIndex = 28;
+            this.labelKg.Text = "kg";
+            // 
             // ProcessPaperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -986,7 +998,11 @@
             this.groupAddProcessPaper.ResumeLayout(false);
             this.groupAddProcessPaper.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkBoxIsGrind.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericProcessAmount)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProcessPaperID.Properties)).EndInit();
@@ -1009,10 +1025,6 @@
             this.panelDataImportBill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcessPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienADVBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.daiLyCaPheDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loHangBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cachDongGoiBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phuongPhapCheBienBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phieuCheBienBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1098,5 +1110,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn xayDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngayCheBienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn soLuongCheBienDataGridViewTextBoxColumn;
+        private DevExpress.XtraEditors.LabelControl labelKg;
     }
 }
