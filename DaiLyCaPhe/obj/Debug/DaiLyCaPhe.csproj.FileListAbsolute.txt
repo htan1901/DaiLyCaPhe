@@ -79,3 +79,4 @@ C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\bin\Debu
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ImportBillForm.resources
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ProcessPaperForm.resources
 C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.AdminForm.resources
+C:\Users\htan1\OneDrive\Tan\Coding\Project\DotNet\DaiLyCaPhe\DaiLyCaPhe\obj\Debug\DaiLyCaPhe.Forms.ProductManagementForm.resources

@@ -41,6 +41,8 @@ namespace DaiLyCaPhe
             tabNavigationPageProcessPaper.PageVisible = false;
             tabNavigationPageAdmin.Enabled = false;
             tabNavigationPageAdmin.PageVisible = false;
+            tabNavigationPageProductManagement.Enabled = false;
+            tabNavigationPageProductManagement.PageVisible = false;
         }
 
         private void EnableFeatures(int role)
@@ -59,10 +61,13 @@ namespace DaiLyCaPhe
             tabNavigationPageProcessPaper.Enabled = true;
             tabNavigationPageProcessPaper.PageVisible = true;
 
+            tabNavigationPageProductManagement.Enabled = true;
+            tabNavigationPageProductManagement.PageVisible = true;
+
             tabNavigationPageLogin.Enabled = false;
             tabNavigationPageLogin.PageVisible = false;
 
-            tabPanelMain.SelectedPage = tabNavigationPageProcessPaper;
+            tabPanelMain.SelectedPage = tabNavigationPageProductManagement;
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -98,7 +103,14 @@ namespace DaiLyCaPhe
             };
             tabNavigationPageAdmin.Controls.Add(adminForm);
             adminForm.Show();
-            
+
+            ProductManagementForm productManagementForm = new ProductManagementForm
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill,
+            };
+            tabNavigationPageProductManagement.Controls.Add(productManagementForm);
+            productManagementForm.Show();
             
             DisableFeatures();
         }
@@ -125,6 +137,13 @@ namespace DaiLyCaPhe
 
         private void logOut_Click(object sender, EventArgs e)
         {
+            if(tabPanelMain.SelectedPage == tabNavigationPageLogin)
+                return;
+
+            DialogResult result = MessageBox.Show("Bạn muốn đăng xuất?", "Thông báo", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.No)
+                return;
             LogOut();
         }
 
@@ -138,6 +157,16 @@ namespace DaiLyCaPhe
         private void HidePassword(object sender, EventArgs e)
         {
             textBoxPassword.UseSystemPasswordChar = !checkBoxHiddenPassword.Checked;
+        }
+
+        private void TabIndexChanged(object sender, EventArgs e)
+        {
+            MainScreen_Load(sender, e);
+        }
+
+        private void labelControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

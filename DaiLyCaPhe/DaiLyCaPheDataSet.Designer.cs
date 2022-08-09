@@ -13965,12 +13965,23 @@ SELECT MaSanPham, TenSanPham, LoaiSanPham, TrongLuong, HanSuDung, SoLuongTon FRO
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MaSanPham, TenSanPham, LoaiSanPham, TrongLuong, HanSuDung, SoLuongTon FROM" +
                 " dbo.SanPham";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT MaSanPham, TenSanPham, LoaiSanPham, TrongLuong, HanSuDung, SoLuongTon \r\nFR" +
+                "OM dbo.SanPham\r\nWHERE TenSanPham LIKE \'%\' + @tenSanPham + \'%\'\r\nAND TrongLuong >=" +
+                " @fromWeight AND TrongLuong <= @toWeight\r\nAND LoaiSanPham LIKE \'%\' + @loaiSanPha" +
+                "m + \'%\'";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tenSanPham", global::System.Data.SqlDbType.NVarChar, 200, global::System.Data.ParameterDirection.Input, 0, 0, "TenSanPham", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fromWeight", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TrongLuong", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@toWeight", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TrongLuong", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@loaiSanPham", global::System.Data.SqlDbType.NVarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "LoaiSanPham", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13995,6 +14006,33 @@ SELECT MaSanPham, TenSanPham, LoaiSanPham, TrongLuong, HanSuDung, SoLuongTon FRO
             DaiLyCaPheDataSet.SanPhamDataTable dataTable = new DaiLyCaPheDataSet.SanPhamDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByNameAndWeightAndType(DaiLyCaPheDataSet.SanPhamDataTable dataTable, string tenSanPham, double fromWeight, double toWeight, string loaiSanPham) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((tenSanPham == null)) {
+                throw new global::System.ArgumentNullException("tenSanPham");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(tenSanPham));
+            }
+            this.Adapter.SelectCommand.Parameters[1].Value = ((double)(fromWeight));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((double)(toWeight));
+            if ((loaiSanPham == null)) {
+                throw new global::System.ArgumentNullException("loaiSanPham");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(loaiSanPham));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15530,13 +15568,26 @@ SELECT MaThongTin, TenDangNhap, MatKhau, VaiTro FROM ThongTinDangNhap WHERE (MaT
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT L.SoLoHang, LH.TenLoaiHat, LH.XuatXu, L.SoLuongTon, L.NgaySanXuat, L.HanSu" +
                 "Dung\r\nFROM     LoHang AS L INNER JOIN\r\n                  LoaiHatCaPhe AS LH ON L" +
                 ".MaLoaiHat = LH.MaLoaiHat";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT L.SoLoHang, LH.TenLoaiHat, LH.XuatXu, L.SoLuongTon, L.NgaySanXuat, L.HanSuDung
+FROM     LoHang AS L INNER JOIN
+                  LoaiHatCaPhe AS LH ON L.MaLoaiHat = LH.MaLoaiHat
+WHERE L.SoLoHang LIKE '%' + @categoryID + '%'
+AND LH.TenLoaiHat LIKE '%' + @beanName + '%'
+AND LH.XuatXu LIKE '%' + @origin + '%'
+";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@categoryID", global::System.Data.SqlDbType.Char, 8, global::System.Data.ParameterDirection.Input, 0, 0, "SoLoHang", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beanName", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "TenLoaiHat", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@origin", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "XuatXu", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15558,6 +15609,66 @@ SELECT MaThongTin, TenDangNhap, MatKhau, VaiTro FROM ThongTinDangNhap WHERE (MaT
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual DaiLyCaPheDataSet.LoHang_SanPhamDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            DaiLyCaPheDataSet.LoHang_SanPhamDataTable dataTable = new DaiLyCaPheDataSet.LoHang_SanPhamDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByCategoryAndNameAndOrigin(DaiLyCaPheDataSet.LoHang_SanPhamDataTable dataTable, string categoryID, string beanName, string origin) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((categoryID == null)) {
+                throw new global::System.ArgumentNullException("categoryID");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(categoryID));
+            }
+            if ((beanName == null)) {
+                throw new global::System.ArgumentNullException("beanName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(beanName));
+            }
+            if ((origin == null)) {
+                throw new global::System.ArgumentNullException("origin");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(origin));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual DaiLyCaPheDataSet.LoHang_SanPhamDataTable GetDataBy(string categoryID, string beanName, string origin) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((categoryID == null)) {
+                throw new global::System.ArgumentNullException("categoryID");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(categoryID));
+            }
+            if ((beanName == null)) {
+                throw new global::System.ArgumentNullException("beanName");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(beanName));
+            }
+            if ((origin == null)) {
+                throw new global::System.ArgumentNullException("origin");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(origin));
+            }
             DaiLyCaPheDataSet.LoHang_SanPhamDataTable dataTable = new DaiLyCaPheDataSet.LoHang_SanPhamDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
