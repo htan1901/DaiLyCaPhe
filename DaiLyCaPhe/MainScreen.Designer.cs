@@ -40,22 +40,22 @@ namespace DaiLyCaPhe
             this.checkBoxHiddenPassword = new System.Windows.Forms.CheckBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanelDivideSection = new System.Windows.Forms.TableLayoutPanel();
+            this.labelPassword = new DevExpress.XtraEditors.LabelControl();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.labelLogin = new DevExpress.XtraEditors.LabelControl();
             this.labelUsername = new DevExpress.XtraEditors.LabelControl();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.labelPassword = new DevExpress.XtraEditors.LabelControl();
+            this.labelLogin = new DevExpress.XtraEditors.LabelControl();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.labelAgencyName = new DevExpress.XtraEditors.LabelControl();
             this.tabNavigationPageProductManagement = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.labelAgencyName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tabPanelMain)).BeginInit();
             this.tabPanelMain.SuspendLayout();
             this.tabNavigationPageLogin.SuspendLayout();
             this.tableLayoutPanelDivideSection.SuspendLayout();
-            this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPanelMain
@@ -168,6 +168,21 @@ namespace DaiLyCaPhe
             this.tableLayoutPanelDivideSection.Size = new System.Drawing.Size(1313, 505);
             this.tableLayoutPanelDivideSection.TabIndex = 1;
             // 
+            // labelPassword
+            // 
+            this.labelPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelPassword.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPassword.Appearance.Options.UseFont = true;
+            this.labelPassword.Appearance.Options.UseTextOptions = true;
+            this.labelPassword.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelPassword.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelPassword.Location = new System.Drawing.Point(19, 447);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.labelPassword.Size = new System.Drawing.Size(533, 28);
+            this.labelPassword.TabIndex = 2;
+            this.labelPassword.Text = "Mật khẩu:";
+            // 
             // textBoxPassword
             // 
             this.textBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -177,18 +192,6 @@ namespace DaiLyCaPhe
             this.textBoxPassword.Size = new System.Drawing.Size(500, 35);
             this.textBoxPassword.TabIndex = 4;
             this.textBoxPassword.UseSystemPasswordChar = true;
-            // 
-            // labelLogin
-            // 
-            this.labelLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLogin.Appearance.Options.UseFont = true;
-            this.tableLayoutPanelDivideSection.SetColumnSpan(this.labelLogin, 2);
-            this.labelLogin.Location = new System.Drawing.Point(554, 224);
-            this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(204, 40);
-            this.labelLogin.TabIndex = 0;
-            this.labelLogin.Text = "ĐĂNG NHẬP";
             // 
             // labelUsername
             // 
@@ -214,46 +217,17 @@ namespace DaiLyCaPhe
             this.textBoxUsername.Size = new System.Drawing.Size(500, 35);
             this.textBoxUsername.TabIndex = 3;
             // 
-            // labelPassword
+            // labelLogin
             // 
-            this.labelPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelPassword.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPassword.Appearance.Options.UseFont = true;
-            this.labelPassword.Appearance.Options.UseTextOptions = true;
-            this.labelPassword.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelPassword.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelPassword.Location = new System.Drawing.Point(19, 447);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.labelPassword.Size = new System.Drawing.Size(533, 28);
-            this.labelPassword.TabIndex = 2;
-            this.labelPassword.Text = "Mật khẩu:";
-            // 
-            // tabNavigationPageProductManagement
-            // 
-            this.tabNavigationPageProductManagement.Caption = "Quản lý sản phẩm";
-            this.tabNavigationPageProductManagement.Name = "tabNavigationPageProductManagement";
-            this.tabNavigationPageProductManagement.Size = new System.Drawing.Size(1313, 847);
-            // 
-            // mainMenuStrip
-            // 
-            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logOutToolStripMenuItem});
-            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.mainMenuStrip.Size = new System.Drawing.Size(1313, 28);
-            this.mainMenuStrip.TabIndex = 1;
-            this.mainMenuStrip.Text = "menuStrip1";
-            // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("logOutToolStripMenuItem.Image")));
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(111, 24);
-            this.logOutToolStripMenuItem.Text = "Đăng xuất";
-            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOut_Click);
+            this.labelLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLogin.Appearance.Options.UseFont = true;
+            this.tableLayoutPanelDivideSection.SetColumnSpan(this.labelLogin, 2);
+            this.labelLogin.Location = new System.Drawing.Point(554, 224);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(204, 40);
+            this.labelLogin.TabIndex = 0;
+            this.labelLogin.Text = "ĐĂNG NHẬP";
             // 
             // pictureBox
             // 
@@ -278,6 +252,33 @@ namespace DaiLyCaPhe
             this.labelAgencyName.TabIndex = 6;
             this.labelAgencyName.Text = "Đại lý Cà phê HêHê";
             // 
+            // tabNavigationPageProductManagement
+            // 
+            this.tabNavigationPageProductManagement.Caption = "Danh sách sản phẩm";
+            this.tabNavigationPageProductManagement.Name = "tabNavigationPageProductManagement";
+            this.tabNavigationPageProductManagement.Size = new System.Drawing.Size(1313, 806);
+            // 
+            // mainMenuStrip
+            // 
+            this.mainMenuStrip.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logOutToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.mainMenuStrip.Size = new System.Drawing.Size(1313, 28);
+            this.mainMenuStrip.TabIndex = 1;
+            this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("logOutToolStripMenuItem.Image")));
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(111, 24);
+            this.logOutToolStripMenuItem.Text = "Đăng xuất";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOut_Click);
+            // 
             // MainScreen
             // 
             this.AcceptButton = this.buttonLogin;
@@ -300,9 +301,9 @@ namespace DaiLyCaPhe
             this.tabNavigationPageLogin.PerformLayout();
             this.tableLayoutPanelDivideSection.ResumeLayout(false);
             this.tableLayoutPanelDivideSection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

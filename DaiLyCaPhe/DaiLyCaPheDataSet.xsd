@@ -1187,6 +1187,29 @@ AND LH.XuatXu LIKE '%' + @origin + '%'
               </DbSource>
             </Sources>
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="LoaiHat_GiaBanTableAdapter" GeneratorDataComponentClassName="LoaiHat_GiaBanTableAdapter" Name="LoaiHat_GiaBan" UserDataComponentName="LoaiHat_GiaBanTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DaiLyCaPheConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select L.MaLoaiHat, L.TenLoaiHat, L.XuatXu, D.TuNgay, D.DenNgay, D.DonGia
+from LoaiHatCaPhe L, DonGia D
+where L.MaLoaiHat = D.MaLoaiHat</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="MaLoaiHat" DataSetColumn="MaLoaiHat" />
+              <Mapping SourceColumn="TenLoaiHat" DataSetColumn="TenLoaiHat" />
+              <Mapping SourceColumn="XuatXu" DataSetColumn="XuatXu" />
+              <Mapping SourceColumn="TuNgay" DataSetColumn="TuNgay" />
+              <Mapping SourceColumn="DenNgay" DataSetColumn="DenNgay" />
+              <Mapping SourceColumn="DonGia" DataSetColumn="DonGia" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1729,33 +1752,63 @@ AND LH.XuatXu LIKE '%' + @origin + '%'
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LoHang_SanPham" msprop:Generator_RowClassName="LoHang_SanPhamRow" msprop:Generator_RowEvHandlerName="LoHang_SanPhamRowChangeEventHandler" msprop:Generator_RowDeletedName="LoHang_SanPhamRowDeleted" msprop:Generator_RowDeletingName="LoHang_SanPhamRowDeleting" msprop:Generator_RowEvArgName="LoHang_SanPhamRowChangeEvent" msprop:Generator_TablePropName="LoHang_SanPham" msprop:Generator_RowChangedName="LoHang_SanPhamRowChanged" msprop:Generator_UserTableName="LoHang_SanPham" msprop:Generator_RowChangingName="LoHang_SanPhamRowChanging" msprop:Generator_TableClassName="LoHang_SanPhamDataTable" msprop:Generator_TableVarName="tableLoHang_SanPham">
+        <xs:element name="LoHang_SanPham" msprop:Generator_RowEvHandlerName="LoHang_SanPhamRowChangeEventHandler" msprop:Generator_RowDeletedName="LoHang_SanPhamRowDeleted" msprop:Generator_RowDeletingName="LoHang_SanPhamRowDeleting" msprop:Generator_RowEvArgName="LoHang_SanPhamRowChangeEvent" msprop:Generator_TablePropName="LoHang_SanPham" msprop:Generator_RowChangedName="LoHang_SanPhamRowChanged" msprop:Generator_UserTableName="LoHang_SanPham" msprop:Generator_RowChangingName="LoHang_SanPhamRowChanging" msprop:Generator_RowClassName="LoHang_SanPhamRow" msprop:Generator_TableClassName="LoHang_SanPhamDataTable" msprop:Generator_TableVarName="tableLoHang_SanPham">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SoLoHang" msprop:Generator_UserColumnName="SoLoHang" msprop:Generator_ColumnPropNameInTable="SoLoHangColumn" msprop:Generator_ColumnPropNameInRow="SoLoHang" msprop:Generator_ColumnVarNameInTable="columnSoLoHang">
+              <xs:element name="SoLoHang" msprop:Generator_ColumnPropNameInTable="SoLoHangColumn" msprop:Generator_ColumnPropNameInRow="SoLoHang" msprop:Generator_UserColumnName="SoLoHang" msprop:Generator_ColumnVarNameInTable="columnSoLoHang">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="8" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TenLoaiHat" msprop:Generator_UserColumnName="TenLoaiHat" msprop:Generator_ColumnPropNameInTable="TenLoaiHatColumn" msprop:Generator_ColumnPropNameInRow="TenLoaiHat" msprop:Generator_ColumnVarNameInTable="columnTenLoaiHat">
+              <xs:element name="TenLoaiHat" msprop:Generator_ColumnPropNameInTable="TenLoaiHatColumn" msprop:Generator_ColumnPropNameInRow="TenLoaiHat" msprop:Generator_UserColumnName="TenLoaiHat" msprop:Generator_ColumnVarNameInTable="columnTenLoaiHat">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="XuatXu" msprop:Generator_UserColumnName="XuatXu" msprop:Generator_ColumnPropNameInTable="XuatXuColumn" msprop:Generator_ColumnPropNameInRow="XuatXu" msprop:Generator_ColumnVarNameInTable="columnXuatXu">
+              <xs:element name="XuatXu" msprop:Generator_ColumnPropNameInTable="XuatXuColumn" msprop:Generator_ColumnPropNameInRow="XuatXu" msprop:Generator_UserColumnName="XuatXu" msprop:Generator_ColumnVarNameInTable="columnXuatXu">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SoLuongTon" msprop:Generator_UserColumnName="SoLuongTon" msprop:Generator_ColumnPropNameInTable="SoLuongTonColumn" msprop:Generator_ColumnPropNameInRow="SoLuongTon" msprop:Generator_ColumnVarNameInTable="columnSoLuongTon" type="xs:int" />
-              <xs:element name="NgaySanXuat" msprop:Generator_UserColumnName="NgaySanXuat" msprop:Generator_ColumnPropNameInTable="NgaySanXuatColumn" msprop:Generator_ColumnPropNameInRow="NgaySanXuat" msprop:Generator_ColumnVarNameInTable="columnNgaySanXuat" type="xs:dateTime" />
-              <xs:element name="HanSuDung" msprop:Generator_UserColumnName="HanSuDung" msprop:Generator_ColumnPropNameInTable="HanSuDungColumn" msprop:Generator_ColumnPropNameInRow="HanSuDung" msprop:Generator_ColumnVarNameInTable="columnHanSuDung" type="xs:dateTime" />
+              <xs:element name="SoLuongTon" msprop:Generator_ColumnPropNameInTable="SoLuongTonColumn" msprop:Generator_ColumnPropNameInRow="SoLuongTon" msprop:Generator_UserColumnName="SoLuongTon" msprop:Generator_ColumnVarNameInTable="columnSoLuongTon" type="xs:int" />
+              <xs:element name="NgaySanXuat" msprop:Generator_ColumnPropNameInTable="NgaySanXuatColumn" msprop:Generator_ColumnPropNameInRow="NgaySanXuat" msprop:Generator_UserColumnName="NgaySanXuat" msprop:Generator_ColumnVarNameInTable="columnNgaySanXuat" type="xs:dateTime" />
+              <xs:element name="HanSuDung" msprop:Generator_ColumnPropNameInTable="HanSuDungColumn" msprop:Generator_ColumnPropNameInRow="HanSuDung" msprop:Generator_UserColumnName="HanSuDung" msprop:Generator_ColumnVarNameInTable="columnHanSuDung" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LoaiHat_GiaBan" msprop:Generator_RowEvHandlerName="LoaiHat_GiaBanRowChangeEventHandler" msprop:Generator_RowDeletedName="LoaiHat_GiaBanRowDeleted" msprop:Generator_RowDeletingName="LoaiHat_GiaBanRowDeleting" msprop:Generator_RowEvArgName="LoaiHat_GiaBanRowChangeEvent" msprop:Generator_TablePropName="LoaiHat_GiaBan" msprop:Generator_RowChangedName="LoaiHat_GiaBanRowChanged" msprop:Generator_RowChangingName="LoaiHat_GiaBanRowChanging" msprop:Generator_TableClassName="LoaiHat_GiaBanDataTable" msprop:Generator_RowClassName="LoaiHat_GiaBanRow" msprop:Generator_TableVarName="tableLoaiHat_GiaBan" msprop:Generator_UserTableName="LoaiHat_GiaBan">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MaLoaiHat" msprop:Generator_ColumnPropNameInRow="MaLoaiHat" msprop:Generator_ColumnPropNameInTable="MaLoaiHatColumn" msprop:Generator_ColumnVarNameInTable="columnMaLoaiHat" msprop:Generator_UserColumnName="MaLoaiHat">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TenLoaiHat" msprop:Generator_ColumnPropNameInRow="TenLoaiHat" msprop:Generator_ColumnPropNameInTable="TenLoaiHatColumn" msprop:Generator_ColumnVarNameInTable="columnTenLoaiHat" msprop:Generator_UserColumnName="TenLoaiHat">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="XuatXu" msprop:Generator_ColumnPropNameInRow="XuatXu" msprop:Generator_ColumnPropNameInTable="XuatXuColumn" msprop:Generator_ColumnVarNameInTable="columnXuatXu" msprop:Generator_UserColumnName="XuatXu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TuNgay" msprop:Generator_ColumnPropNameInRow="TuNgay" msprop:Generator_ColumnPropNameInTable="TuNgayColumn" msprop:Generator_ColumnVarNameInTable="columnTuNgay" msprop:Generator_UserColumnName="TuNgay" type="xs:dateTime" />
+              <xs:element name="DenNgay" msprop:Generator_ColumnPropNameInRow="DenNgay" msprop:Generator_ColumnPropNameInTable="DenNgayColumn" msprop:Generator_ColumnVarNameInTable="columnDenNgay" msprop:Generator_UserColumnName="DenNgay" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DonGia" msprop:Generator_ColumnPropNameInRow="DonGia" msprop:Generator_ColumnPropNameInTable="DonGiaColumn" msprop:Generator_ColumnVarNameInTable="columnDonGia" msprop:Generator_UserColumnName="DonGia" type="xs:long" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1837,22 +1890,23 @@ AND LH.XuatXu LIKE '%' + @origin + '%'
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__ChiTietPh__MaPhi__45F365D3" msdata:parent="PhieuNhapHang" msdata:child="ChiTietPhieuNhap" msdata:parentkey="MaPhieuNhap" msdata:childkey="MaPhieuNhap" msprop:Generator_UserParentTable="PhieuNhapHang" msprop:Generator_UserChildTable="ChiTietPhieuNhap" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__45F365D3" msprop:Generator_ChildPropName="GetChiTietPhieuNhapRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__45F365D3" msprop:Generator_ParentPropName="PhieuNhapHangRow" />
-      <msdata:Relationship name="FK__ChiTietPhieuNhap__46E78A0C" msdata:parent="LoHang" msdata:child="ChiTietPhieuNhap" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="ChiTietPhieuNhap" msprop:Generator_RelationVarName="relationFK__ChiTietPhieuNhap__46E78A0C" msprop:Generator_ChildPropName="GetChiTietPhieuNhapRows" msprop:Generator_UserRelationName="FK__ChiTietPhieuNhap__46E78A0C" msprop:Generator_ParentPropName="LoHangRowParent" />
-      <msdata:Relationship name="FK__ChiTietPh__MaPhi__4D94879B" msdata:parent="PhieuXuatHang" msdata:child="ChiTietPhieuXuat" msdata:parentkey="MaPhieuXuat" msdata:childkey="MaPhieuXuat" msprop:Generator_UserParentTable="PhieuXuatHang" msprop:Generator_UserChildTable="ChiTietPhieuXuat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__4D94879B" msprop:Generator_ChildPropName="GetChiTietPhieuXuatRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__4D94879B" msprop:Generator_ParentPropName="PhieuXuatHangRow" />
-      <msdata:Relationship name="FK__ChiTietPh__MaSan__4E88ABD4" msdata:parent="SanPham" msdata:child="ChiTietPhieuXuat" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="ChiTietPhieuXuat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaSan__4E88ABD4" msprop:Generator_ChildPropName="GetChiTietPhieuXuatRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaSan__4E88ABD4" msprop:Generator_ParentPropName="SanPhamRow" />
-      <msdata:Relationship name="FK__DonGia__MaLoaiHa__3E52440B" msdata:parent="LoaiHatCaPhe" msdata:child="DonGia" msdata:parentkey="MaLoaiHat" msdata:childkey="MaLoaiHat" msprop:Generator_UserParentTable="LoaiHatCaPhe" msprop:Generator_UserChildTable="DonGia" msprop:Generator_RelationVarName="relationFK__DonGia__MaLoaiHa__3E52440B" msprop:Generator_ChildPropName="GetDonGiaRows" msprop:Generator_UserRelationName="FK__DonGia__MaLoaiHa__3E52440B" msprop:Generator_ParentPropName="LoaiHatCaPheRow" />
-      <msdata:Relationship name="FK__LoHang__MaLoaiHa__2E1BDC42" msdata:parent="LoaiHatCaPhe" msdata:child="LoHang" msdata:parentkey="MaLoaiHat" msdata:childkey="MaLoaiHat" msprop:Generator_UserParentTable="LoaiHatCaPhe" msprop:Generator_UserChildTable="LoHang" msprop:Generator_RelationVarName="relationFK__LoHang__MaLoaiHa__2E1BDC42" msprop:Generator_ChildPropName="GetLoHangRows" msprop:Generator_ParentPropName="LoaiHatCaPheRow" msprop:Generator_UserRelationName="FK__LoHang__MaLoaiHa__2E1BDC42" />
-      <msdata:Relationship name="FK__PhieuCheB__MaCac__398D8EEE" msdata:parent="CachDongGoi" msdata:child="PhieuCheBien" msdata:parentkey="MaCachDongGoi" msdata:childkey="MaCachDongGoi" msprop:Generator_UserParentTable="CachDongGoi" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaCac__398D8EEE" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="CachDongGoiRow" msprop:Generator_UserRelationName="FK__PhieuCheB__MaCac__398D8EEE" />
-      <msdata:Relationship name="FK__PhieuCheB__MaNha__3A81B327" msdata:parent="NhanVien" msdata:child="PhieuCheBien" msdata:parentkey="MaNhanVien" msdata:childkey="MaNhanVien" msprop:Generator_UserParentTable="NhanVien" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaNha__3A81B327" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="NhanVienRow" msprop:Generator_UserRelationName="FK__PhieuCheB__MaNha__3A81B327" />
-      <msdata:Relationship name="FK__PhieuCheB__MaPPC__38996AB5" msdata:parent="PhuongPhapCheBien" msdata:child="PhieuCheBien" msdata:parentkey="MaPPCheBien" msdata:childkey="MaPPCheBien" msprop:Generator_UserParentTable="PhuongPhapCheBien" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaPPC__38996AB5" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheB__MaPPC__38996AB5" msprop:Generator_ParentPropName="PhuongPhapCheBienRow" />
-      <msdata:Relationship name="FK__PhieuCheB__MaSan__36B12243" msdata:parent="SanPham" msdata:child="PhieuCheBien" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaSan__36B12243" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheB__MaSan__36B12243" msprop:Generator_ParentPropName="SanPhamRow" />
-      <msdata:Relationship name="FK__PhieuCheBien__37A5467C" msdata:parent="LoHang" msdata:child="PhieuCheBien" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheBien__37A5467C" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="LoHangRowParent" msprop:Generator_UserRelationName="FK__PhieuCheBien__37A5467C" />
-      <msdata:Relationship name="FK__ChiTietPh__MaPhi__45F365D31" msdata:parent="PhieuNhapHang" msdata:child="CTPN_LoaiHat" msdata:parentkey="MaPhieuNhap" msdata:childkey="MaPhieuNhap" msprop:Generator_UserParentTable="PhieuNhapHang" msprop:Generator_UserChildTable="CTPN_LoaiHat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__45F365D31" msprop:Generator_ChildPropName="GetCTPN_LoaiHatRows" msprop:Generator_ParentPropName="PhieuNhapHangRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__45F365D31" />
-      <msdata:Relationship name="FK__ChiTietPhieuNhap__46E78A0C1" msdata:parent="LoHang" msdata:child="CTPN_LoaiHat" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="CTPN_LoaiHat" msprop:Generator_RelationVarName="relationFK__ChiTietPhieuNhap__46E78A0C1" msprop:Generator_ChildPropName="GetCTPN_LoaiHatRows" msprop:Generator_ParentPropName="LoHangRowParent" msprop:Generator_UserRelationName="FK__ChiTietPhieuNhap__46E78A0C1" />
-      <msdata:Relationship name="FK__ChiTietPh__MaPhi__4D94879B1" msdata:parent="PhieuXuatHang" msdata:child="CTPX_SanPham" msdata:parentkey="MaPhieuXuat" msdata:childkey="MaPhieuXuat" msprop:Generator_UserParentTable="PhieuXuatHang" msprop:Generator_UserChildTable="CTPX_SanPham" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__4D94879B1" msprop:Generator_ChildPropName="GetCTPX_SanPhamRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__4D94879B1" msprop:Generator_ParentPropName="PhieuXuatHangRow" />
-      <msdata:Relationship name="FK__ChiTietPh__MaSan__4E88ABD41" msdata:parent="SanPham" msdata:child="CTPX_SanPham" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="CTPX_SanPham" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaSan__4E88ABD41" msprop:Generator_ChildPropName="GetCTPX_SanPhamRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaSan__4E88ABD41" msprop:Generator_ParentPropName="SanPhamRow" />
-      <msdata:Relationship name="FK__PhieuCheB__MaCac__398D8EEE1" msdata:parent="PhieuCheBienADV" msdata:child="PhieuCheBien" msdata:parentkey="MaCachDongGoi" msdata:childkey="MaCachDongGoi" msprop:Generator_UserParentTable="PhieuCheBienADV" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaCac__398D8EEE1" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="PhieuCheBienADVRow" msprop:Generator_UserRelationName="FK__PhieuCheB__MaCac__398D8EEE1" />
+      <msdata:Relationship name="FK__ChiTietPh__MaPhi__45F365D3" msdata:parent="PhieuNhapHang" msdata:child="ChiTietPhieuNhap" msdata:parentkey="MaPhieuNhap" msdata:childkey="MaPhieuNhap" msprop:Generator_UserParentTable="PhieuNhapHang" msprop:Generator_UserChildTable="ChiTietPhieuNhap" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__45F365D3" msprop:Generator_ChildPropName="GetChiTietPhieuNhapRows" msprop:Generator_ParentPropName="PhieuNhapHangRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__45F365D3" />
+      <msdata:Relationship name="FK__ChiTietPhieuNhap__46E78A0C" msdata:parent="LoHang" msdata:child="ChiTietPhieuNhap" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="ChiTietPhieuNhap" msprop:Generator_RelationVarName="relationFK__ChiTietPhieuNhap__46E78A0C" msprop:Generator_ChildPropName="GetChiTietPhieuNhapRows" msprop:Generator_ParentPropName="LoHangRowParent" msprop:Generator_UserRelationName="FK__ChiTietPhieuNhap__46E78A0C" />
+      <msdata:Relationship name="FK__ChiTietPh__MaPhi__4D94879B" msdata:parent="PhieuXuatHang" msdata:child="ChiTietPhieuXuat" msdata:parentkey="MaPhieuXuat" msdata:childkey="MaPhieuXuat" msprop:Generator_UserParentTable="PhieuXuatHang" msprop:Generator_UserChildTable="ChiTietPhieuXuat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__4D94879B" msprop:Generator_ChildPropName="GetChiTietPhieuXuatRows" msprop:Generator_ParentPropName="PhieuXuatHangRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__4D94879B" />
+      <msdata:Relationship name="FK__ChiTietPh__MaSan__4E88ABD4" msdata:parent="SanPham" msdata:child="ChiTietPhieuXuat" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="ChiTietPhieuXuat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaSan__4E88ABD4" msprop:Generator_ChildPropName="GetChiTietPhieuXuatRows" msprop:Generator_ParentPropName="SanPhamRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaSan__4E88ABD4" />
+      <msdata:Relationship name="FK__DonGia__MaLoaiHa__3E52440B" msdata:parent="LoaiHatCaPhe" msdata:child="DonGia" msdata:parentkey="MaLoaiHat" msdata:childkey="MaLoaiHat" msprop:Generator_UserParentTable="LoaiHatCaPhe" msprop:Generator_UserChildTable="DonGia" msprop:Generator_RelationVarName="relationFK__DonGia__MaLoaiHa__3E52440B" msprop:Generator_ChildPropName="GetDonGiaRows" msprop:Generator_ParentPropName="LoaiHatCaPheRow" msprop:Generator_UserRelationName="FK__DonGia__MaLoaiHa__3E52440B" />
+      <msdata:Relationship name="FK__LoHang__MaLoaiHa__2E1BDC42" msdata:parent="LoaiHatCaPhe" msdata:child="LoHang" msdata:parentkey="MaLoaiHat" msdata:childkey="MaLoaiHat" msprop:Generator_UserParentTable="LoaiHatCaPhe" msprop:Generator_UserChildTable="LoHang" msprop:Generator_RelationVarName="relationFK__LoHang__MaLoaiHa__2E1BDC42" msprop:Generator_ChildPropName="GetLoHangRows" msprop:Generator_UserRelationName="FK__LoHang__MaLoaiHa__2E1BDC42" msprop:Generator_ParentPropName="LoaiHatCaPheRow" />
+      <msdata:Relationship name="FK__PhieuCheB__MaCac__398D8EEE" msdata:parent="CachDongGoi" msdata:child="PhieuCheBien" msdata:parentkey="MaCachDongGoi" msdata:childkey="MaCachDongGoi" msprop:Generator_UserParentTable="CachDongGoi" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaCac__398D8EEE" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheB__MaCac__398D8EEE" msprop:Generator_ParentPropName="CachDongGoiRow" />
+      <msdata:Relationship name="FK__PhieuCheB__MaNha__3A81B327" msdata:parent="NhanVien" msdata:child="PhieuCheBien" msdata:parentkey="MaNhanVien" msdata:childkey="MaNhanVien" msprop:Generator_UserParentTable="NhanVien" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaNha__3A81B327" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheB__MaNha__3A81B327" msprop:Generator_ParentPropName="NhanVienRow" />
+      <msdata:Relationship name="FK__PhieuCheB__MaPPC__38996AB5" msdata:parent="PhuongPhapCheBien" msdata:child="PhieuCheBien" msdata:parentkey="MaPPCheBien" msdata:childkey="MaPPCheBien" msprop:Generator_UserParentTable="PhuongPhapCheBien" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaPPC__38996AB5" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="PhuongPhapCheBienRow" msprop:Generator_UserRelationName="FK__PhieuCheB__MaPPC__38996AB5" />
+      <msdata:Relationship name="FK__PhieuCheB__MaSan__36B12243" msdata:parent="SanPham" msdata:child="PhieuCheBien" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaSan__36B12243" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_ParentPropName="SanPhamRow" msprop:Generator_UserRelationName="FK__PhieuCheB__MaSan__36B12243" />
+      <msdata:Relationship name="FK__PhieuCheBien__37A5467C" msdata:parent="LoHang" msdata:child="PhieuCheBien" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheBien__37A5467C" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheBien__37A5467C" msprop:Generator_ParentPropName="LoHangRowParent" />
+      <msdata:Relationship name="FK__ChiTietPh__MaPhi__45F365D31" msdata:parent="PhieuNhapHang" msdata:child="CTPN_LoaiHat" msdata:parentkey="MaPhieuNhap" msdata:childkey="MaPhieuNhap" msprop:Generator_UserParentTable="PhieuNhapHang" msprop:Generator_UserChildTable="CTPN_LoaiHat" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__45F365D31" msprop:Generator_ChildPropName="GetCTPN_LoaiHatRows" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__45F365D31" msprop:Generator_ParentPropName="PhieuNhapHangRow" />
+      <msdata:Relationship name="FK__ChiTietPhieuNhap__46E78A0C1" msdata:parent="LoHang" msdata:child="CTPN_LoaiHat" msdata:parentkey="SoLoHang MaLoaiHat" msdata:childkey="SoLoHang MaLoaiHat" msprop:Generator_UserParentTable="LoHang" msprop:Generator_UserChildTable="CTPN_LoaiHat" msprop:Generator_RelationVarName="relationFK__ChiTietPhieuNhap__46E78A0C1" msprop:Generator_ChildPropName="GetCTPN_LoaiHatRows" msprop:Generator_UserRelationName="FK__ChiTietPhieuNhap__46E78A0C1" msprop:Generator_ParentPropName="LoHangRowParent" />
+      <msdata:Relationship name="FK__ChiTietPh__MaPhi__4D94879B1" msdata:parent="PhieuXuatHang" msdata:child="CTPX_SanPham" msdata:parentkey="MaPhieuXuat" msdata:childkey="MaPhieuXuat" msprop:Generator_UserParentTable="PhieuXuatHang" msprop:Generator_UserChildTable="CTPX_SanPham" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaPhi__4D94879B1" msprop:Generator_ChildPropName="GetCTPX_SanPhamRows" msprop:Generator_ParentPropName="PhieuXuatHangRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaPhi__4D94879B1" />
+      <msdata:Relationship name="FK__ChiTietPh__MaSan__4E88ABD41" msdata:parent="SanPham" msdata:child="CTPX_SanPham" msdata:parentkey="MaSanPham" msdata:childkey="MaSanPham" msprop:Generator_UserParentTable="SanPham" msprop:Generator_UserChildTable="CTPX_SanPham" msprop:Generator_RelationVarName="relationFK__ChiTietPh__MaSan__4E88ABD41" msprop:Generator_ChildPropName="GetCTPX_SanPhamRows" msprop:Generator_ParentPropName="SanPhamRow" msprop:Generator_UserRelationName="FK__ChiTietPh__MaSan__4E88ABD41" />
+      <msdata:Relationship name="FK__PhieuCheB__MaCac__398D8EEE1" msdata:parent="PhieuCheBienADV" msdata:child="PhieuCheBien" msdata:parentkey="MaCachDongGoi" msdata:childkey="MaCachDongGoi" msprop:Generator_UserParentTable="PhieuCheBienADV" msprop:Generator_UserChildTable="PhieuCheBien" msprop:Generator_RelationVarName="relationFK__PhieuCheB__MaCac__398D8EEE1" msprop:Generator_ChildPropName="GetPhieuCheBienRows" msprop:Generator_UserRelationName="FK__PhieuCheB__MaCac__398D8EEE1" msprop:Generator_ParentPropName="PhieuCheBienADVRow" />
+      <msdata:Relationship name="FK__DonGia__MaLoaiHa__3E52440B1" msdata:parent="LoaiHatCaPhe" msdata:child="LoaiHat_GiaBan" msdata:parentkey="MaLoaiHat" msdata:childkey="MaLoaiHat" msprop:Generator_UserParentTable="LoaiHatCaPhe" msprop:Generator_UserChildTable="LoaiHat_GiaBan" msprop:Generator_RelationVarName="relationFK__DonGia__MaLoaiHa__3E52440B1" msprop:Generator_ChildPropName="GetLoaiHat_GiaBanRows" msprop:Generator_ParentPropName="LoaiHatCaPheRow" msprop:Generator_UserRelationName="FK__DonGia__MaLoaiHa__3E52440B1" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

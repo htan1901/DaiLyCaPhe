@@ -15,12 +15,12 @@ namespace DaiLyCaPhe.DBConnection
         public string GetBeanTypeIdByNameAndOrigin(string beanName, string beanOrigin)
         {
             string data = "";
-            string query = "SELECT MaLoaiHat FROM LoaiHatCaPhe WHERE TenLoaiHat LIKE @beanName AND XuatXu LIKE @beanOrigin";
+            string query = "SELECT MaLoaiHat FROM LoaiHatCaPhe WHERE TenLoaiHat LIKE @beanOrigin AND XuatXu LIKE @beanOrigin";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.Add(new SqlParameter("@beanName", beanName));
+                command.Parameters.Add(new SqlParameter("@beanOrigin", beanName));
                 command.Parameters.Add(new SqlParameter("@beanOrigin", beanOrigin));
                 object obj = command.ExecuteScalar();
                 data = obj == null? "" : obj.ToString();
@@ -291,13 +291,13 @@ namespace DaiLyCaPhe.DBConnection
         public List<string> GetAllOrigin(string categoryID, string beanName)
         {
             List<string> origins = new List<string>();
-            string query = "select distinct C.XuatXu from LoHang L, LoaiHatCaPhe C where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanName";
+            string query = "select distinct C.XuatXu from LoHang L, LoaiHatCaPhe C where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanOrigin";
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
-                command.Parameters.Add(new SqlParameter("@beanName", beanName));
+                command.Parameters.Add(new SqlParameter("@beanOrigin", beanName));
                 using(SqlDataReader reader = command.ExecuteReader())
                 {
                     while(reader.Read())
@@ -315,13 +315,13 @@ namespace DaiLyCaPhe.DBConnection
             string id;
             string query = "select L.HanSuDung " +
                             "from LoHang L, LoaiHatCaPhe C " +
-                            "where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanName and C.XuatXu like @origin";
+                            "where L.MaLoaiHat = C.MaLoaiHat and L.SoLoHang = @categoryID and C.TenLoaiHat = @beanOrigin and C.XuatXu like @origin";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.Add(new SqlParameter("@categoryId", categoryID));
-                command.Parameters.Add(new SqlParameter("@beanName", beanName));
+                command.Parameters.Add(new SqlParameter("@beanOrigin", beanName));
                 command.Parameters.Add(new SqlParameter("@origin", origin));
                 object obj = command.ExecuteScalar();
                 id = obj == null ? "" : obj.ToString();
@@ -355,7 +355,7 @@ namespace DaiLyCaPhe.DBConnection
 
         public string GetExpireDate(string categoryID, string beanID)
         {
-            string id;
+            string expireDate;
             string query = "select HanSuDung " +
                             "from LoHang " +
                             "where SoLoHang = @categoryID and MaLoaiHat = @beanID ";
@@ -366,9 +366,9 @@ namespace DaiLyCaPhe.DBConnection
                 command.Parameters.Add(new SqlParameter("@categoryID", categoryID));
                 command.Parameters.Add(new SqlParameter("@beanID", beanID));
                 object obj = command.ExecuteScalar();
-                id = obj == null ? "" : obj.ToString();
+                expireDate = obj == null ? "" : obj.ToString();
             }
-            return id;
+            return expireDate;
         }
 
         public List<string> GetAllCategoryID()
@@ -546,7 +546,7 @@ namespace DaiLyCaPhe.DBConnection
         public int UpdateTableSanPham(string productID, string productName, string productType, float weight, DateTime expireDate, int amountLeftOver)
         {
             int rowAffected = 0;
-            string updateCommand = "update SanPham set TenSanPham = @productName, LoaiSanPham = @productType, TrongLuong = @weight, HanSuDung = @expireDate, SoLuongTon = @amountLeftOver where MaSanPham = @productID";
+            string updateCommand = "update SanPham set TenSanPham = @productName, LoaiSanPham = @productType, TrongLuong = @weight, HanSuDung = @beanOrigin, SoLuongTon = @amountLeftOver where MaSanPham = @productID";
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -555,7 +555,7 @@ namespace DaiLyCaPhe.DBConnection
                 command.Parameters.Add(new SqlParameter("@productName", productName));
                 command.Parameters.Add(new SqlParameter("@productType", productType));
                 command.Parameters.Add(new SqlParameter("@weight", weight));
-                command.Parameters.Add(new SqlParameter("@expireDate", expireDate));
+                command.Parameters.Add(new SqlParameter("@beanOrigin", expireDate));
                 command.Parameters.Add(new SqlParameter("@amountLeftOver", amountLeftOver));
 
                 rowAffected = command.ExecuteNonQuery();                
@@ -609,14 +609,14 @@ namespace DaiLyCaPhe.DBConnection
             string id;
             string query = "select MaSanPham " +
                             "from SanPham " +
-                            "where TenSanPham = @productName and LoaiSanPham = @productType and HanSuDung = @expireDate and TrongLuong = @weight ";
+                            "where TenSanPham = @productName and LoaiSanPham = @productType and HanSuDung = @beanOrigin and TrongLuong = @weight ";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.Add(new SqlParameter("@productName", productName));
                 command.Parameters.Add(new SqlParameter("@productType", productType));
-                command.Parameters.Add(new SqlParameter("@expireDate", expireDate));
+                command.Parameters.Add(new SqlParameter("@beanOrigin", expireDate));
                 command.Parameters.Add(new SqlParameter("@weight", weight));
 
                 object obj = command.ExecuteScalar();
@@ -845,6 +845,84 @@ namespace DaiLyCaPhe.DBConnection
                     state = int.Parse(obj.ToString());
             }
             return state;
+        }
+
+        public int UpdatePrice(string beanID, DateTime date, long newPrice)
+        {
+            int rowAffected = 0;
+            string insertCommand = "insert into DonGia values (@beanID, @date, null, @newPrice)";
+            string updateCommand = "update DonGia set DenNgay = @date where MaLoaiHat = @beanID and DenNgay is null";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand icommand = new SqlCommand(insertCommand, connection);
+                icommand.Parameters.Add(new SqlParameter("@beanID", beanID));
+                icommand.Parameters.Add(new SqlParameter("@date", date));
+                icommand.Parameters.Add(new SqlParameter("@newPrice", newPrice));
+
+                SqlCommand ucommand = new SqlCommand(updateCommand, connection);
+                ucommand.Parameters.Add(new SqlParameter("@date", date));
+                ucommand.Parameters.Add(new SqlParameter("@beanID", beanID));
+
+                rowAffected += ucommand.ExecuteNonQuery();
+                rowAffected += icommand.ExecuteNonQuery();                
+            }
+            return rowAffected;
+        }
+
+        public List<string> GetAllBeanIDs()
+        {
+            List<string> ids = new List<string>();
+            string query = "select MaLoaiHat from LoaiHatCaPhe";
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        string line = reader.GetString(0);
+                        ids.Add(line);
+                    }
+                }
+            }
+            return ids;
+
+        }
+
+        public string GetBeanName(string beanID)
+        {
+            string beanName;
+            string query = "select TenLoaiHat " +
+                            "from LoaiHatCaPhe " +
+                            "where MaLoaiHat = @beanID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+                object obj = command.ExecuteScalar();
+                beanName = obj == null ? "" : obj.ToString();
+            }
+            return beanName;
+        }
+
+        public string GetBeanOrigin(string beanID)
+        {
+            string beanOrigin;
+            string query = "select XuatXu " +
+                            "from LoaiHatCaPhe " +
+                            "where MaLoaiHat = @beanID";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@beanID", beanID));
+                object obj = command.ExecuteScalar();
+                beanOrigin = obj == null ? "" : obj.ToString();
+            }
+            return beanOrigin;
         }
     }
 }

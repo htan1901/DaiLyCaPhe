@@ -40,24 +40,35 @@ namespace DaiLyCaPhe.Forms
             checkBoxIsAdmin.Enabled = state;
         }
 
-        private void ClearCurrentData()
+        private void ClearCurrentAccountData()
         {
             textBoxUsername.Text = null;
             textBoxPassword.Text = null;
             textBoxRepeatPassword.Text = null;
             checkBoxIsAdmin.Checked = false;
         }
+        private void ClearCurrentPricedata()
+        {
+            comboBoxBeanID.Text = null;
+            textBoxBeanName.Text = null;
+            textBoxNewPrice.Text = null;
+            textBoxNewPrice.Text = null;
+        }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.LoHang_SanPham' table. You can move, or remove it, as needed.
+            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.LoaiHat_GiaBan' table. You can move, or remove it, as needed.
+            this.loaiHat_GiaBanTableAdapter.Fill(this.daiLyCaPheDataSet.LoaiHat_GiaBan);
+            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.DonGia' table. You can move, or remove it, as needed.
+            this.donGiaTableAdapter.Fill(this.daiLyCaPheDataSet.DonGia);
             this.loHang_SanPhamTableAdapter.Fill(this.daiLyCaPheDataSet.LoHang_SanPham);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.LoHang' table. You can move, or remove it, as needed.
-            this.loHangTableAdapter.Fill(this.daiLyCaPheDataSet.LoHang);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.SanPham' table. You can move, or remove it, as needed.
-            this.sanPhamTableAdapter.Fill(this.daiLyCaPheDataSet.SanPham);
-            // TODO: This line of code loads data into the 'daiLyCaPheDataSet.ThongTinDangNhap' table. You can move, or remove it, as needed.
             this.thongTinDangNhapTableAdapter.Fill(this.daiLyCaPheDataSet.ThongTinDangNhap);
+
+            comboBoxBeanID.Items.Clear();
+            List<string> ids = database.GetAllBeanIDs();
+            foreach(string item in ids)
+                comboBoxBeanID.Items.Add(item);
+
         }
 
         private void DataGridViewAccounts_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -77,7 +88,7 @@ namespace DaiLyCaPhe.Forms
 
         private void buttonAddAccount_Click(object sender, EventArgs e)
         {
-            ClearCurrentData();
+            ClearCurrentAccountData();
             ChangeState(editable);
             ToggleEditing(editable);
             textBoxUsername.Focus();
@@ -95,7 +106,7 @@ namespace DaiLyCaPhe.Forms
         {
             ChangeState(!editable);
             ToggleEditing(!editable);
-            ClearCurrentData();
+            ClearCurrentAccountData();
         }
         
         private void SaveAccount(string username, string password, bool isAdmin)
@@ -142,7 +153,7 @@ namespace DaiLyCaPhe.Forms
 
             AdminForm_Load(sender, e);
 
-            ClearCurrentData();
+            ClearCurrentAccountData();
             ToggleEditing(!editable);
             ChangeState(!editable);
         }
@@ -164,6 +175,84 @@ namespace DaiLyCaPhe.Forms
 
             thongTinDangNhapTableAdapter.DeleteByUsername(textBoxUsername.Text);
             AdminForm_Load(sender, e);
+        }
+
+        private void dataGridViewPrices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            int index = e.RowIndex;
+            string beanID = dataGridViewPrices.Rows[index].Cells[0].Value.ToString();
+            string beanName = dataGridViewPrices.Rows[index].Cells[1].Value.ToString();
+            string beanOrigin = dataGridViewPrices.Rows[index].Cells[2].Value.ToString();
+            string oldPrice = dataGridViewPrices.Rows[index].Cells[3].Value.ToString();
+
+            comboBoxBeanID.Text = beanID;
+            textBoxBeanName.Text = beanName;
+            textBoxBeanOrigin.Text = beanOrigin;
+
+            buttonSavePrice.Enabled = true;
+            buttonCancelPrice.Enabled = true;
+
+        }
+
+        private void NumberOnly(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            string beanID = comboBoxBeanID.Text;
+            string beanName = textBoxBeanName.Text;
+            string beanOrigin = textBoxBeanOrigin.Text;
+            string newPriceStr = textBoxNewPrice.Text;
+
+            long newPrice = 0;
+                
+            if (!(newPriceStr == "" || newPriceStr == null))
+                newPrice = long.Parse(newPriceStr);
+
+            DateTime date = DateTime.Now;
+
+            int rowAffected = database.UpdatePrice(beanID, date, newPrice);
+            MessageBox.Show(rowAffected.ToString());
+
+            ClearCurrentPricedata();
+
+            buttonAddPrice.Enabled = true;
+            buttonSavePrice.Enabled = false;
+            buttonCancelPrice.Enabled = false;
+
+            AdminForm_Load(sender, e);
+        }
+
+        private void buttonAddPrice_Click(object sender, EventArgs e)
+        {
+            comboBoxBeanID.Enabled = true;
+            buttonSavePrice.Enabled = true;
+            buttonCancelPrice.Enabled = true;
+            buttonAddPrice.Enabled = false;
+        }
+
+        private void AutoFillData(object sender, EventArgs e)
+        {
+            string beanID = comboBoxBeanID.Text;
+            string beanName = database.GetBeanName(beanID);
+            string origin = database.GetBeanOrigin(beanID);
+
+            textBoxBeanName.Text = beanName;
+            textBoxBeanOrigin.Text = origin;
+        }
+
+        private void buttonCancelPrice_Click(object sender, EventArgs e)
+        {
+            ClearCurrentPricedata();
+
+            buttonAddPrice.Enabled = true;
+            buttonSavePrice.Enabled = false;
+            buttonCancelPrice.Enabled = false;
         }
     }
 }

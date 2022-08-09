@@ -163,10 +163,5 @@ namespace DaiLyCaPhe
         {
             MainScreen_Load(sender, e);
         }
-
-        private void labelControl1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
