@@ -136,6 +136,7 @@
             this.textBoxRepeatPassword.Properties.Appearance.Options.UseFont = true;
             this.textBoxRepeatPassword.Size = new System.Drawing.Size(240, 28);
             this.textBoxRepeatPassword.TabIndex = 3;
+            this.textBoxRepeatPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PreventSpace);
             // 
             // labelControl2
             // 
@@ -158,6 +159,7 @@
             this.textBoxPassword.Properties.Appearance.Options.UseFont = true;
             this.textBoxPassword.Size = new System.Drawing.Size(240, 28);
             this.textBoxPassword.TabIndex = 2;
+            this.textBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PreventSpace);
             // 
             // labelControl1
             // 

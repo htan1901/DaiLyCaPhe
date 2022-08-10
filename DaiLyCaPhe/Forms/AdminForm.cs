@@ -257,5 +257,11 @@ namespace DaiLyCaPhe.Forms
             buttonSavePrice.Enabled = false;
             buttonCancelPrice.Enabled = false;
         }
+
+        private void PreventSpace(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ')
+                e.Handled = true;
+        }
     }
 }
