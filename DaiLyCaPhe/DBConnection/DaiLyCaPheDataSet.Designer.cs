@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace DaiLyCaPhe {
+namespace DaiLyCaPhe.DBConnection {
     
     
     /// <summary>
@@ -9657,7 +9657,7 @@ namespace DaiLyCaPhe {
         }
     }
 }
-namespace DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters {
+namespace DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters {
     
     
     /// <summary>

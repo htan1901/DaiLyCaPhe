@@ -61,7 +61,7 @@
             this.ngaySanXuatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hanSuDungDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loHangSanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
+            this.daiLyCaPheDataSet = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSet();
             this.labelCategory = new DevExpress.XtraEditors.LabelControl();
             this.panelDataSanPham = new System.Windows.Forms.Panel();
             this.dataGridViewProducts = new System.Windows.Forms.DataGridView();
@@ -74,8 +74,8 @@
             this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelProduct = new DevExpress.XtraEditors.LabelControl();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.loHang_SanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter();
-            this.sanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
+            this.loHang_SanPhamTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter();
+            this.sanPhamTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
             this.buttonClearProductFilter = new DevExpress.XtraEditors.SimpleButton();
             this.buttonClearCategoryFilter = new DevExpress.XtraEditors.SimpleButton();
             this.panelFilter.SuspendLayout();
@@ -636,9 +636,9 @@
         private System.Windows.Forms.Panel panelDataSanPham;
         private System.Windows.Forms.DataGridView dataGridViewProducts;
         private DevExpress.XtraEditors.LabelControl labelProduct;
-        private DaiLyCaPheDataSet daiLyCaPheDataSet;
+        private DBConnection.DaiLyCaPheDataSet daiLyCaPheDataSet;
         private System.Windows.Forms.BindingSource loHangSanPhamBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter loHang_SanPhamTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter loHang_SanPhamTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn soLoHangDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenLoaiHatDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn xuatXuDataGridViewTextBoxColumn;
@@ -646,7 +646,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ngaySanXuatDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hanSuDungDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource sanPhamBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter sanPhamTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter sanPhamTableAdapter;
         private System.Windows.Forms.Panel panelCategoryFilter;
         private System.Windows.Forms.Panel panelProductFilter;
         private DevExpress.XtraEditors.TextEdit textBoxProductNameFilter;

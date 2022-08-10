@@ -1,4 +1,6 @@
-﻿namespace DaiLyCaPhe.Forms
+﻿using DaiLyCaPhe.DBConnection;
+
+namespace DaiLyCaPhe.Forms
 {
     partial class AdminForm
     {
@@ -50,7 +52,7 @@
             this.matKhauDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vaiTroDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.thongTinDangNhapBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
+            this.daiLyCaPheDataSet = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSet();
             this.labelListAccountTitle = new DevExpress.XtraEditors.LabelControl();
             this.panelData = new System.Windows.Forms.Panel();
             this.panelDataLoHang = new System.Windows.Forms.Panel();
@@ -79,10 +81,10 @@
             this.labelProduct = new DevExpress.XtraEditors.LabelControl();
             this.donGiaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loHangSanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.thongTinDangNhapTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.ThongTinDangNhapTableAdapter();
-            this.loHang_SanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter();
-            this.donGiaTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.DonGiaTableAdapter();
-            this.loaiHat_GiaBanTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.LoaiHat_GiaBanTableAdapter();
+            this.thongTinDangNhapTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.ThongTinDangNhapTableAdapter();
+            this.loHang_SanPhamTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter();
+            this.donGiaTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.DonGiaTableAdapter();
+            this.loaiHat_GiaBanTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.LoaiHat_GiaBanTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddProcessPaper)).BeginInit();
             this.groupAddProcessPaper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxRepeatPassword.Properties)).BeginInit();
@@ -751,7 +753,7 @@
         private DevExpress.XtraEditors.LabelControl labelListAccountTitle;
         private DaiLyCaPheDataSet daiLyCaPheDataSet;
         private System.Windows.Forms.BindingSource thongTinDangNhapBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.ThongTinDangNhapTableAdapter thongTinDangNhapTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.ThongTinDangNhapTableAdapter thongTinDangNhapTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn maThongTinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenDangNhapDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn matKhauDataGridViewTextBoxColumn;
@@ -763,11 +765,11 @@
         private System.Windows.Forms.Panel panelDataSanPham;
         private DevExpress.XtraEditors.LabelControl labelProduct;
         private System.Windows.Forms.BindingSource loHangSanPhamBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter loHang_SanPhamTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.LoHang_SanPhamTableAdapter loHang_SanPhamTableAdapter;
         private System.Windows.Forms.BindingSource donGiaBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.DonGiaTableAdapter donGiaTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.DonGiaTableAdapter donGiaTableAdapter;
         private System.Windows.Forms.BindingSource loaiHatGiaBanBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.LoaiHat_GiaBanTableAdapter loaiHat_GiaBanTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.LoaiHat_GiaBanTableAdapter loaiHat_GiaBanTableAdapter;
         private DevExpress.XtraEditors.LabelControl labelBeanID;
         private DevExpress.XtraEditors.TextEdit textBoxNewPrice;
         private DevExpress.XtraEditors.LabelControl labelBeanNewPrice;

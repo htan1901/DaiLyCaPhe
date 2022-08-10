@@ -1,4 +1,6 @@
-﻿namespace DaiLyCaPhe.Forms
+﻿using DaiLyCaPhe.DBConnection;
+
+namespace DaiLyCaPhe.Forms
 {
     partial class ExportBillForm
     {
@@ -71,7 +73,7 @@
             this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.donGiaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cTPXSanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.daiLyCaPheDataSet = new DaiLyCaPhe.DaiLyCaPheDataSet();
+            this.daiLyCaPheDataSet = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSet();
             this.labelExportBillDetailsTitle = new System.Windows.Forms.Label();
             this.panelDataImportBill = new System.Windows.Forms.Panel();
             this.dataGridViewImportBill = new System.Windows.Forms.DataGridView();
@@ -82,9 +84,9 @@
             this.phieuXuatHangBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelExportBillTitle = new System.Windows.Forms.Label();
             this.chiTietPhieuXuatBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.phieuXuatHangTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.PhieuXuatHangTableAdapter();
-            this.chiTietPhieuXuatTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.ChiTietPhieuXuatTableAdapter();
-            this.CTPX_SanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CTPX_SanPhamTableAdapter();
+            this.phieuXuatHangTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.PhieuXuatHangTableAdapter();
+            this.chiTietPhieuXuatTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.ChiTietPhieuXuatTableAdapter();
+            this.CTPX_SanPhamTableAdapter = new DaiLyCaPhe.DBConnection.DaiLyCaPheDataSetTableAdapters.CTPX_SanPhamTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.panelAddBillGroup)).BeginInit();
             this.panelAddBillGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxBillID.Properties)).BeginInit();
@@ -789,19 +791,19 @@
         private System.Windows.Forms.Panel panelDataSection;
         private DaiLyCaPheDataSet daiLyCaPheDataSet;
         private System.Windows.Forms.BindingSource phieuXuatHangBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.PhieuXuatHangTableAdapter phieuXuatHangTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.PhieuXuatHangTableAdapter phieuXuatHangTableAdapter;
         private System.Windows.Forms.Panel panelDataImportBill;
         private System.Windows.Forms.DataGridView dataGridViewImportBill;
         private System.Windows.Forms.Panel panelDataImportBillDetails;
         private System.Windows.Forms.Label labelExportBillDetailsTitle;
         private System.Windows.Forms.BindingSource chiTietPhieuXuatBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.ChiTietPhieuXuatTableAdapter chiTietPhieuXuatTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.ChiTietPhieuXuatTableAdapter chiTietPhieuXuatTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn maPhieuXuatDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn noiXuatDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngayXuatDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tongTienDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource cTPXSanPhamBindingSource;
-        private DaiLyCaPheDataSetTableAdapters.CTPX_SanPhamTableAdapter CTPX_SanPhamTableAdapter;
+        private DBConnection.DaiLyCaPheDataSetTableAdapters.CTPX_SanPhamTableAdapter CTPX_SanPhamTableAdapter;
         private System.Windows.Forms.DataGridView dataGridViewImportBIllDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn maPhieuXuatDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn maSanPhamDataGridViewTextBoxColumn;
