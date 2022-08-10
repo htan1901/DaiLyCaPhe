@@ -204,10 +204,22 @@ namespace DaiLyCaPhe.Forms
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            string beanID = comboBoxBeanID.Text;
+            string beanID = comboBoxBeanID.Text.Trim();
             string beanName = textBoxBeanName.Text;
             string beanOrigin = textBoxBeanOrigin.Text;
-            string newPriceStr = textBoxNewPrice.Text;
+            string newPriceStr = textBoxNewPrice.Text.Trim();
+
+            if(beanID == "" || beanID == null)
+            {
+                MessageBox.Show("Mã loại hạt không được rỗng", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
+
+            if(newPriceStr == null || newPriceStr == "")
+            {
+                MessageBox.Show("Giá bán không được rỗng", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
 
             long newPrice = 0;
                 
@@ -234,6 +246,7 @@ namespace DaiLyCaPhe.Forms
         private void buttonAddPrice_Click(object sender, EventArgs e)
         {
             comboBoxBeanID.Enabled = true;
+            textBoxNewPrice.Enabled = true;
             buttonSavePrice.Enabled = true;
             buttonCancelPrice.Enabled = true;
             buttonAddPrice.Enabled = false;

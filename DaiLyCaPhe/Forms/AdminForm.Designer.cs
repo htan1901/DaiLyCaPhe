@@ -586,6 +586,7 @@ namespace DaiLyCaPhe.Forms
             // 
             // textBoxNewPrice
             // 
+            this.textBoxNewPrice.Enabled = false;
             this.textBoxNewPrice.Location = new System.Drawing.Point(183, 300);
             this.textBoxNewPrice.Name = "textBoxNewPrice";
             this.textBoxNewPrice.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
