@@ -130,8 +130,8 @@ namespace DaiLyCaPhe.Forms
 
         private void ButtonDeleteBill_Click(object sender, EventArgs e)
         {
-            string billID = textBoxBillID.Text;
-            string categoryID = textBoxCategoryID.Text;
+            string billID = textBoxBillID.Text.Trim();
+            string categoryID = textBoxCategoryID.Text.Trim();
 
             DialogResult dialogResult = MessageBox.Show(string.Format("Hóa đơn {0} sẽ bị xóa", billID), "Thông báo", MessageBoxButtons.OKCancel);
 
@@ -140,8 +140,8 @@ namespace DaiLyCaPhe.Forms
             foreach (Control item in panelBillItem.Controls)
             {
                 ImportBillItem billItem = item as ImportBillItem;
-                string beanName = billItem.BeanName;
-                string origin = billItem.Origin;
+                string beanName = billItem.BeanName.Trim();
+                string origin = billItem.Origin.Trim();
 
                 string beanID = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
 
@@ -175,16 +175,19 @@ namespace DaiLyCaPhe.Forms
 
         private void NameAndDateFillEvent(object sender, EventArgs e)
         {
+            string fromDateStr = dateEditFromDateFilter.Text.Trim();
             DateTime fromDate;
-            if(dateEditFromDateFilter.Text == null || dateEditFromDateFilter.Text == "")
+            if(fromDateStr == null || fromDateStr == "")
                 fromDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
             else
-                fromDate = DateTime.ParseExact(dateEditFromDateFilter.Text, DEFAULT_DATE_FORMAT, null);
+                fromDate = DateTime.ParseExact(fromDateStr, DEFAULT_DATE_FORMAT, null);
+
+            string toDateStr = dateEditToDateFilter.Text.Trim();
             DateTime toDate;
-            if (dateEditToDateFilter.Text == null || dateEditToDateFilter.Text == "")
+            if (toDateStr == null || toDateStr == "")
                 toDate = DateTime.MaxValue;
             else
-                toDate = DateTime.ParseExact(dateEditToDateFilter.Text, DEFAULT_DATE_FORMAT, null);
+                toDate = DateTime.ParseExact(toDateStr, DEFAULT_DATE_FORMAT, null);
 
             try
             {
@@ -198,8 +201,8 @@ namespace DaiLyCaPhe.Forms
 
         private void NameAndOriginFillEvent(object sender, EventArgs e)
         {
-            string name = textBoxBeanNameFilter.Text;
-            string origin = textBoxBeanOriginFilter.Text;
+            string name = textBoxBeanNameFilter.Text.Trim();
+            string origin = textBoxBeanOriginFilter.Text.Trim();
             string billID = dataGridViewImportBill.SelectedCells[0].Value.ToString();
 
             this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, name, origin, billID);
@@ -259,8 +262,8 @@ namespace DaiLyCaPhe.Forms
 
             textBoxBillID.Text = billID;
             textBoxCategoryID.Text = categoryId;
-            string beanNameFillCriteria = textBoxBeanNameFilter.Text;
-            string originFillCriteria = textBoxBeanOriginFilter.Text;
+            string beanNameFillCriteria = textBoxBeanNameFilter.Text.Trim();
+            string originFillCriteria = textBoxBeanOriginFilter.Text.Trim();
 
             this.CTPN_LoaiHatTableAdapter.FillByOriginAndNameAndBillCode(this.daiLyCaPheDataSet.CTPN_LoaiHat, beanNameFillCriteria, originFillCriteria ,billID);
 
@@ -301,10 +304,10 @@ namespace DaiLyCaPhe.Forms
 
         private void UpdateBill()
         {
-            string billID = textBoxBillID.Text;
-            string categoryID = textBoxCategoryID.Text;
-            string productCompanyName = textBoxProductCompanyName.Text;
-            string importDate = dateEditImportDate.Text;
+            string billID = textBoxBillID.Text.Trim();
+            string categoryID = textBoxCategoryID.Text.Trim();
+            string productCompanyName = textBoxProductCompanyName.Text.Trim();
+            string importDate = dateEditImportDate.Text.Trim();
 
             foreach(Control item in panelBillItem.Controls)
             {
@@ -333,8 +336,8 @@ namespace DaiLyCaPhe.Forms
 
             foreach(ImportBillItem item in deletedItems)
             {
-                string beanName = item.BeanName;
-                string origin = item.Origin;
+                string beanName = item.BeanName.Trim();
+                string origin = item.Origin.Trim();
 
                 string beanTypeID = database.GetBeanTypeIdByNameAndOrigin(beanName, origin);
 
@@ -344,7 +347,7 @@ namespace DaiLyCaPhe.Forms
 
         private void SaveBill()
         {
-            string importDateText = dateEditImportDate.Text;
+            string importDateText = dateEditImportDate.Text.Trim();
             DateTime importDate;
             if(importDateText == null || importDateText == "")
                 importDate = DateTime.Now;
@@ -354,7 +357,7 @@ namespace DaiLyCaPhe.Forms
             string billID = GenerateID("PNH", 6);
             string categoryID = GenerateID("SL", 6);
             long total = 0;
-            string productCompanyName = textBoxProductCompanyName.Text;
+            string productCompanyName = textBoxProductCompanyName.Text.Trim();
 
             if (productCompanyName == null || productCompanyName == "")
             {
@@ -382,7 +385,7 @@ namespace DaiLyCaPhe.Forms
                 ImportBillItem billItem = item as ImportBillItem;
 
                 string beanTypeID = "";
-                string productionDateText = billItem.ProductionDate;
+                string productionDateText = billItem.ProductionDate.Trim();
                 DateTime productionDate;
                 DateTime expireDate;
                 long price = 0;
@@ -396,8 +399,8 @@ namespace DaiLyCaPhe.Forms
                 price = billItem.Price;
                 int amount = int.Parse(billItem.Amount.ToString());
 
-                string name = billItem.BeanName;
-                string origin = billItem.Origin;
+                string name = billItem.BeanName.Trim();
+                string origin = billItem.Origin.Trim();
 
                 if (price == 0 || amount == 0 || name == "" || name == null || origin == "" || origin == null)
                     continue;

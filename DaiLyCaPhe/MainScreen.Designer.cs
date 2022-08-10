@@ -60,10 +60,10 @@ namespace DaiLyCaPhe
             // 
             // tabPanelMain
             // 
-            this.tabPanelMain.Controls.Add(this.tabNavigationPageAdmin);
-            this.tabPanelMain.Controls.Add(this.tabNavigationPageProcessPaper);
             this.tabPanelMain.Controls.Add(this.tabNavigationPageImportBill);
             this.tabPanelMain.Controls.Add(this.tabNavigationPageExportBill);
+            this.tabPanelMain.Controls.Add(this.tabNavigationPageProcessPaper);
+            this.tabPanelMain.Controls.Add(this.tabNavigationPageAdmin);
             this.tabPanelMain.Controls.Add(this.tabNavigationPageLogin);
             this.tabPanelMain.Controls.Add(this.tabNavigationPageProductManagement);
             this.tabPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -82,34 +82,37 @@ namespace DaiLyCaPhe
             this.tabPanelMain.Size = new System.Drawing.Size(1313, 847);
             this.tabPanelMain.TabIndex = 0;
             this.tabPanelMain.Text = "Quản lý hóa đơn nhập";
-            this.tabPanelMain.TabIndexChanged += new System.EventHandler(this.TabIndexChanged);
             // 
             // tabNavigationPageAdmin
             // 
             this.tabNavigationPageAdmin.Caption = "Quản trị viên";
             this.tabNavigationPageAdmin.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabNavigationPageAdmin.Name = "tabNavigationPageAdmin";
-            this.tabNavigationPageAdmin.Size = new System.Drawing.Size(1313, 847);
+            this.tabNavigationPageAdmin.Size = new System.Drawing.Size(1313, 806);
+            this.tabNavigationPageAdmin.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // tabNavigationPageProcessPaper
             // 
             this.tabNavigationPageProcessPaper.Caption = "Quản lý chế biến";
             this.tabNavigationPageProcessPaper.Name = "tabNavigationPageProcessPaper";
-            this.tabNavigationPageProcessPaper.Size = new System.Drawing.Size(1313, 847);
+            this.tabNavigationPageProcessPaper.Size = new System.Drawing.Size(1313, 806);
+            this.tabNavigationPageProcessPaper.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // tabNavigationPageImportBill
             // 
             this.tabNavigationPageImportBill.Caption = "Quản lý hóa đơn nhập";
             this.tabNavigationPageImportBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabNavigationPageImportBill.Name = "tabNavigationPageImportBill";
-            this.tabNavigationPageImportBill.Size = new System.Drawing.Size(1313, 847);
+            this.tabNavigationPageImportBill.Size = new System.Drawing.Size(1313, 806);
+            this.tabNavigationPageImportBill.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // tabNavigationPageExportBill
             // 
             this.tabNavigationPageExportBill.Caption = "Quản lý hóa đơn xuất";
             this.tabNavigationPageExportBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabNavigationPageExportBill.Name = "tabNavigationPageExportBill";
-            this.tabNavigationPageExportBill.Size = new System.Drawing.Size(1313, 847);
+            this.tabNavigationPageExportBill.Size = new System.Drawing.Size(1313, 806);
+            this.tabNavigationPageExportBill.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // tabNavigationPageLogin
             // 
@@ -167,6 +170,7 @@ namespace DaiLyCaPhe
             this.tableLayoutPanelDivideSection.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelDivideSection.Size = new System.Drawing.Size(1313, 505);
             this.tableLayoutPanelDivideSection.TabIndex = 1;
+            this.tableLayoutPanelDivideSection.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // labelPassword
             // 
@@ -257,6 +261,7 @@ namespace DaiLyCaPhe
             this.tabNavigationPageProductManagement.Caption = "Danh sách sản phẩm";
             this.tabNavigationPageProductManagement.Name = "tabNavigationPageProductManagement";
             this.tabNavigationPageProductManagement.Size = new System.Drawing.Size(1313, 806);
+            this.tabNavigationPageProductManagement.Enter += new System.EventHandler(this.OnActivePage);
             // 
             // mainMenuStrip
             // 

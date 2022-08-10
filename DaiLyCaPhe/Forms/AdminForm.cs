@@ -221,6 +221,9 @@ namespace DaiLyCaPhe.Forms
 
             ClearCurrentPricedata();
 
+            comboBoxBeanID.Enabled = false;
+            textBoxNewPrice.Enabled = false;
+
             buttonAddPrice.Enabled = true;
             buttonSavePrice.Enabled = false;
             buttonCancelPrice.Enabled = false;

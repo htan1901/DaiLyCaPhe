@@ -114,6 +114,13 @@ namespace DaiLyCaPhe.Forms
                 long price = database.GetPrice(productId);
                 decimal maximum = database.GetProductAmount(productId);
 
+                if(maximum == 0)
+                {
+                    MessageBox.Show("Sản phẩm này đã hết trong kho", "Thông báo", MessageBoxButtons.OK);
+                    panelBillDetails.Controls.Remove(item);
+                    return;
+                }
+
                 item.ProductName = name;
                 item.ProductType = type;
                 item.Weight = weight.ToString();
@@ -180,7 +187,7 @@ namespace DaiLyCaPhe.Forms
         #region Fill Events
         private void PlaceAndDateFillEvent(object sender, EventArgs e)
         {
-            string exportPlace = textBoxExportPlaceFilter.Text;
+            string exportPlace = textBoxExportPlaceFilter.Text.Trim();
             DateTime fromDate;
             if(dateEditFromDateFilter.Text == null || dateEditFromDateFilter.Text == "")
                 fromDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
@@ -198,9 +205,9 @@ namespace DaiLyCaPhe.Forms
         private void NameAndTypeFillEvent(object sender, EventArgs e)
         {
 
-            string name = textBoxProductNameFilter.Text;
-            string type = comboBoxProductTypeFilter.Text;
-            string billID = dataGridViewImportBill.SelectedCells[0].Value.ToString();
+            string name = textBoxProductNameFilter.Text.Trim();
+            string type = comboBoxProductTypeFilter.Text.Trim();
+            string billID = dataGridViewImportBill.SelectedCells[0].Value.ToString().Trim();
 
             CTPX_SanPhamTableAdapter.FillByNameAndType(daiLyCaPheDataSet.CTPX_SanPham, name, type, billID);
         }
@@ -270,8 +277,8 @@ namespace DaiLyCaPhe.Forms
 
         private void UpdateBill()
         {
-            string billID = textBoxBillID.Text;
-            string exportPlace = textBoxExportPlace.Text;
+            string billID = textBoxBillID.Text.Trim();
+            string exportPlace = textBoxExportPlace.Text.Trim();
 
             if(exportPlace == null || exportPlace == "")
             {
@@ -280,7 +287,7 @@ namespace DaiLyCaPhe.Forms
             }
 
             DateTime exportDate;
-            string exportDateStr = dateEditExportDate.Text;
+            string exportDateStr = dateEditExportDate.Text.Trim();
             if (exportDateStr == null || exportDateStr == "")
                 exportDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
             else
@@ -317,7 +324,7 @@ namespace DaiLyCaPhe.Forms
         private void SaveBill()
         {
             string billID = GenerateBillID();
-            string exportPlace = textBoxExportPlace.Text;
+            string exportPlace = textBoxExportPlace.Text.Trim();
 
             if(exportPlace == null || exportPlace == "")
             {
@@ -326,7 +333,7 @@ namespace DaiLyCaPhe.Forms
             }
 
             DateTime exportDate;
-            string exportDateStr = dateEditExportDate.Text;
+            string exportDateStr = dateEditExportDate.Text.Trim();
             if (exportDateStr == null || exportDateStr == "")
                 exportDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
             else
@@ -339,7 +346,7 @@ namespace DaiLyCaPhe.Forms
                 ExportBillItem billItem = item as ExportBillItem;
 
                 decimal amount = billItem.Amount;
-                string productID = billItem.ProductID;
+                string productID = billItem.ProductID.Trim();
                 long price = billItem.Price;
 
                 if(amount == 0 || productID == "" || productID == null || price == 0)
@@ -354,7 +361,7 @@ namespace DaiLyCaPhe.Forms
 
         private void ButtonSaveBill_Click(object sender, EventArgs e)
         {
-            string billID = textBoxBillID.Text;
+            string billID = textBoxBillID.Text.Trim();
             if (billID == "" || billID == null)
                 SaveBill();
             else
@@ -366,7 +373,7 @@ namespace DaiLyCaPhe.Forms
 
         private void buttonDeleteBill_Click(object sender, EventArgs e)
         {
-            string billID = textBoxBillID.Text;
+            string billID = textBoxBillID.Text.Trim();
             DialogResult result = MessageBox.Show(string.Format("Phiếu xuất hàng {0} sẽ bị xóa", textBoxBillID.Text), "Thông báo", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.Cancel)

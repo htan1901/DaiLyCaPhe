@@ -15,6 +15,31 @@ namespace DaiLyCaPhe
     public partial class MainScreen : DevExpress.XtraEditors.XtraForm
     {
         private DatabaseConnection database = new DatabaseConnection();
+        private ImportBillForm importBillForm = new ImportBillForm
+        {
+            TopLevel = false,
+            Dock = DockStyle.Fill,
+        };
+        private ExportBillForm exportBillForm = new ExportBillForm
+        {
+            TopLevel = false,
+            Dock = DockStyle.Fill,
+        };
+        private ProcessPaperForm processPaperForm = new ProcessPaperForm
+        {
+            TopLevel = false,
+            Dock = DockStyle.Fill,
+        };
+        private AdminForm adminForm = new AdminForm
+        {
+            TopLevel = false,
+            Dock = DockStyle.Fill,
+        };
+        private ProductManagementForm productManagementForm = new ProductManagementForm
+        {
+            TopLevel = false,
+            Dock = DockStyle.Fill,
+        };
 
         public MainScreen()
         {
@@ -72,43 +97,18 @@ namespace DaiLyCaPhe
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            ImportBillForm importBillForm = new ImportBillForm
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill,
-            };
             tabNavigationPageImportBill.Controls.Add(importBillForm);
             importBillForm.Show();
 
-            ExportBillForm exportBillForm = new ExportBillForm
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill,
-            };
             tabNavigationPageExportBill.Controls.Add(exportBillForm);
             exportBillForm.Show();
 
-            ProcessPaperForm processPaperForm = new ProcessPaperForm
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill,
-            };
             tabNavigationPageProcessPaper.Controls.Add(processPaperForm);
             processPaperForm.Show();
 
-            AdminForm adminForm = new AdminForm
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill,
-            };
             tabNavigationPageAdmin.Controls.Add(adminForm);
             adminForm.Show();
 
-            ProductManagementForm productManagementForm = new ProductManagementForm
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill,
-            };
             tabNavigationPageProductManagement.Controls.Add(productManagementForm);
             productManagementForm.Show();
             
@@ -159,9 +159,9 @@ namespace DaiLyCaPhe
             textBoxPassword.UseSystemPasswordChar = !checkBoxHiddenPassword.Checked;
         }
 
-        private void TabIndexChanged(object sender, EventArgs e)
+        private void OnActivePage(object sender, EventArgs e)
         {
-            MainScreen_Load(sender, e);
+            ((Control)sender).Refresh();
         }
     }
 }

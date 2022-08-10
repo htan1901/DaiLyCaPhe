@@ -15,12 +15,12 @@ namespace DaiLyCaPhe.DBConnection
         public string GetBeanTypeIdByNameAndOrigin(string beanName, string beanOrigin)
         {
             string data = "";
-            string query = "SELECT MaLoaiHat FROM LoaiHatCaPhe WHERE TenLoaiHat LIKE @beanOrigin AND XuatXu LIKE @beanOrigin";
+            string query = "SELECT MaLoaiHat FROM LoaiHatCaPhe WHERE TenLoaiHat LIKE @beanName AND XuatXu LIKE @beanOrigin";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.Add(new SqlParameter("@beanOrigin", beanName));
+                command.Parameters.Add(new SqlParameter("@beanName", beanName));
                 command.Parameters.Add(new SqlParameter("@beanOrigin", beanOrigin));
                 object obj = command.ExecuteScalar();
                 data = obj == null? "" : obj.ToString();

@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupAddProcessPaper = new DevExpress.XtraEditors.GroupControl();
+            this.labelKg = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxProcessMakerID = new System.Windows.Forms.ComboBox();
             this.comboBoxBeanOrigin = new System.Windows.Forms.ComboBox();
             this.comboBoxBeanName = new System.Windows.Forms.ComboBox();
@@ -107,7 +108,6 @@
             this.cachDongGoiTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.CachDongGoiTableAdapter();
             this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sanPhamTableAdapter = new DaiLyCaPhe.DaiLyCaPheDataSetTableAdapters.SanPhamTableAdapter();
-            this.labelKg = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupAddProcessPaper)).BeginInit();
             this.groupAddProcessPaper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxProductName.Properties)).BeginInit();
@@ -177,6 +177,16 @@
             this.groupAddProcessPaper.TabIndex = 2;
             this.groupAddProcessPaper.Text = "Thêm phiếu chế biến";
             // 
+            // labelKg
+            // 
+            this.labelKg.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKg.Appearance.Options.UseFont = true;
+            this.labelKg.Location = new System.Drawing.Point(1213, 78);
+            this.labelKg.Name = "labelKg";
+            this.labelKg.Size = new System.Drawing.Size(17, 21);
+            this.labelKg.TabIndex = 28;
+            this.labelKg.Text = "kg";
+            // 
             // comboBoxProcessMakerID
             // 
             this.comboBoxProcessMakerID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -186,7 +196,7 @@
             this.comboBoxProcessMakerID.Location = new System.Drawing.Point(680, 75);
             this.comboBoxProcessMakerID.Name = "comboBoxProcessMakerID";
             this.comboBoxProcessMakerID.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxProcessMakerID.TabIndex = 27;
+            this.comboBoxProcessMakerID.TabIndex = 3;
             // 
             // comboBoxBeanOrigin
             // 
@@ -197,7 +207,7 @@
             this.comboBoxBeanOrigin.Location = new System.Drawing.Point(680, 140);
             this.comboBoxBeanOrigin.Name = "comboBoxBeanOrigin";
             this.comboBoxBeanOrigin.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxBeanOrigin.TabIndex = 26;
+            this.comboBoxBeanOrigin.TabIndex = 7;
             this.comboBoxBeanOrigin.SelectedValueChanged += new System.EventHandler(this.comboBoxBeanOrigin_SelectedValueChanged);
             // 
             // comboBoxBeanName
@@ -209,7 +219,7 @@
             this.comboBoxBeanName.Location = new System.Drawing.Point(360, 138);
             this.comboBoxBeanName.Name = "comboBoxBeanName";
             this.comboBoxBeanName.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxBeanName.TabIndex = 25;
+            this.comboBoxBeanName.TabIndex = 6;
             this.comboBoxBeanName.SelectedValueChanged += new System.EventHandler(this.comboBoxBeanName_SelectedValueChanged);
             // 
             // textBoxProductName
@@ -221,7 +231,7 @@
             this.textBoxProductName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxProductName.Properties.Appearance.Options.UseFont = true;
             this.textBoxProductName.Size = new System.Drawing.Size(240, 28);
-            this.textBoxProductName.TabIndex = 24;
+            this.textBoxProductName.TabIndex = 9;
             // 
             // labelControl1
             // 
@@ -244,7 +254,7 @@
             this.comboBoxCategoryID.Location = new System.Drawing.Point(40, 140);
             this.comboBoxCategoryID.Name = "comboBoxCategoryID";
             this.comboBoxCategoryID.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxCategoryID.TabIndex = 21;
+            this.comboBoxCategoryID.TabIndex = 5;
             this.comboBoxCategoryID.SelectedValueChanged += new System.EventHandler(this.comboBoxCategoryID_SelectedValueChanged);
             // 
             // loHangBindingSource
@@ -266,7 +276,7 @@
             this.checkBoxIsGrind.Properties.Appearance.Options.UseFont = true;
             this.checkBoxIsGrind.Properties.Caption = "Xay";
             this.checkBoxIsGrind.Size = new System.Drawing.Size(121, 25);
-            this.checkBoxIsGrind.TabIndex = 20;
+            this.checkBoxIsGrind.TabIndex = 12;
             // 
             // labelBeanID
             // 
@@ -289,7 +299,7 @@
             this.comboBoxPackingMethod.Location = new System.Drawing.Point(680, 210);
             this.comboBoxPackingMethod.Name = "comboBoxPackingMethod";
             this.comboBoxPackingMethod.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxPackingMethod.TabIndex = 17;
+            this.comboBoxPackingMethod.TabIndex = 11;
             // 
             // cachDongGoiBindingSource
             // 
@@ -306,7 +316,7 @@
             this.comboBoxProcessMethod.Location = new System.Drawing.Point(360, 210);
             this.comboBoxProcessMethod.Name = "comboBoxProcessMethod";
             this.comboBoxProcessMethod.Size = new System.Drawing.Size(240, 29);
-            this.comboBoxProcessMethod.TabIndex = 16;
+            this.comboBoxProcessMethod.TabIndex = 10;
             // 
             // phuongPhapCheBienBindingSource
             // 
@@ -320,7 +330,7 @@
             this.numericProcessAmount.Location = new System.Drawing.Point(1000, 75);
             this.numericProcessAmount.Name = "numericProcessAmount";
             this.numericProcessAmount.Size = new System.Drawing.Size(207, 28);
-            this.numericProcessAmount.TabIndex = 15;
+            this.numericProcessAmount.TabIndex = 4;
             // 
             // tableLayoutPanel1
             // 
@@ -366,7 +376,7 @@
             this.buttonDeletePaper.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonDeletePaper.Name = "buttonDeletePaper";
             this.buttonDeletePaper.Size = new System.Drawing.Size(155, 30);
-            this.buttonDeletePaper.TabIndex = 7;
+            this.buttonDeletePaper.TabIndex = 15;
             this.buttonDeletePaper.Text = "Xóa phiếu chế biến";
             this.buttonDeletePaper.Click += new System.EventHandler(this.ButtonDeletePaper_Click);
             // 
@@ -380,7 +390,7 @@
             this.buttonSavePaper.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonSavePaper.Name = "buttonSavePaper";
             this.buttonSavePaper.Size = new System.Drawing.Size(115, 30);
-            this.buttonSavePaper.TabIndex = 6;
+            this.buttonSavePaper.TabIndex = 16;
             this.buttonSavePaper.Text = "Lưu ";
             this.buttonSavePaper.Click += new System.EventHandler(this.buttonSavePaper_Click);
             // 
@@ -393,7 +403,7 @@
             this.buttonModifyPaper.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonModifyPaper.Name = "buttonModifyPaper";
             this.buttonModifyPaper.Size = new System.Drawing.Size(155, 30);
-            this.buttonModifyPaper.TabIndex = 12;
+            this.buttonModifyPaper.TabIndex = 14;
             this.buttonModifyPaper.Text = "Sửa phiếu chế biến";
             this.buttonModifyPaper.Click += new System.EventHandler(this.ButtonModifyPaper_Click);
             // 
@@ -407,7 +417,7 @@
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(115, 30);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 17;
             this.buttonCancel.Text = "Hủy";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -441,7 +451,7 @@
             this.dateEditBeanExpireDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditBeanExpireDate.Properties.MaskSettings.Set("mask", "dd/MM/yyyy");
             this.dateEditBeanExpireDate.Size = new System.Drawing.Size(240, 28);
-            this.dateEditBeanExpireDate.TabIndex = 2;
+            this.dateEditBeanExpireDate.TabIndex = 8;
             // 
             // labelProcessMethod
             // 
@@ -606,7 +616,7 @@
             this.textBoxBeanNameFilter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxBeanNameFilter.Properties.Appearance.Options.UseFont = true;
             this.textBoxBeanNameFilter.Size = new System.Drawing.Size(166, 28);
-            this.textBoxBeanNameFilter.TabIndex = 10;
+            this.textBoxBeanNameFilter.TabIndex = 22;
             this.textBoxBeanNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // labelBeanNameFilter
@@ -623,7 +633,7 @@
             this.textBoxProductNameFilter.Location = new System.Drawing.Point(171, 40);
             this.textBoxProductNameFilter.Name = "textBoxProductNameFilter";
             this.textBoxProductNameFilter.Size = new System.Drawing.Size(166, 28);
-            this.textBoxProductNameFilter.TabIndex = 3;
+            this.textBoxProductNameFilter.TabIndex = 21;
             this.textBoxProductNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // labelProductNameFilter
@@ -673,7 +683,7 @@
             this.textBoxProductMakerNameFilter.Location = new System.Drawing.Point(188, 12);
             this.textBoxProductMakerNameFilter.Name = "textBoxProductMakerNameFilter";
             this.textBoxProductMakerNameFilter.Size = new System.Drawing.Size(219, 28);
-            this.textBoxProductMakerNameFilter.TabIndex = 1;
+            this.textBoxProductMakerNameFilter.TabIndex = 18;
             this.textBoxProductMakerNameFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // labelProductMaker
@@ -704,7 +714,7 @@
             this.dateEditFromDateFilter.Properties.MaskSettings.Set("mask", "dd/MM/yyyy");
             this.dateEditFromDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditFromDateFilter.Size = new System.Drawing.Size(125, 28);
-            this.dateEditFromDateFilter.TabIndex = 2;
+            this.dateEditFromDateFilter.TabIndex = 19;
             this.dateEditFromDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // dateEditToDateFilter
@@ -726,7 +736,7 @@
             this.dateEditToDateFilter.Properties.MaskSettings.Set("mask", "dd/MM/yyyy");
             this.dateEditToDateFilter.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditToDateFilter.Size = new System.Drawing.Size(125, 28);
-            this.dateEditToDateFilter.TabIndex = 3;
+            this.dateEditToDateFilter.TabIndex = 20;
             this.dateEditToDateFilter.TextChanged += new System.EventHandler(this.FillEvent);
             // 
             // panelDataSection
@@ -754,8 +764,8 @@
             // 
             this.dataGridViewProcessPaper.AllowUserToAddRows = false;
             this.dataGridViewProcessPaper.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewProcessPaper.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewProcessPaper.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewProcessPaper.AutoGenerateColumns = false;
             this.dataGridViewProcessPaper.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewProcessPaper.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -971,16 +981,6 @@
             // sanPhamTableAdapter
             // 
             this.sanPhamTableAdapter.ClearBeforeFill = true;
-            // 
-            // labelKg
-            // 
-            this.labelKg.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKg.Appearance.Options.UseFont = true;
-            this.labelKg.Location = new System.Drawing.Point(1213, 78);
-            this.labelKg.Name = "labelKg";
-            this.labelKg.Size = new System.Drawing.Size(17, 21);
-            this.labelKg.TabIndex = 28;
-            this.labelKg.Text = "kg";
             // 
             // ProcessPaperForm
             // 

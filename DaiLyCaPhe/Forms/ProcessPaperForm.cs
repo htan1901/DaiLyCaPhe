@@ -105,15 +105,15 @@ namespace DaiLyCaPhe.Forms
         {
             try
             {
-                string paperID = textBoxProcessPaperID.Text;
-                string processDateStr = dateEditProcessDate.Text;
-                string makerID = comboBoxProcessMakerID.Text;
+                string paperID = textBoxProcessPaperID.Text.Trim();
+                string processDateStr = dateEditProcessDate.Text.Trim();
+                string makerID = comboBoxProcessMakerID.Text.Trim();
                 decimal amount = numericProcessAmount.Value;
-                string categoryID = comboBoxCategoryID.Text;
-                string beanName = comboBoxBeanName.Text;
-                string beanOrigin = comboBoxBeanOrigin.Text;
-                string expireDateStr = dateEditBeanExpireDate.Text.Substring(0, 10);
-                string productName = textBoxProductName.Text;
+                string categoryID = comboBoxCategoryID.Text.Trim();
+                string beanName = comboBoxBeanName.Text.Trim();
+                string beanOrigin = comboBoxBeanOrigin.Text.Trim();
+                string expireDateStr = dateEditBeanExpireDate.Text.Trim().Substring(0, 10);
+                string productName = textBoxProductName.Text.Trim();
 
                 string processMethodID = database.GetProcessMethodID(comboBoxProcessMethod.Text);
                 string packingMethodID = database.GetPackingMethodID(comboBoxPackingMethod.Text);
@@ -157,17 +157,17 @@ namespace DaiLyCaPhe.Forms
             try
             {
                 string paperID = GeneratePaperID();
-                string processDateStr = dateEditProcessDate.Text;
-                string makerID = comboBoxProcessMakerID.Text;
+                string processDateStr = dateEditProcessDate.Text.Trim();
+                string makerID = comboBoxProcessMakerID.Text.Trim();
                 decimal amount = numericProcessAmount.Value;
-                string categoryID = comboBoxCategoryID.Text;
-                string beanName = comboBoxBeanName.Text;
+                string categoryID = comboBoxCategoryID.Text.Trim();
+                string beanName = comboBoxBeanName.Text.Trim();
                 string beanOrigin = comboBoxBeanOrigin.Text;
                 string expireDateStr = dateEditBeanExpireDate.Text.Substring(0, 10);
-                string productName = textBoxProductName.Text;
+                string productName = textBoxProductName.Text.Trim();
 
-                string processMethodID = database.GetProcessMethodID(comboBoxProcessMethod.Text);
-                string packingMethodID = database.GetPackingMethodID(comboBoxPackingMethod.Text);
+                string processMethodID = database.GetProcessMethodID(comboBoxProcessMethod.Text.Trim());
+                string packingMethodID = database.GetPackingMethodID(comboBoxPackingMethod.Text.Trim());
                 bool isGrind = checkBoxIsGrind.Checked;
                 string beanID = database.GetBeanTypeIdByNameAndOrigin(beanName, beanOrigin);
                 string productID = GenerateProductID(beanID.Substring(0,3), processMethodID);
@@ -185,7 +185,10 @@ namespace DaiLyCaPhe.Forms
 
                 DateTime expireDate;
                 if (expireDateStr == null || expireDateStr == "")
-                    expireDate = DateTime.Now;
+                {
+                    MessageBox.Show("Ngày hết hạn không được rỗng", "Thông báo", MessageBoxButtons.OK);
+                    return;
+                }
                 else
                     expireDate = DateTime.ParseExact(expireDateStr, DEFAULT_DATE_FORMAT, null);
 
@@ -252,7 +255,7 @@ namespace DaiLyCaPhe.Forms
 
         private void ButtonDeletePaper_Click(object sender, EventArgs e)
         {
-            string paperID = textBoxProcessPaperID.Text;
+            string paperID = textBoxProcessPaperID.Text.Trim();
             if (paperID == null || paperID == "")
                 return;
             DialogResult result = MessageBox.Show(string.Format("Bạn muốn xóa phiếu chế biến {0}", paperID), "Thông báo", MessageBoxButtons.YesNo);
@@ -263,7 +266,7 @@ namespace DaiLyCaPhe.Forms
 
         private void buttonSavePaper_Click(object sender, EventArgs e)
         {
-            string paperID = textBoxProcessPaperID.Text;
+            string paperID = textBoxProcessPaperID.Text.Trim();
             if (paperID == "" || paperID == null)
                 SaveBill();
             else
@@ -354,11 +357,11 @@ namespace DaiLyCaPhe.Forms
 
         private void FillEvent(object sender, EventArgs e)
         {
-            string makerName = textBoxProductMakerNameFilter.Text;
+            string makerName = textBoxProductMakerNameFilter.Text.Trim();
             DateTime fromDate;
             DateTime toDate;
-            string fromDateStr = dateEditFromDateFilter.Text;
-            string toDateStr = dateEditToDateFilter.Text;
+            string fromDateStr = dateEditFromDateFilter.Text.Trim();
+            string toDateStr = dateEditToDateFilter.Text.Trim();
 
             if (fromDateStr == null || fromDateStr == "")
                 fromDate = DateTime.ParseExact(MIN_DATE_VALUE, DEFAULT_DATE_FORMAT, null);
@@ -370,8 +373,8 @@ namespace DaiLyCaPhe.Forms
             else
                 toDate = DateTime.ParseExact(toDateStr, DEFAULT_DATE_FORMAT, null);
 
-            string productName = textBoxProductNameFilter.Text;
-            string beanName = textBoxBeanNameFilter.Text;
+            string productName = textBoxProductNameFilter.Text.Trim();
+            string beanName = textBoxBeanNameFilter.Text.Trim();
 
 
             this.phieuCheBienADVTableAdapter.FillByMaker_Date_Product_Bean(this.daiLyCaPheDataSet.PhieuCheBienADV, makerName, fromDate, toDate, productName, beanName);
@@ -379,7 +382,7 @@ namespace DaiLyCaPhe.Forms
 
         private void comboBoxCategoryID_SelectedValueChanged(object sender, EventArgs e)
         {
-            string categoryID = comboBoxCategoryID.Text;
+            string categoryID = comboBoxCategoryID.Text.Trim();
             if (categoryID == "" || categoryID == null)
                 return;
             comboBoxBeanName.Items.Clear();
@@ -394,8 +397,8 @@ namespace DaiLyCaPhe.Forms
         {
             comboBoxBeanOrigin.Items.Clear();
             List<string> origins = new List<string>();
-            string categoryID = comboBoxCategoryID.Text;
-            string beanName = comboBoxBeanName.Text;
+            string categoryID = comboBoxCategoryID.Text.Trim();
+            string beanName = comboBoxBeanName.Text.Trim();
             origins = database.GetAllOrigin(categoryID, beanName);
             foreach (string item in origins)
                 comboBoxBeanOrigin.Items.Add(item);
@@ -403,9 +406,9 @@ namespace DaiLyCaPhe.Forms
 
         private void comboBoxBeanOrigin_SelectedValueChanged(object sender, EventArgs e)
         {
-            string categoryID = comboBoxCategoryID.Text;
-            string beanName = comboBoxBeanName.Text;
-            string origin = comboBoxBeanOrigin.Text;
+            string categoryID = comboBoxCategoryID.Text.Trim();
+            string beanName = comboBoxBeanName.Text.Trim();
+            string origin = comboBoxBeanOrigin.Text.Trim();
             dateEditBeanExpireDate.Text = database.GetExpireDate(categoryID, beanName, origin).Substring(0,10);
             dateEditBeanExpireDate.Enabled = false;
         }

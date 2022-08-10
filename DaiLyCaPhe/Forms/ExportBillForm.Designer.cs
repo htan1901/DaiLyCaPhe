@@ -142,7 +142,7 @@
             this.buttonAddBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonAddBill.Name = "buttonAddBill";
             this.buttonAddBill.Size = new System.Drawing.Size(115, 30);
-            this.buttonAddBill.TabIndex = 13;
+            this.buttonAddBill.TabIndex = 5;
             this.buttonAddBill.Text = "Thêm hóa đơn";
             this.buttonAddBill.Click += new System.EventHandler(this.ButtonAddBill_Click);
             // 
@@ -154,7 +154,7 @@
             this.buttonModifyBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonModifyBill.Name = "buttonModifyBill";
             this.buttonModifyBill.Size = new System.Drawing.Size(115, 30);
-            this.buttonModifyBill.TabIndex = 12;
+            this.buttonModifyBill.TabIndex = 6;
             this.buttonModifyBill.Text = "Sửa hóa đơn";
             this.buttonModifyBill.Click += new System.EventHandler(this.ButtonModifyBill_Click);
             // 
@@ -210,7 +210,7 @@
             this.buttonDeleteBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonDeleteBill.Name = "buttonDeleteBill";
             this.buttonDeleteBill.Size = new System.Drawing.Size(115, 30);
-            this.buttonDeleteBill.TabIndex = 7;
+            this.buttonDeleteBill.TabIndex = 4;
             this.buttonDeleteBill.Text = "Xóa hóa đơn";
             this.buttonDeleteBill.Click += new System.EventHandler(this.buttonDeleteBill_Click);
             // 
@@ -223,7 +223,7 @@
             this.buttonSaveBill.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonSaveBill.Name = "buttonSaveBill";
             this.buttonSaveBill.Size = new System.Drawing.Size(115, 30);
-            this.buttonSaveBill.TabIndex = 6;
+            this.buttonSaveBill.TabIndex = 7;
             this.buttonSaveBill.Text = "Lưu ";
             this.buttonSaveBill.Click += new System.EventHandler(this.ButtonSaveBill_Click);
             // 
@@ -236,7 +236,7 @@
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(115, 30);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 8;
             this.buttonCancel.Text = "Hủy";
             this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
@@ -249,7 +249,7 @@
             this.buttonAddItem.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.buttonAddItem.Name = "buttonAddItem";
             this.buttonAddItem.Size = new System.Drawing.Size(115, 30);
-            this.buttonAddItem.TabIndex = 4;
+            this.buttonAddItem.TabIndex = 3;
             this.buttonAddItem.Text = "Thêm sản phẩm";
             this.buttonAddItem.Click += new System.EventHandler(this.ButtonAddItem_Click);
             // 

@@ -47,9 +47,9 @@ namespace DaiLyCaPhe.Forms
 
         private void ProductFillEvent(object sender, EventArgs e)
         {
-            string productName = textBoxProductNameFilter.Text;
+            string productName = textBoxProductNameFilter.Text.Trim();
 
-            string fromWeightStr = textBoxFromWeightFilter.Text;
+            string fromWeightStr = textBoxFromWeightFilter.Text.Trim();
             float fromWeight = 0;
             try
             {
@@ -62,7 +62,7 @@ namespace DaiLyCaPhe.Forms
             {
             }
 
-            string toWeightStr = textBoxToWeightFilter.Text;
+            string toWeightStr = textBoxToWeightFilter.Text.Trim();
             float toWeight = 100;
             try
             {
@@ -75,16 +75,16 @@ namespace DaiLyCaPhe.Forms
             {
             }
 
-            string productType = textBoxProductTypeFilter.Text;
+            string productType = textBoxProductTypeFilter.Text.Trim();
 
             this.sanPhamTableAdapter.FillByNameAndWeightAndType(daiLyCaPheDataSet.SanPham, productName, fromWeight, toWeight, productType);
         }
 
         private void CategoryFillEvent(object sender, EventArgs e)
         {
-            string categoryID = textBoxCategoryIDFilter.Text;
-            string beanName = textBoxBeanNameFilter.Text;
-            string origin = textBoxOriginFilter.Text;
+            string categoryID = textBoxCategoryIDFilter.Text.Trim();
+            string beanName = textBoxBeanNameFilter.Text.Trim();
+            string origin = textBoxOriginFilter.Text.Trim();
 
             this.loHang_SanPhamTableAdapter.FillByCategoryAndNameAndOrigin(daiLyCaPheDataSet.LoHang_SanPham, categoryID, beanName, origin);
         }
